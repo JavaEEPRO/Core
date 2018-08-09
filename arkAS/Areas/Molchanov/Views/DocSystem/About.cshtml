@@ -1,0 +1,141 @@
+﻿
+@{
+    ViewBag.Title = "О нас";
+    Layout = "~/Areas/Molchanov/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron">
+    <h1>Основные преимущества работы с нами: </h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor.</p>
+    <p><a class="btn btn-primary btn-lg" role="button">Подробнее &raquo;</a></p>
+</div>
+<div class="container">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Новости системы:
+        </h1>
+    </div>
+    <div class="col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>News Block (1)</h4>
+            </div>
+            <div class="panel-body">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
+                <a href="#" class="btn btn-default">Подробнее</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>News Block (2)</h4>
+            </div>
+            <div class="panel-body">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
+                <a href="#" class="btn btn-default">Подробнее</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>News Block (3)</h4>
+            </div>
+            <div class="panel-body">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
+                <a href="#" class="btn btn-default">Подробнее</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <h2 class="page-header">Наши продукты: </h2>
+    </div>
+    <div class="col-md-4 col-sm-6">
+        <a href="#">
+            <img class="img-thumbnail img-gallery img-hover" src="~/Areas/Molchanov/Content/Images/700x450.png" alt="">
+        </a>
+    </div>
+    <div class="col-md-4 col-sm-6">
+        <a href="#">
+            <img class="img-thumbnail img-gallery img-hover" src="~/Areas/Molchanov/Content/Images/700x450.png" alt="">
+        </a>
+    </div>
+    <div class="col-md-4 col-sm-6">
+        <a href="#">
+            <img class="img-thumbnail img-gallery img-hover" src="~/Areas/Molchanov/Content/Images/700x450.png" alt="">
+        </a>
+    </div>
+    <div class="col-md-4 col-sm-6">
+        <a href="#">
+            <img class="img-thumbnail img-gallery img-hover" src="~/Areas/Molchanov/Content/Images/700x450.png" alt="">
+        </a>
+    </div>
+    <div class="col-md-4 col-sm-6">
+        <a href="#">
+            <img class="img-thumbnail img-gallery img-hover" src="~/Areas/Molchanov/Content/Images/700x450.png" alt="">
+        </a>
+    </div>
+    <div class="col-md-4 col-sm-6">
+        <a href="#">
+            <img class="img-thumbnail img-gallery img-hover" src="~/Areas/Molchanov/Content/Images/700x450.png" alt="">
+        </a>
+    </div>
+</div>
+<div class="container">
+    <div class="col-md-12">
+        <h2 class="page-header">Наши контакты</h2>
+    </div>
+    <div class="col-md-4">
+        <h3>Обратная связь</h3>
+        <form name="sentMessage" id="contactForm" novalidate>
+            <div class="control-group form-group">
+                <div class="controls">
+                    <label>Полное имя:</label>
+                    <input type="text" class="form-control" id="name" required data-validation-required-message="Please enter your name.">
+                    <p class="help-block"></p>
+                </div>
+            </div>
+            <div class="control-group form-group">
+                <div class="controls">
+                    <label>Телефон:</label>
+                    <input type="tel" class="form-control" id="phone" required data-validation-required-message="Please enter your phone number.">
+                </div>
+            </div>
+            <div class="control-group form-group">
+                <div class="controls">
+                    <label>E-mail:</label>
+                    <input type="email" class="form-control" id="email" required data-validation-required-message="Please enter your email address.">
+                </div>
+            </div>
+            <div class="control-group form-group">
+                <div class="controls">
+                    <label>Сообщение:</label>
+                    <textarea rows="10" cols="100" class="form-control" id="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"></textarea>
+                </div>
+            </div>
+            <div id="success"></div>
+            <button type="submit" class="btn btn-primary">Отправить сообщение</button>
+        </form>
+    </div>
+    <div class="col-md-8">
+        <h3>Контакты</h3>
+        <p>
+            Country, City<br> Street, Home 24578<br>
+        </p>
+        <p>
+            <abbr title="Phone">P</abbr>: (123) 456-7890
+        </p>
+        <p>
+            <abbr title="Email">E</abbr>: <a href="mailto:name@example.com">name@example.com</a>
+        </p>
+        <p>
+            <abbr title="Hours">H</abbr>: Понедельник - Пятница: 9:00 AM to 5:00 PM
+        </p>
+        <hr />
+        <div class="col-md-8">
+            <!-- Embedded Google Map -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2245.280826804694!2d37.62037121545337!3d55.75362369939679!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54a576482cc01%3A0xdb96e0941f26a0bf!2z0JrRgNCw0YHQvdCw0Y8g0L_Quy4sINCc0L7RgdC60LLQsCwgMTA5MDEy!5e0!3m2!1sru!2sru!4v1496690040010" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,183 @@
+﻿<error errorId="bd1933c0-372c-44f1-a9cd-bc027c889b0b" host="WI-U26835" type="System.InvalidOperationException" message="The view 'opinions' or its master was not found or no view engine supports the searched locations. The following locations were searched:&#xD;&#xA;~/Views/admin/opinions.aspx&#xD;&#xA;~/Views/admin/opinions.ascx&#xD;&#xA;~/Views/Shared/opinions.aspx&#xD;&#xA;~/Views/Shared/opinions.ascx&#xD;&#xA;~/Views/admin/opinions.cshtml&#xD;&#xA;~/Views/admin/opinions.vbhtml&#xD;&#xA;~/Views/Shared/opinions.cshtml&#xD;&#xA;~/Views/Shared/opinions.vbhtml" source="System.Web.Mvc" detail="System.InvalidOperationException: The view 'opinions' or its master was not found or no view engine supports the searched locations. The following locations were searched:&#xD;&#xA;~/Views/admin/opinions.aspx&#xD;&#xA;~/Views/admin/opinions.ascx&#xD;&#xA;~/Views/Shared/opinions.aspx&#xD;&#xA;~/Views/Shared/opinions.ascx&#xD;&#xA;~/Views/admin/opinions.cshtml&#xD;&#xA;~/Views/admin/opinions.vbhtml&#xD;&#xA;~/Views/Shared/opinions.cshtml&#xD;&#xA;~/Views/Shared/opinions.vbhtml&#xD;&#xA;   в System.Web.Mvc.ViewResult.FindView(ControllerContext context)&#xD;&#xA;   в System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)&#xD;&#xA;   в System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)&#xD;&#xA;   в System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)&#xD;&#xA;   в System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)&#xD;&#xA;   в System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c__DisplayClass21.&lt;BeginInvokeAction&gt;b__1e(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.Controller.&lt;BeginExecuteCore&gt;b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.MvcHandler.&lt;BeginProcessRequest&gt;b__5(IAsyncResult asyncResult, ProcessRequestState innerState)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()&#xD;&#xA;   в System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)" user="core-admin@mail.ru" time="2015-11-22T10:46:02.3129309Z">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CONNECTION:keep-alive&#xD;&#xA;HTTP_ACCEPT:text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip, deflate&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3&#xD;&#xA;HTTP_COOKIE:userGuid=479e4807-9fee-40ad-aa5e-ca57892e9918; as-crud-commentsTable-selectParams_usCont={&quot;page&quot;:1,&quot;pageSize&quot;:10,&quot;filter&quot;:{&quot;username&quot;:&quot;0&quot;,&quot;type&quot;:&quot;customer&quot;,&quot;text&quot;:&quot;&quot;},&quot;sort&quot;:&quot;created&quot;,&quot;direction&quot;:&quot;down&quot;}; _ym_uid=1446616340871873741; _ym_visorc_32000186=w; _ym_isad=0; __RequestVerificationToken=xr08J8t-CzAIPIqBAIPKnHP5dCyvYZlGMvYJne0lDCk5nWEA4_y7IOo-hqSqnVLXL4iWf7eK3UD2Kob10NaQCDTyFqU1; arkAS=60E8176694EF8CA3C5A42CE7BAEA3BE2871E304363D77595625AE0B5D2299D69654C75DFBA6885DE748BC3E9412A787598F475633E6C2CE59BA7CB7E05B6751C59C261F0A321A9F5C5C9BD953FDE271FA469A398B1758DD1F0FC206FC769714B4BB85300&#xD;&#xA;HTTP_HOST:core.web-automation.ru&#xD;&#xA;HTTP_REFERER:http://core.web-automation.ru/Account/Login?ReturnUrl=%2fadmin%2fopinions&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0&#xD;&#xA;HTTP_DNT:1&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Connection: keep-alive&#xD;&#xA;Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#xD;&#xA;Accept-Encoding: gzip, deflate&#xD;&#xA;Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3&#xD;&#xA;Cookie: userGuid=479e4807-9fee-40ad-aa5e-ca57892e9918; as-crud-commentsTable-selectParams_usCont={&quot;page&quot;:1,&quot;pageSize&quot;:10,&quot;filter&quot;:{&quot;username&quot;:&quot;0&quot;,&quot;type&quot;:&quot;customer&quot;,&quot;text&quot;:&quot;&quot;},&quot;sort&quot;:&quot;created&quot;,&quot;direction&quot;:&quot;down&quot;}; _ym_uid=1446616340871873741; _ym_visorc_32000186=w; _ym_isad=0; __RequestVerificationToken=xr08J8t-CzAIPIqBAIPKnHP5dCyvYZlGMvYJne0lDCk5nWEA4_y7IOo-hqSqnVLXL4iWf7eK3UD2Kob10NaQCDTyFqU1; arkAS=60E8176694EF8CA3C5A42CE7BAEA3BE2871E304363D77595625AE0B5D2299D69654C75DFBA6885DE748BC3E9412A787598F475633E6C2CE59BA7CB7E05B6751C59C261F0A321A9F5C5C9BD953FDE271FA469A398B1758DD1F0FC206FC769714B4BB85300&#xD;&#xA;Host: core.web-automation.ru&#xD;&#xA;Referer: http://core.web-automation.ru/Account/Login?ReturnUrl=%2fadmin%2fopinions&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0&#xD;&#xA;DNT: 1&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="/LM/W3SVC/9/ROOT" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="C:\sites\core\arkAS\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="Forms" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="core-admin@mail.ru" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="core-admin@mail.ru" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="0" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="CGI/1.1" />
+    </item>
+    <item name="HTTPS">
+      <value string="off" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="9" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="/LM/W3SVC/9" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="193.124.64.149" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/admin/opinions" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="C:\sites\core\arkAS\admin\opinions" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="5.44.169.174" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="5.44.169.174" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="52226" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="GET" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/admin/opinions" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="core.web-automation.ru" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="80" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="Microsoft-IIS/8.5" />
+    </item>
+    <item name="URL">
+      <value string="/admin/opinions" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="keep-alive" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip, deflate" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string="userGuid=479e4807-9fee-40ad-aa5e-ca57892e9918; as-crud-commentsTable-selectParams_usCont={&quot;page&quot;:1,&quot;pageSize&quot;:10,&quot;filter&quot;:{&quot;username&quot;:&quot;0&quot;,&quot;type&quot;:&quot;customer&quot;,&quot;text&quot;:&quot;&quot;},&quot;sort&quot;:&quot;created&quot;,&quot;direction&quot;:&quot;down&quot;}; _ym_uid=1446616340871873741; _ym_visorc_32000186=w; _ym_isad=0; __RequestVerificationToken=xr08J8t-CzAIPIqBAIPKnHP5dCyvYZlGMvYJne0lDCk5nWEA4_y7IOo-hqSqnVLXL4iWf7eK3UD2Kob10NaQCDTyFqU1; arkAS=60E8176694EF8CA3C5A42CE7BAEA3BE2871E304363D77595625AE0B5D2299D69654C75DFBA6885DE748BC3E9412A787598F475633E6C2CE59BA7CB7E05B6751C59C261F0A321A9F5C5C9BD953FDE271FA469A398B1758DD1F0FC206FC769714B4BB85300" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="core.web-automation.ru" />
+    </item>
+    <item name="HTTP_REFERER">
+      <value string="http://core.web-automation.ru/Account/Login?ReturnUrl=%2fadmin%2fopinions" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0" />
+    </item>
+    <item name="HTTP_DNT">
+      <value string="1" />
+    </item>
+  </serverVariables>
+  <cookies>
+    <item name="userGuid">
+      <value string="479e4807-9fee-40ad-aa5e-ca57892e9918" />
+    </item>
+    <item name="as-crud-commentsTable-selectParams_usCont">
+      <value string="{&quot;page&quot;:1,&quot;pageSize&quot;:10,&quot;filter&quot;:{&quot;username&quot;:&quot;0&quot;,&quot;type&quot;:&quot;customer&quot;,&quot;text&quot;:&quot;&quot;},&quot;sort&quot;:&quot;created&quot;,&quot;direction&quot;:&quot;down&quot;}" />
+    </item>
+    <item name="_ym_uid">
+      <value string="1446616340871873741" />
+    </item>
+    <item name="_ym_visorc_32000186">
+      <value string="w" />
+    </item>
+    <item name="_ym_isad">
+      <value string="0" />
+    </item>
+    <item name="__RequestVerificationToken">
+      <value string="xr08J8t-CzAIPIqBAIPKnHP5dCyvYZlGMvYJne0lDCk5nWEA4_y7IOo-hqSqnVLXL4iWf7eK3UD2Kob10NaQCDTyFqU1" />
+    </item>
+    <item name="arkAS">
+      <value string="60E8176694EF8CA3C5A42CE7BAEA3BE2871E304363D77595625AE0B5D2299D69654C75DFBA6885DE748BC3E9412A787598F475633E6C2CE59BA7CB7E05B6751C59C261F0A321A9F5C5C9BD953FDE271FA469A398B1758DD1F0FC206FC769714B4BB85300" />
+    </item>
+  </cookies>
+</error>

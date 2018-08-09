@@ -1,0 +1,168 @@
+﻿<error errorId="bf2fc3f2-7024-4ed9-b791-fb4a0e6e9cfd" host="WI-U26835" type="System.Web.HttpException" message="The controller for path '/favicon.ico' was not found or does not implement IController." source="System.Web.Mvc" detail="System.Web.HttpException (0x80004005): The controller for path '/favicon.ico' was not found or does not implement IController.&#xD;&#xA;   в System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)&#xD;&#xA;   в System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)&#xD;&#xA;   в Castle.Proxies.Invocations.IControllerFactory_CreateController.InvokeMethodOnTarget()&#xD;&#xA;   в Castle.DynamicProxy.AbstractInvocation.Proceed()&#xD;&#xA;   в Glimpse.Core.Extensibility.AlternateMethod.NewImplementation(IAlternateMethodContext context)&#xD;&#xA;   в Castle.DynamicProxy.AbstractInvocation.Proceed()&#xD;&#xA;   в Castle.Proxies.IControllerFactoryProxy.CreateController(RequestContext requestContext, String controllerName)&#xD;&#xA;   в System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController&amp; controller, IControllerFactory&amp; factory)&#xD;&#xA;   в System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)&#xD;&#xA;   в System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()&#xD;&#xA;   в System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)" time="2015-11-19T11:21:17.6389510Z" statusCode="404">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CONNECTION:keep-alive&#xD;&#xA;HTTP_ACCEPT:*/*&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip, deflate, sdch&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:ru,en;q=0.8&#xD;&#xA;HTTP_COOKIE:userGuid=143ab442-0199-4f71-8811-5d8df043c06e; _ym_uid=1446490377285857743; _ym_visorc_32000186=w&#xD;&#xA;HTTP_HOST:core.web-automation.ru&#xD;&#xA;HTTP_REFERER:http://core.web-automation.ru/&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 YaBrowser/15.10.2454.3658 Safari/537.36&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Connection: keep-alive&#xD;&#xA;Accept: */*&#xD;&#xA;Accept-Encoding: gzip, deflate, sdch&#xD;&#xA;Accept-Language: ru,en;q=0.8&#xD;&#xA;Cookie: userGuid=143ab442-0199-4f71-8811-5d8df043c06e; _ym_uid=1446490377285857743; _ym_visorc_32000186=w&#xD;&#xA;Host: core.web-automation.ru&#xD;&#xA;Referer: http://core.web-automation.ru/&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 YaBrowser/15.10.2454.3658 Safari/537.36&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="/LM/W3SVC/9/ROOT" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="C:\sites\core\arkAS\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="0" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="CGI/1.1" />
+    </item>
+    <item name="HTTPS">
+      <value string="off" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="9" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="/LM/W3SVC/9" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="193.124.64.149" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/favicon.ico" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="C:\sites\core\arkAS\favicon.ico" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="46.61.34.136" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="46.61.34.136" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="57233" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="GET" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/favicon.ico" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="core.web-automation.ru" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="80" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="Microsoft-IIS/8.5" />
+    </item>
+    <item name="URL">
+      <value string="/favicon.ico" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="keep-alive" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="*/*" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip, deflate, sdch" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="ru,en;q=0.8" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string="userGuid=143ab442-0199-4f71-8811-5d8df043c06e; _ym_uid=1446490377285857743; _ym_visorc_32000186=w" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="core.web-automation.ru" />
+    </item>
+    <item name="HTTP_REFERER">
+      <value string="http://core.web-automation.ru/" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 YaBrowser/15.10.2454.3658 Safari/537.36" />
+    </item>
+  </serverVariables>
+  <cookies>
+    <item name="userGuid">
+      <value string="143ab442-0199-4f71-8811-5d8df043c06e" />
+    </item>
+    <item name="_ym_uid">
+      <value string="1446490377285857743" />
+    </item>
+    <item name="_ym_visorc_32000186">
+      <value string="w" />
+    </item>
+  </cookies>
+</error>

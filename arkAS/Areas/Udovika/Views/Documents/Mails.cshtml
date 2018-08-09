@@ -1,0 +1,327 @@
+﻿@using arkAS.BLL
+@model arkAS.Areas.Udovika.Models.MailsView
+@{
+    ViewBag.Title = "Mails";
+    var js = new System.Web.Script.Serialization.JavaScriptSerializer();
+}
+<div class='dmCont'></div>
+<select class='usCheckMailStatuces hide'>
+    <option value="0">Не выбрано</option>
+    @foreach (var item in Model.mailStatuses)
+    {
+        <option value='@item.id'>@item.name</option>
+    }
+</select>
+<div class='dmStatusesTemplate hide'>
+    @foreach (var item in Model.mailStatuses)
+    {
+
+        if ((item.name != "согласована отправка") && (item.name != "закрыто")) 
+        { 
+            <div class="form-group inline" style="margin-bottom: 4px;">
+                <input type="checkbox" data-code='@item.name' value='@item.id' id='svOurSup@(item.id)' />
+                <label for='svOurSup@(item.id)'>@item.name</label>@Html.Raw("&nbsp; &nbsp; &nbsp; &nbsp;")<br />
+            </div>
+        }
+    }
+</div>
+
+@section js{
+    <script type="text/javascript">
+        var sourceContractorsfilter = @Html.Raw(js.Serialize((Model.contractor).Select(x => new { text = x.name, value = x.id, Selected = false })));
+        var sourceContractors = @Html.Raw(js.Serialize((Model.contractor).Select(x => new { Text = x.name, Value = x.id, Selected = false })));
+    
+        var sourceMailStatuses = @Html.Raw(js.Serialize((Model.mailStatuses).Select(x => new { text = x.name, value = x.id, Selected = false })));
+        var sourceMailStatuses = @Html.Raw(js.Serialize((Model.mailStatuses).Select(x => new { text = x.name, value = x.id, Selected = false })));
+
+        var us = {
+            init: function () {
+                us.initMainTable();
+                $(document).delegate(".crdCreate", "click", function (e) {
+                    e.preventDefault();
+                    us.createItem();
+                });
+            },
+            initMainTable: function () {
+                var cols = [
+                    { code: "id", title: "ID", tooltip: "Идентификатор", isVisible: false, isPK: true, datatype: "int", isRequired: false, editHide: true },
+                    {code: "from", title: "От", tooltip: "От кого", isVisible: true, isPK: false, datatype: "string", isRequired: false, callback: null},
+                    {code: "to", title: "Кому", tooltip: "Кому", isVisible: true, isPK: false, datatype: "string", isRequired: false, callback: null},
+                    { code: "trackNum", title: "Номер", tooltip: "Трек-номер", isVisible: true, isPK: false, datatype: "string", isRequired: true, isSort: false, callback: null,
+                        editable: { type: "text", format: "{0}", callback: function(el, newValue){}}
+                    },
+                    { code: "system", title: "Система отправки", tooltip: "Система отправки", isVisible: true, isPK: false, datatype: "string", isRequired: true, isSort: false, callback: null,
+                        editable: { type: "text", format: "{0}", callback: function(el, newValue){}}
+                    },
+                    { code: "date", title: "Дата создания", tooltip: "Дата", isVisible: true, isPK: false, datatype: "date", isRequired: true, isSort: true, callback: null },
+                    { code: "backNum", title: "Обратный номер", tooltip: "Обратный номер", isVisible: true, isPK: false, datatype: "string", isRequired: true, isSort: false, callback: null},
+                    { code: "backDate", title: "Дата ответа", tooltip: "Дата ответа", isVisible: true, isPK: false, datatype: "date", isRequired: true, isSort: true, callback: null,
+                    editable:{type: "text", format: "dd.mm.yyyy", callback: function(el, newValue){}}
+                    },
+                    { code: "status", title: "Статус", tooltip: "Статус", isVisible: true, isPK: false, datatype: "select", isRequired: false, format: "{0}", isSort: false, editHide: true, callback: null,
+                    editable: { type: "select", format:"{0}", source: sourceMailStatuses, notSelected: "Не выбрано", callback: function (el, newValue) { }, }
+                    },
+                    { code: "description", title: "Описание", tooltip: "Описание", isVisible: true, isPK: false, datatype: "text", isRequired: false, isSort: false, callback: null },
+                    { code: "statusID", title: "ID статуса", tooltip: "ID статуса", isVisible: false, isPK: false, datatype: "int", isRequired: false, isSort: false, editHide: true, callback: null, },
+                ];
+                as.crud.init({
+                    cont: $(".dmCont"),
+                    title: "Почта",
+                    ajaxURLFormat: '/Udovika/Documents/Mails_{0}',
+                    inlineAjaxURL: "/Udovika/Documents/MailInlineEdit",
+                    showChecksCol: false,
+                    showNumsCol: false,
+                    showToolbar: true,
+                    showColSettings: false,
+                    showReplaceTool: false,
+                    showExcelExport: false,
+                    additionalSort: false,
+                    pageSize: 20,
+                    cookiePrefix: "as-crud-mailTypeTable-",
+                    emptyText: 'Ничего не найдено',
+                    createLinkTitle: 'Создать',
+                    filterLinkTitle: 'Найти',
+                    filterTitle: 'Фильтрация',
+                    cols: cols,
+                    operations: {
+                        create: true,
+                        edit: false,
+                        remove: true,
+                        other:[
+                            {linkClass: 'crdTo2', iconClass: 'glyphicon glyphicon-pencil', title: 'Редактировать', callback: us.editItem}
+                        ]
+                    },
+                    getFilterMakeup: function (filter) {
+                        var s = "";
+                        s+="<div class='set-left' style='float:left'><span class='gCap'>Трекномер</span><input type='text' class='dmNum form-control' value='" + (filter.trackNum || '') + "' />";
+                        s+="<span class='gCap'>От</span><input type='text' class='dmFrom form-control' value='" + (filter.from || '') + "' />";
+                        s+="<span class='gCap'>Кому</span><input type='text' class='dmTo form-control' value='" + (filter.to || '') + "' />";
+                        $('.dmStatusesTemplate input').removeAttr('checked');
+                        if (filter.statusIDs) {
+                            $.each(filter.statusIDs, function (i, item) {
+                                $('.dmStatusesTemplate input[value=' + item + ']').attr('checked', 'checked');
+                            })
+                        }
+                        s+="</div><div class='set-right' style='margin-left:240px; min-height: 120px;'><span class='gCap'>Статус</span><div class='dmStatuses'>" + $('.dmStatusesTemplate').html() + "</div></div>";
+
+                        return s;
+                    },
+                    filter: function () {
+                        var statusIDs = [];
+                        $('.dmStatuses input:checked').each(function () {
+                            statusIDs+=$(this).attr('value');
+                        });
+                        var filter = {
+                            trackNum: $('.dmNum').val() || "",
+                            from: $('.dmFrom').val() || "",
+                            to: $('.dmTo').val() || "",
+                            statusIDs: statusIDs
+                        };
+                        return filter;
+                    }
+                });
+            },
+            createItem: function(){
+                var s = "";
+                s+="<label for='trackNum'>Номер</label>";
+                s+="<input type='text' id='trackNum' class='form-control trackNum' /><br />";
+                s+="<label for='backNum'>Обратный номер</label>";
+                s+="<input type='text' id='backNum' class='form-control backNum' /><br />";
+                s+="<label for='from'>Email отправителя</label>";
+                s+="<input type='text' id='from' class='form-control from' /><br />";
+                s+="<label for='to'>Email получателся</label>";
+                s+="<input type='text' id='to' class='form-control to' /><br />";
+                s+="<label for='system'>Система отправки</label>";
+                s+="<input type='text' id='system' class='form-control system' /><br />";
+                s+="<label for='description'>Описание:</label>";
+                s+="<textarea rows='5' id='description' class='form-control description' ></textarea>";
+                setTimeout(function() { $('.trackNum').focus(); }, 200);
+                as.sys.showDialog("Создание", s, "Сохранить", function() {
+                    var trackNum = $("#trackNum").val();
+                    var backNum = $('#backNum').val();
+                    var from = $('#from').val();
+                    var to = $('#to').val();
+                    var system = $('#system').val();
+                    var description = $("#description").val();
+                    
+                    if(!trackNum){
+                        as.sys.bootstrapAlert("Введите трекномер", {type: 'warning'});
+                        $('#trackNum').focus();
+                        return;
+                    }
+                    if(!backNum){
+                        as.sys.bootstrapAlert("Введите обратный трекномер", {type: 'warning'});
+                        $('#backNum').focus();
+                        return;
+                    }
+                    if(!from){
+                        as.sys.bootstrapAlert("Введите email отправителя", {type: 'warning'});
+                        $('#from').focus();
+                        return;
+                    }
+
+                    if(!us.emailValid(from, '#from'))
+                        return;
+                        
+                    if(!to){
+                        as.sys.bootstrapAlert("Введите email получателя", {type: 'warning'});
+                        $('#to').focus();
+                        return;
+                    }
+
+                    if(!us.emailValid(to, '#to'))
+                        return;
+                    
+                    if(!system){
+                        as.sys.bootstrapAlert("Введите систему отправки", {type: 'warning'});
+                        $('#system').focus();
+                        return;
+                    }
+                    if (!description) {
+                        $('#description').text("");
+                    }
+                    var params = {
+                        trackNum: trackNum,
+                        backNum: backNum,
+                        from: from,
+                        to: to,
+                        system: system,
+                        description: description
+                    };
+                    as.sys.ajaxSend("/Udovika/Documents/Mail_Create", params, function (data) {
+                        if (typeof(data)!="object") {
+                            data = eval('('+data+')');
+                        }
+                        if (data.result) {
+                            as.sys.bootstrapAlert("Почта сохранена", {type:"success"});
+                            as.sys.closeDialog();
+                            as.crud.getItems();
+                        }else {
+                            as.sys.bootstrapAlert(data.msg || "Ошибка сохранения.", {type:"warning"});
+                        }
+                    });
+                });
+            },
+            editItem: function() {
+            var params = { id: $(this).closest('tr').attr('data-itemid'), status: us.getStatusID($(this).closest('tr')) };
+            as.sys.ajaxSend("/Udovika/Documents/GetMail", params, function(data) {
+                if (typeof (data) != "object") data = eval('(' + data + ')');
+                if (data.id) {
+                    var s = "";
+                    var date = us.formatDate(data.date);
+                    var backDate = us.formatDate(data.backDate);
+                    $('.usCheckMailStatuces option').removeAttr('selected');
+                    s+="<input  type='hidden' disabled data-date-format='DD MM YYYY' value='" + date + "' class='form-control usCreated'/>";
+                    s+="<input  type='hidden' disabled data-date-format='DD MM YYYY' value='" + backDate + "' class='form-control usCreated2'/>";
+                    s+="<label for='trackNum'>Трекномер</label>";
+                    s+="<input type='text' id='trackNum' class='form-control trackNum' value='" + data.trackNum + "' /><br />";
+                    s+="<label for='backNum'>Обратный номер</label>";
+                    s+="<input type='text' id='backNum' class='form-control backNum' value='" + data.backNum + "' /><br />";
+                    s+="<label for='from'>Email отправителя</label>";
+                    s+="<input type='text' id='from' class='form-control from' value='" + data.from + "' /><br />";
+                    s+="<label for='to'>Email получателся</label>";
+                    s+="<input type='text' id='to' class='form-control to' value='" + data.to + "' /><br />";
+                    s+="<label for='system'>Система отправки</label>";
+                    s+="<input type='text' id='system' class='form-control system' value='" + data.system + "' /><br />";
+                    s+="<label for='description'>Описание:</label>";
+                    s+="<textarea rows='5' id='description' class='form-control description' >"+data.description+"</textarea>";
+                    setTimeout(function() { $('.newNumber').focus(); }, 200);
+                    as.sys.showDialog("Редактирование", s, "Сохранить", function() {
+                        var id = parseInt(params.id);
+                        var description = $('#description').val();
+                        var trackNum = $('#trackNum').val();
+                        var backNum = $('#backNum').val();
+                        var date = $('.usCreated').val();
+                        var backDate = $('.usCreated2').val();
+                        var statusID = parseInt(params.status);
+                        var from = $('#from').val();
+                        var to = $('#to').val();
+                        var system = $('#system').val();
+
+                        if(!trackNum){
+                            as.sys.bootstrapAlert("Введите трекномер", {type: 'warning'});
+                            $('#trackNum').focus();
+                            return;
+                        }
+                        if(!backNum){
+                            as.sys.bootstrapAlert("Введите обратный трекномер", {type: 'warning'});
+                            $('#backNum').focus();
+                            return;
+                        }
+                        if(!from){
+                            as.sys.bootstrapAlert("Введите email отправителя", {type: 'warning'});
+                            $('#from').focus();
+                            return;
+                        }
+                        if(!to){
+                            as.sys.bootstrapAlert("Введите email получателя", {type: 'warning'});
+                            $('#to').focus();
+                            return;
+                        }
+                        if(!system){
+                            as.sys.bootstrapAlert("Введите систему отправки", {type: 'warning'});
+                            $('#system').focus();
+                            return;
+                        }
+                        if (!description) {
+                            $('#description').text("");
+                        }
+
+                        var paramsEdit = {
+                            id: id,
+                            statusID: statusID,
+                            trackNum: trackNum,
+                            backNum: backNum,
+                            from: from,
+                            to: to,
+                            system: system,
+                            description: description,
+                            date: date,
+                            backDate: backDate
+                        };
+
+                        as.sys.ajaxSend("/Udovika/Documents/EditMail", paramsEdit, function(data) {
+                            if (typeof (data) != "object") data = eval('(' + data + ')');
+                            if (data.result) {
+                                as.sys.bootstrapAlert("Почта успешно отредактирована", { type: 'success' });
+                                as.sys.closeDialog();
+                                as.crud.getItems();
+                            } else {
+                                as.sys.bootstrapAlert(data.msg || "Возникли ошибки при выполнении операции!", { type: 'danger' });
+                            }
+                        });
+                    });
+                } else {
+                    as.sys.bootstrapAlert(data.msg || "Возникли ошибки при выполнении операции!", { type: 'danger' });
+                }
+            });
+            },
+            
+            emailValid: function(email, elem){
+                if(!as.tools.isEmail(email)){
+                    as.sys.bootstrapAlert("Введите корректный email", {type: 'warning'});
+                    $(elem).focus();
+                    return false;
+                }
+                return true;
+            },
+            formatDate: function(dateString) {
+                var date_mas = dateString.split('.');
+                return [date_mas[2], date_mas[1], date_mas[0]].join('-');
+            },
+            getStatusID: function(element) {
+                var el = element.find('td');
+                var status = 0;
+                el.each(function(i, item){
+                    if ($(item).attr('data-code') == 'status') {
+                        status = ($(item).find('a').attr('data-value'));
+                    }
+                });
+                return status;
+            },
+        }
+        $(function () {
+            us.init();
+        });
+    </script>
+}

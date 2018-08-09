@@ -1,0 +1,70 @@
+﻿@model arkAS.Areas.Rosh.Models.OrdersViewModel
+
+@using (Html.BeginForm("Orders_createItem", "Orders",
+        FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        @Html.HiddenFor(model => model.id)
+
+        <div class="editor-field hidden">
+            <label for="orderDate" class="control-label">Дата</label>
+            <input type="text" class="form-control" placeholder="" name="orderDate" />
+
+            @*@Html.EditorFor(model => model.orderDate)
+                @Html.ValidationMessageFor(model => model.orderDate)*@
+        </div>
+
+        <div class="editor-field">
+            <label for="orderNumber" class="control-label">Номер счета</label>
+            <input type="text" class="form-control ordNumb" placeholder="" name="orderNumber" />
+
+            @*@Html.EditorFor(model => model.orderNumber)
+                @Html.ValidationMessageFor(model => model.orderNumber)*@
+        </div>
+
+        <div class="editor-field">
+            <label for="contragentID" class="control-label">Контрагент</label>
+            <select class="form-control" name="contragentID">
+                <option value="0"></option>
+                @foreach (var item in Model.Contragents)
+                {
+                    <option value='@item.id'>@item.name</option>
+                }
+            </select>
+
+            @*@Html.DropDownListFor(model => model.contragentID, new SelectList(Model.Contragents, "id", "name"),
+                  htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.contragentID)*@
+        </div>
+
+        <div class="editor-field">
+            <label for="orderStatusID" class="control-label">Статус счета</label>
+            <select class="form-control" name="orderStatusID">
+                <option value="0"></option>
+                @foreach (var item in Model.OrdersStatuses)
+                {
+                    <option value='@item.id'>@item.name</option>
+                }
+            </select>
+
+            @*@Html.DropDownListFor(model => model.orderStatusID, new SelectList(Model.OrdersStatuses, "id", "name"),
+                  htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.orderStatusID)*@
+        </div>
+
+        <div class="editor-field">
+            <label for="description" class="control-label">Примечание</label>
+            <input type="text" class="form-control" placeholder="" name="description" />
+
+            @*@Html.EditorFor(model => model.description)
+                @Html.ValidationMessageFor(model => model.description)*@
+        </div>
+
+        <p><input type="submit" class="btn btn-default" value="Сохранить" /></p>
+
+        <h3>@ViewBag.Message</h3>
+    </fieldset>
+}

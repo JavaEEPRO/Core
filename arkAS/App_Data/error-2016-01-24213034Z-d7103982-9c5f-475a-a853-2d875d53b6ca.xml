@@ -1,0 +1,174 @@
+﻿<error errorId="d7103982-9c5f-475a-a853-2d875d53b6ca" host="WI-U26835" type="System.InvalidOperationException" message="The view 'dotjsdemo' or its master was not found or no view engine supports the searched locations. The following locations were searched:&#xD;&#xA;~/Views/demo/dotjsdemo.aspx&#xD;&#xA;~/Views/demo/dotjsdemo.ascx&#xD;&#xA;~/Views/Shared/dotjsdemo.aspx&#xD;&#xA;~/Views/Shared/dotjsdemo.ascx&#xD;&#xA;~/Views/demo/dotjsdemo.cshtml&#xD;&#xA;~/Views/demo/dotjsdemo.vbhtml&#xD;&#xA;~/Views/Shared/dotjsdemo.cshtml&#xD;&#xA;~/Views/Shared/dotjsdemo.vbhtml" source="System.Web.Mvc" detail="System.InvalidOperationException: The view 'dotjsdemo' or its master was not found or no view engine supports the searched locations. The following locations were searched:&#xD;&#xA;~/Views/demo/dotjsdemo.aspx&#xD;&#xA;~/Views/demo/dotjsdemo.ascx&#xD;&#xA;~/Views/Shared/dotjsdemo.aspx&#xD;&#xA;~/Views/Shared/dotjsdemo.ascx&#xD;&#xA;~/Views/demo/dotjsdemo.cshtml&#xD;&#xA;~/Views/demo/dotjsdemo.vbhtml&#xD;&#xA;~/Views/Shared/dotjsdemo.cshtml&#xD;&#xA;~/Views/Shared/dotjsdemo.vbhtml&#xD;&#xA;   в System.Web.Mvc.ViewResult.FindView(ControllerContext context)&#xD;&#xA;   в System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)&#xD;&#xA;   в System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)&#xD;&#xA;   в System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)&#xD;&#xA;   в System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)&#xD;&#xA;   в System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c__DisplayClass21.&lt;BeginInvokeAction&gt;b__1e(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.Controller.&lt;BeginExecuteCore&gt;b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.MvcHandler.&lt;BeginProcessRequest&gt;b__5(IAsyncResult asyncResult, ProcessRequestState innerState)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()&#xD;&#xA;   в System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)" time="2016-01-24T21:30:34.0059780Z">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CONNECTION:keep-alive&#xD;&#xA;HTTP_ACCEPT:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip, deflate, sdch&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4&#xD;&#xA;HTTP_COOKIE:_ym_uid=1449681249242694738; userGuid=20bbb434-8ebe-4c5a-886a-602c0b05bb41; __RequestVerificationToken=5iqdyD4QZfDXI1QDZrwjXI4AQXfLB6oz2uRjBbQJqu3eYEdWUdm3-4vtYK-VfxFHKpyIb5kuPfI0aysgkN5XwOgXHoU1; arkAS=CE60188DC1C8D658DE0F4A7A7A5DE4B593F99A631D408AE62DB2CE241CD87726D89CB23424ACD4B809E7176F0A331BF3E68EE362600285AC0A53FB395087D29ACAD5EEA49560D6DE4C783A9B2D30E88A3EF0E00A6305DFADE8780AA79901732423002B72; _ym_isad=0; _ym_visorc_32000186=w&#xD;&#xA;HTTP_HOST:core.web-automation.ru&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36&#xD;&#xA;HTTP_UPGRADE_INSECURE_REQUESTS:1&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Connection: keep-alive&#xD;&#xA;Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&#xD;&#xA;Accept-Encoding: gzip, deflate, sdch&#xD;&#xA;Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4&#xD;&#xA;Cookie: _ym_uid=1449681249242694738; userGuid=20bbb434-8ebe-4c5a-886a-602c0b05bb41; __RequestVerificationToken=5iqdyD4QZfDXI1QDZrwjXI4AQXfLB6oz2uRjBbQJqu3eYEdWUdm3-4vtYK-VfxFHKpyIb5kuPfI0aysgkN5XwOgXHoU1; arkAS=CE60188DC1C8D658DE0F4A7A7A5DE4B593F99A631D408AE62DB2CE241CD87726D89CB23424ACD4B809E7176F0A331BF3E68EE362600285AC0A53FB395087D29ACAD5EEA49560D6DE4C783A9B2D30E88A3EF0E00A6305DFADE8780AA79901732423002B72; _ym_isad=0; _ym_visorc_32000186=w&#xD;&#xA;Host: core.web-automation.ru&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36&#xD;&#xA;Upgrade-Insecure-Requests: 1&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="/LM/W3SVC/9/ROOT" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="C:\sites\core\arkAS\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="0" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="CGI/1.1" />
+    </item>
+    <item name="HTTPS">
+      <value string="off" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="9" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="/LM/W3SVC/9" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="193.124.64.149" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/demo/dotjsdemo" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="C:\sites\core\arkAS\demo\dotjsdemo" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="93.85.54.81" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="93.85.54.81" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="24825" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="GET" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/demo/dotjsdemo" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="core.web-automation.ru" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="80" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="Microsoft-IIS/8.5" />
+    </item>
+    <item name="URL">
+      <value string="/demo/dotjsdemo" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="keep-alive" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip, deflate, sdch" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string="_ym_uid=1449681249242694738; userGuid=20bbb434-8ebe-4c5a-886a-602c0b05bb41; __RequestVerificationToken=5iqdyD4QZfDXI1QDZrwjXI4AQXfLB6oz2uRjBbQJqu3eYEdWUdm3-4vtYK-VfxFHKpyIb5kuPfI0aysgkN5XwOgXHoU1; arkAS=CE60188DC1C8D658DE0F4A7A7A5DE4B593F99A631D408AE62DB2CE241CD87726D89CB23424ACD4B809E7176F0A331BF3E68EE362600285AC0A53FB395087D29ACAD5EEA49560D6DE4C783A9B2D30E88A3EF0E00A6305DFADE8780AA79901732423002B72; _ym_isad=0; _ym_visorc_32000186=w" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="core.web-automation.ru" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36" />
+    </item>
+    <item name="HTTP_UPGRADE_INSECURE_REQUESTS">
+      <value string="1" />
+    </item>
+  </serverVariables>
+  <cookies>
+    <item name="_ym_uid">
+      <value string="1449681249242694738" />
+    </item>
+    <item name="userGuid">
+      <value string="20bbb434-8ebe-4c5a-886a-602c0b05bb41" />
+    </item>
+    <item name="__RequestVerificationToken">
+      <value string="5iqdyD4QZfDXI1QDZrwjXI4AQXfLB6oz2uRjBbQJqu3eYEdWUdm3-4vtYK-VfxFHKpyIb5kuPfI0aysgkN5XwOgXHoU1" />
+    </item>
+    <item name="_ym_isad">
+      <value string="0" />
+    </item>
+    <item name="_ym_visorc_32000186">
+      <value string="w" />
+    </item>
+  </cookies>
+</error>

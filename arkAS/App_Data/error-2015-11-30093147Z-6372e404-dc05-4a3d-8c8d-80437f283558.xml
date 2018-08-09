@@ -1,0 +1,183 @@
+﻿<error errorId="6372e404-dc05-4a3d-8c8d-80437f283558" host="WI-U26835" type="System.Web.HttpException" message="The controller for path '/Partners/PartnersSpec' was not found or does not implement IController." source="System.Web.Mvc" detail="System.Web.HttpException (0x80004005): The controller for path '/Partners/PartnersSpec' was not found or does not implement IController.&#xD;&#xA;   в System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)&#xD;&#xA;   в System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)&#xD;&#xA;   в Castle.Proxies.Invocations.IControllerFactory_CreateController.InvokeMethodOnTarget()&#xD;&#xA;   в Castle.DynamicProxy.AbstractInvocation.Proceed()&#xD;&#xA;   в Glimpse.Core.Extensibility.AlternateMethod.NewImplementation(IAlternateMethodContext context)&#xD;&#xA;   в Castle.DynamicProxy.AbstractInvocation.Proceed()&#xD;&#xA;   в Castle.Proxies.IControllerFactoryProxy.CreateController(RequestContext requestContext, String controllerName)&#xD;&#xA;   в System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController&amp; controller, IControllerFactory&amp; factory)&#xD;&#xA;   в System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)&#xD;&#xA;   в System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()&#xD;&#xA;   в System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)" user="core-admin@mail.ru" time="2015-11-30T09:31:47.3267402Z" statusCode="404">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CONNECTION:keep-alive&#xD;&#xA;HTTP_ACCEPT:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip, deflate, sdch&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4&#xD;&#xA;HTTP_COOKIE:_ym_uid=1448181427929351335; userGuid=7529d1a2-2572-4400-8ccf-dccdb97479ab; __RequestVerificationToken=jzFMmlXpDy9nDS1a02GL_d_yWfkWWUoeScqjVfapY5CK__lRGIwRcN8tNZvwgfbDYPX1WfQl16uiwluQ78QIoA4eyVU1; as-crud-clientsTable-selectParams_usCont={&quot;page&quot;:1,&quot;pageSize&quot;:150,&quot;filter&quot;:{&quot;nextContact&quot;:&quot;&quot;,&quot;sourceName&quot;:&quot;0&quot;,&quot;statusName&quot;:[&quot;1&quot;],&quot;text&quot;:&quot;&quot;,&quot;needActive&quot;:&quot;-1&quot;},&quot;sort&quot;:&quot;,&quot;,&quot;direction&quot;:&quot;,&quot;}; arkAS=30918D8B95D30482FE61BF69A62BC91E5070C6C04FF1FC9CFA6B41BD63B954BFD20066E0D66CAB5C42119E29821552E83E4D90CA2CE4CD2B7C3AE89C887CF73BBF98A96B0CD4114E3BD0CE77881C370832FB5ADA54DC1315DBEB2677146A191C66F74A00; _ym_isad=1; _ym_visorc_32000186=w&#xD;&#xA;HTTP_HOST:core.web-automation.ru&#xD;&#xA;HTTP_REFERER:http://core.web-automation.ru/Admin/Menu&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36&#xD;&#xA;HTTP_UPGRADE_INSECURE_REQUESTS:1&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Connection: keep-alive&#xD;&#xA;Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&#xD;&#xA;Accept-Encoding: gzip, deflate, sdch&#xD;&#xA;Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4&#xD;&#xA;Cookie: _ym_uid=1448181427929351335; userGuid=7529d1a2-2572-4400-8ccf-dccdb97479ab; __RequestVerificationToken=jzFMmlXpDy9nDS1a02GL_d_yWfkWWUoeScqjVfapY5CK__lRGIwRcN8tNZvwgfbDYPX1WfQl16uiwluQ78QIoA4eyVU1; as-crud-clientsTable-selectParams_usCont={&quot;page&quot;:1,&quot;pageSize&quot;:150,&quot;filter&quot;:{&quot;nextContact&quot;:&quot;&quot;,&quot;sourceName&quot;:&quot;0&quot;,&quot;statusName&quot;:[&quot;1&quot;],&quot;text&quot;:&quot;&quot;,&quot;needActive&quot;:&quot;-1&quot;},&quot;sort&quot;:&quot;,&quot;,&quot;direction&quot;:&quot;,&quot;}; arkAS=30918D8B95D30482FE61BF69A62BC91E5070C6C04FF1FC9CFA6B41BD63B954BFD20066E0D66CAB5C42119E29821552E83E4D90CA2CE4CD2B7C3AE89C887CF73BBF98A96B0CD4114E3BD0CE77881C370832FB5ADA54DC1315DBEB2677146A191C66F74A00; _ym_isad=1; _ym_visorc_32000186=w&#xD;&#xA;Host: core.web-automation.ru&#xD;&#xA;Referer: http://core.web-automation.ru/Admin/Menu&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36&#xD;&#xA;Upgrade-Insecure-Requests: 1&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="/LM/W3SVC/9/ROOT" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="C:\sites\core\arkAS\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="Forms" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="core-admin@mail.ru" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="core-admin@mail.ru" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="0" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="CGI/1.1" />
+    </item>
+    <item name="HTTPS">
+      <value string="off" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="9" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="/LM/W3SVC/9" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="193.124.64.149" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/Partners/PartnersSpec" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="C:\sites\core\arkAS\Partners\PartnersSpec" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="178.137.208.140" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="178.137.208.140" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="52498" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="GET" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/Partners/PartnersSpec" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="core.web-automation.ru" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="80" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="Microsoft-IIS/8.5" />
+    </item>
+    <item name="URL">
+      <value string="/Partners/PartnersSpec" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="keep-alive" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip, deflate, sdch" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string="_ym_uid=1448181427929351335; userGuid=7529d1a2-2572-4400-8ccf-dccdb97479ab; __RequestVerificationToken=jzFMmlXpDy9nDS1a02GL_d_yWfkWWUoeScqjVfapY5CK__lRGIwRcN8tNZvwgfbDYPX1WfQl16uiwluQ78QIoA4eyVU1; as-crud-clientsTable-selectParams_usCont={&quot;page&quot;:1,&quot;pageSize&quot;:150,&quot;filter&quot;:{&quot;nextContact&quot;:&quot;&quot;,&quot;sourceName&quot;:&quot;0&quot;,&quot;statusName&quot;:[&quot;1&quot;],&quot;text&quot;:&quot;&quot;,&quot;needActive&quot;:&quot;-1&quot;},&quot;sort&quot;:&quot;,&quot;,&quot;direction&quot;:&quot;,&quot;}; arkAS=30918D8B95D30482FE61BF69A62BC91E5070C6C04FF1FC9CFA6B41BD63B954BFD20066E0D66CAB5C42119E29821552E83E4D90CA2CE4CD2B7C3AE89C887CF73BBF98A96B0CD4114E3BD0CE77881C370832FB5ADA54DC1315DBEB2677146A191C66F74A00; _ym_isad=1; _ym_visorc_32000186=w" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="core.web-automation.ru" />
+    </item>
+    <item name="HTTP_REFERER">
+      <value string="http://core.web-automation.ru/Admin/Menu" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36" />
+    </item>
+    <item name="HTTP_UPGRADE_INSECURE_REQUESTS">
+      <value string="1" />
+    </item>
+  </serverVariables>
+  <cookies>
+    <item name="_ym_uid">
+      <value string="1448181427929351335" />
+    </item>
+    <item name="userGuid">
+      <value string="7529d1a2-2572-4400-8ccf-dccdb97479ab" />
+    </item>
+    <item name="__RequestVerificationToken">
+      <value string="jzFMmlXpDy9nDS1a02GL_d_yWfkWWUoeScqjVfapY5CK__lRGIwRcN8tNZvwgfbDYPX1WfQl16uiwluQ78QIoA4eyVU1" />
+    </item>
+    <item name="as-crud-clientsTable-selectParams_usCont">
+      <value string="{&quot;page&quot;:1,&quot;pageSize&quot;:150,&quot;filter&quot;:{&quot;nextContact&quot;:&quot;&quot;,&quot;sourceName&quot;:&quot;0&quot;,&quot;statusName&quot;:[&quot;1&quot;],&quot;text&quot;:&quot;&quot;,&quot;needActive&quot;:&quot;-1&quot;},&quot;sort&quot;:&quot;,&quot;,&quot;direction&quot;:&quot;,&quot;}" />
+    </item>
+    <item name="arkAS">
+      <value string="30918D8B95D30482FE61BF69A62BC91E5070C6C04FF1FC9CFA6B41BD63B954BFD20066E0D66CAB5C42119E29821552E83E4D90CA2CE4CD2B7C3AE89C887CF73BBF98A96B0CD4114E3BD0CE77881C370832FB5ADA54DC1315DBEB2677146A191C66F74A00" />
+    </item>
+    <item name="_ym_isad">
+      <value string="1" />
+    </item>
+    <item name="_ym_visorc_32000186">
+      <value string="w" />
+    </item>
+  </cookies>
+</error>

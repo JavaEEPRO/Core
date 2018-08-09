@@ -1,0 +1,426 @@
+﻿@model arkAS.Areas.Motskin.Models.DocumentViewModel
+
+@{
+    ViewBag.Title = "Управление документами";
+    var js = new System.Web.Script.Serialization.JavaScriptSerializer();
+}
+
+<select class='dmTypesTemplate hide'>
+    <option value="0">Не выбрано</option>
+    @foreach (var item in Model.Types)
+    {
+        <option value='@item.id'>@item.name</option>
+    }
+</select>
+
+<select class='dmContractorsTemplate hide'>
+    <option value="0">Не выбрано</option>
+    @foreach (var item in Model.Contractors)
+    {
+        <option value='@item.id'>@item.name</option>
+    }
+</select>
+
+
+<div class='dmStatusesTemplate hide'>
+    @foreach (var item in Model.Statuses)
+    {
+        <div class="statusCont">
+            <input type="checkbox" value='@item.id' id='svOurSup@(item.id)' />
+            <label for='svOurSup@(item.id)'>@item.name</label>
+        </div>
+    }
+</div>
+
+@Html.Partial("_StatusHistoryModal")
+
+<div class='docCont'>
+</div>
+@section js{
+    <script type="text/javascript">
+        var statuseSource = @Html.Raw(js.Serialize((Model.Statuses).Select(x => new { value = x.id, text = x.name, Selected = false })));
+        var contractorSource = @Html.Raw(js.Serialize((Model.Contractors).Select(x => new { Value = x.id, Text = x.name, Selected = false })));
+        var typeSource = @Html.Raw(js.Serialize((Model.Types).Select(x => new { Value = x.id, Text = x.name, Selected = false })));
+        var asdemo = {
+            init: function () {
+                asdemo.initMainTable();
+                $(document).delegate('.usCreateDoc', 'click', function (e) {
+                    e.preventDefault();
+                    asdemo.createItem();
+                });
+                $(document).delegate('#uploadDoc', 'change', function(e) {
+                    e.preventDefault();
+                    asdemo.uploadDoc();
+                });
+            },
+
+            basePathController: '/Motskin/Document/',
+
+            initMainTable: function () {
+                as.crud.init({
+                    cont: $('.docCont'),
+                    title: 'Редактирование документов и создание новых документов',
+                    toolbarAdditional: '<a href="#" class="btn btn-primary usCreateDoc">Создать</a>',
+                    groupOperationsToolbar: '',
+                    ajaxURLFormat: asdemo.basePathController+'Documents_{0}',
+                    inlineAjaxURL: asdemo.basePathController+'ChangeDocumentStatus',
+                    pageSize: 15,
+                    cookiePrefix: 'as-crud-m-doc-',
+                    emptyText: 'Нет элементов',
+                    createLinkTitle: 'Создать новый',
+                    filterLinkTitle: 'Найти',
+                    filterTitle: 'Фильтрация данных',
+                    showChecksCol: false,
+                    showNumsCol: true,
+                    showToolbar: true,
+                    showColSettings: false,
+                    showReplaceTool: false,
+                    showExcelExport: false,
+                    additionalSort: false,
+                    cols: [
+                        { code: "id", title: "ID", tooltip: "Идентификатор", isVisible: false, isPK: true, datatype: "int", isRequired: false, editHide: true },
+                        { code: "number", title: "Номер  документа", tooltip: "Номер  документа", isVisible: true, isPK: false, datatype: "string", isRequired: true, format: "{0}", isSort: true, callback: null },
+                        { code: "date", title: "Дата создания", tooltip: "Дата создания", isVisible: true, isPK: false, datatype: "date", isRequired: false, format: "{0}", isSort: true, editHide: true, callback: null },
+                        { code: "contractorName", title: "Контрагент", tooltip: "Контрагент", isVisible: true, isPK: false, datatype: "select", isRequired: true, format: "{0}", isSort: true,editSources: contractorSource,  callback: null },
+                        { code: "sum", title: "Сумма", tooltip: "Сумма", isVisible: true, isPK: false, datatype: "string", isRequired: true, format: "{0}", isSort: true, callback: null },
+                        { code: "documentTypeName", title: "Тип", tooltip: "Тип", isVisible: true, isPK: false, datatype: "select", isRequired: true, format: "{0}", isSort: true,editSources: typeSource, callback: null },
+                        {
+                            code: "documentStatusName", title: "Статус", tooltip: "Статус", isVisible: true, isPK: false, datatype: "select", isRequired: false, format: "{0}", isSort: true,  editHide: true, editSources: statuseSource, callback: null,
+                            editable: { type: "select", format: "{0}", source: statuseSource, callback: function (el, newValue) { } }
+                        },
+                        { code: "history", title: "История", tooltip: "Нажмите для получения истории смены статуса", isVisible: true, isPK: false, datatype: "string", isRequired: false, format: "История", editHide: true, isSort: false, callback: asdemo.showHistory },
+                        { code: "comment", title: "Комментарий", tooltip: "Комментарий", isVisible: true, isPK: false, datatype: "string", isRequired: false, format: "{0}", isSort: false, callback: null },
+                        { code: "reference", title: "Ссылка", tooltip: "Ссылка", isVisible: true, isPK: false, datatype: "string", isRequired: false, format: "{0}", isSort: false, callback: asdemo.downloadDoc },
+                    ],
+                    
+                    operations: {
+                        create: false,
+                        remove: true,
+                        edit: false,
+                        other: [
+                            {
+                                linkClass: 'crdDownload', iconClass: 'glyphicon glyphicon-download', title: 'Скачать документ', callback: asdemo.downloadDoc
+                            },
+                            {
+                                linkClass: 'crdEdit', iconClass: 'glyphicon glyphicon-pencil', title: 'Редактировать', callback: asdemo.editItem
+                            }
+                        ]
+                    },
+                    getFilterMakeup: function (filter) {
+                        var s = '';
+                        s+=("<div class='crdFilterItem'><span class='gCap'>Номер документа</span><input type='text' class='dmNum' value='" + (filter.number || '') + "' /></div>");
+
+                        $('.dmTypesTemplate option').removeAttr('selected');
+                        $('.dmTypesTemplate option[value=' + filter.typeID + ']').attr('selected', 'selected');
+                        s+=("<div class='crdFilterItem'><span class='gCap'>Тип документа</span><select class='dmTypes'>" + $('.dmTypesTemplate').html() + "</select></div>");
+
+                        $('.dmContractorsTemplate option').removeAttr('selected');
+                        $('.dmContractorsTemplate option[value=' + filter.contractorID + ']').attr('selected', 'selected');
+                        s+=("<div class='crdFilterItem'><span class='gCap'>Контрагент</span><select class='dmContractors'>" + $('.dmContractorsTemplate').html() + "</select></div>");
+
+                        $('.dmStatusesTemplate input').removeAttr('checked');
+                        if (filter.statusIDs) {
+                            $.each(filter.statusIDs, function (i, item) {
+                                $('.dmStatusesTemplate input[value=' + item + ']').attr('checked', 'checked');
+                            })
+                        }
+                        s+=("<div class='crdFilterItem'><span class='gCap'>Статус</span><div class='dmStatuses'>" + $('.dmStatusesTemplate').html() + "</div></div>");
+                        return s;
+                    },
+                    filter: function () {
+                        var statusIDs = [];
+                        $('.dmStatuses input:checked').each(function () {
+                            statusIDs.push($(this).attr('value'));
+                        });
+                        var strStatusIDs = statusIDs.length >0 ? statusIDs.join(';') : '';
+                        var filter = {
+                            number: $('.dmNum').val() || "",
+                            typeID: $('.dmTypes option:selected').val(),
+                            contractorID: $('.dmContractors option:selected').val(),
+                            statusIDs: statusIDs,
+                            strStatusIDs: strStatusIDs
+                        };
+                        return filter;
+                    }
+                });
+            },
+
+            showHistory:function(sender)
+            {
+                var params = { id: $(sender).closest('tr').attr('data-itemid') };
+                as.sys.ajaxSend(asdemo.basePathController+'LogDocumentStatuses', params, function(data)
+                {
+                    if (data.items) {
+                        var s = "";
+                        s+="<table class='table'><thead><tr><th>Статус</th><th>Дата</th><th>Примечание</th></thead>";
+                        s+="<tbody>";
+                        for (var i=0; i<data.items.length;i++)
+                        {
+                            var item = data.items[i];
+                            s+="<tr><td>"+item.status+"</td>";
+                            s+="<td>"+item.created+"</td>";
+                            s+="<td>"+item.note+"</td></tr>";
+                        }
+                        s+="</tbody></table>";
+
+                        var modalWindow = $('#statusHistoryModal');
+                        $('.modal-body', modalWindow).html(s);
+                        modalWindow.modal('show');
+                    } else {
+                        as.sys.bootstrapAlert("Возникли ошибки при выполнении операции!", { type: 'danger' });
+                    }
+                });
+            },
+
+            createItem: function() {
+                var s = "";
+                s += "<span>Номер</span><input type='text' class='form-control dmNewNumber' /><br />";
+
+                $('.dmTypesTemplate option').removeAttr('selected');
+                $('.dmTypesTemplate option:first').attr('selected', 'selected');
+                s += "<span class='gCap'>Тип документа</span><select class='form-control dmNewTypeID' >" + $('.dmTypesTemplate').html() + "</select><br />";
+
+                $('.dmContractorsTemplate option').removeAttr('selected');
+                $('.dmContractorsTemplate option:first').attr('selected', 'selected');
+                s += "<span class='gCap'>Контрагент</span><select class='form-control dmNewContragentID' >" + $('.dmContractorsTemplate').html() + "</select><br />";
+
+                s += "<span>Сумма</span>";
+                s += "<input type='text' class='form-control dmNewSumma' value=''/><br />";
+
+                s += "<div id='partUpload'>";
+                s += "<span>Загрузить документ</span>";
+                s += "<input type='file' id='uploadDoc'/><br />";
+                s += "</div>";
+
+                s += "<span>Описание</span></ br>";
+                s += "<textarea id='note' class='form-control' placeholder='Опишите документ...' cols='30' rows='2'></textarea>";
+                setTimeout(function() { $('.dmNewNumber').focus(); }, 200);
+                as.sys.showDialog("Создание", s, "Сохранить", function() {
+                    var number = $('.dmNewNumber').val();
+
+                    var fileUpload = $("#uploadDoc").get(0);
+                    var files = fileUpload.files;
+
+                    var documentTypeID = $('.dmNewTypeID option:selected').val();
+                    var contractorID = $('.dmNewContragentID option:selected').val();
+                    var sum = $('.dmNewSumma').val();
+                    var comment = $('#note').val();
+                    var sumIsNumber = asdemo.IsNumber(sum);
+                    if (!number) {
+                        as.sys.bootstrapAlert("Укажите пожалуйста номер", { type: 'warning' });
+                        $('.dmNewNumber').focus();
+                        return;
+                    }
+                    if (!documentTypeID || documentTypeID == 0) {
+                        as.sys.bootstrapAlert("Укажите пожалуйста тип документа", { type: 'warning' });
+                        $('.dmNewTypeID').focus();
+                        return;
+                    }
+                    if (!contractorID || contractorID == 0) {
+                        as.sys.bootstrapAlert("Укажите пожалуйста контрагента", { type: 'warning' });
+                        $('.dmNewContragentID').focus();
+                        return;
+                    }
+                    if (!sum || sum == 0 || !sumIsNumber) {
+                        as.sys.bootstrapAlert("Укажите пожалуйста сумму ", { type: 'warning' });
+                        $('.dmNewSumma').focus();
+                        return;
+                    }
+                    if (files.length==0) {
+                        as.sys.bootstrapAlert("Для документа необходимо загрузить файл", { type: 'warning' });
+                        return;
+                    }
+                    if (!comment) {
+                        as.sys.bootstrapAlert("Опишите ваш документ", { type: 'warning' });
+                        $('#note').focus();
+                        return;
+                    }
+                    sum = parseFloat(sum);
+
+                    if (window.FormData !== undefined)
+                    {
+                        var data = new FormData();
+                        for (var x = 0; x < files.length; x++)
+                        {
+                            data.append("file" + x, files[x]);
+                        }
+                        data.append("number",number);
+                        data.append("documentTypeID",documentTypeID);
+                        data.append("contractorID",contractorID);
+                        data.append("sum",sum);
+                        data.append("comment",comment);
+                        data.append("reference",files[0].name); // берём только 1 файл
+
+                        $.ajax({
+                            type: "POST",
+                            url: asdemo.basePathController+'Documents_save',
+                            contentType: false,
+                            processData: false,
+                            data: data,
+                            success: function(data) {
+                                if (data.result) {
+                                    as.sys.bootstrapAlert("Элемент сохранен", { type: 'success' });
+                                    as.sys.closeDialog();
+                                    as.crud.getItems();
+                                    setTimeout(function() {
+                                        as.crud.gotoItem(data.itemID);
+                                    }, 1000);
+                                } else {
+                                    as.sys.bootstrapAlert(data.msg || "Возникли ошибки при выполнении операции!", { type: 'danger' });
+                                }
+                            },
+                            error: function(error) {
+                                as.sys.bootstrapAlert(data.msg || "Возникли ошибки!", { type: 'danger' });
+                            }
+                        });
+                    } else {
+                        alert("Браузер не поддерживает загрузку файлов HTML5!");
+                    }
+                });
+            },
+
+            editItem: function() {
+                var params = { id: $(this).closest('tr').attr('data-itemid') };
+                var p = params;
+                as.sys.ajaxSend(asdemo.basePathController+'GetDocument', params, function(data) {
+                    if (typeof (data) != "object") data = eval('(' + data + ')');
+                    if (data.id) {
+                        var s = "";
+                        s+=("<input type='hidden' id='docId' value='" + data.id + "'/><br />");
+
+                        s+=("<span>Номер</span><input type='text' class='form-control dmNewNumber' value='" + data.number + "' /><br />");
+
+                        $('.dmTypesTemplate option').removeAttr('selected');
+                        $(".dmTypesTemplate option[value='" + data.documentTypeID + "']").attr("selected", "selected");
+                        s+=("<span class='gCap'>Тип документа</span><select class='form-control dmNewTypeID' >" + $('.dmTypesTemplate').html() + "</select><br />");
+
+                        $('.dmContractorsTemplate option').removeAttr('selected');
+                        $(".dmContractorsTemplate  option[value='" + data.contractorID + "']").attr("selected", "selected");
+                        s+=("<span class='gCap'>Контрагент</span><select class='form-control dmNewContragentID' >" + $('.dmContractorsTemplate').html() + "</select><br />");
+
+                        s+="<span>Сумма</span>";
+                        s+=("<input type='text' class='form-control dmNewSumma' value='" + data.sum + "'/><br />");
+
+                        s+="<div id='partUpload'>";
+                        s+=("<span>Ссылка на документ: </span><input type='text' class='form-control dmNewPath' value='" + data.reference + "' readonly/><br />");
+                        s+="<input type='file' id='uploadDoc'/><br />";
+                        s+="</div>";
+
+                        s+=("<textarea id='note' class='form-control' placeholder='Опишите документ...' cols='30' rows='2'>"+ data.comment +"</textarea>");
+                        
+                        setTimeout(function() { $('.dmNewNumber').focus(); }, 200);
+                        as.sys.showDialog("Редактирование", s, "Сохранить", function() {
+                            var id = parseInt(params.id);
+                            var number = $('.dmNewNumber').val();
+
+                            var fileUpload = $("#uploadDoc").get(0);
+                            var files = fileUpload.files;
+
+                            var documentTypeID = $('.dmNewTypeID option:selected').val();
+                            var contractorID = $('.dmNewContragentID option:selected').val();
+                            var sum = $('.dmNewSumma').val();
+                            var sumIsNumber = asdemo.IsNumber(sum);
+                            var reference = $('.dmNewPath').val();
+                            var comment = $('#note').val();
+
+                            if (!number) {
+                                as.sys.bootstrapAlert("Укажите пожалуйста номер", { type: 'warning' });
+                                $('.dmNewNumber').focus();
+                                return;
+                            }
+                            if (!documentTypeID || documentTypeID == 0) {
+                                as.sys.bootstrapAlert("Укажите пожалуйста тип документа", { type: 'warning' });
+                                $('.dmNewTypeID').focus();
+                                return;
+                            }
+                            if (!contractorID || contractorID == 0) {
+                                as.sys.bootstrapAlert("Укажите пожалуйста контрагента", { type: 'warning' });
+                                $('.dmNewContragentID').focus();
+                                return;
+                            }
+                            if (!sum || sum == 0 || !sumIsNumber) {
+                                as.sys.bootstrapAlert("Укажите пожалуйста сумму", { type: 'warning' });
+                                $('.dmNewSumma').focus();
+                                return;
+                            }
+                            if (!comment) {
+                                as.sys.bootstrapAlert("Опишите ваш документ", { type: 'warning' });
+                                $('#note').focus();
+                                return;
+                            }
+                            sum = parseFloat(sum);
+                            if (window.FormData !== undefined)
+                            {
+                                var data = new FormData();
+                                for (var x = 0; x < files.length; x++)
+                                {
+                                    data.append("file" + x, files[x]);
+                                }
+                                data.append("id",id);
+                                data.append("number",number);
+                                data.append("documentTypeID",documentTypeID);
+                                data.append("contractorID",contractorID);
+                                data.append("sum",sum);
+                                data.append("comment",comment);
+                                data.append("reference",reference); // берём только 1 файл
+
+                                $.ajax({
+                                    type: "POST",
+                                    url: asdemo.basePathController+'Documents_edit',
+                                    contentType: false,
+                                    processData: false,
+                                    data: data,
+                                    success: function(data) {
+                                        if (data.result) {
+                                            as.sys.bootstrapAlert("Элемент изменён", { type: 'success' });
+                                            as.sys.closeDialog();
+                                            as.crud.getItems();
+                                            setTimeout(function() {
+                                                as.crud.gotoItem(data.itemID);
+                                            }, 1000);
+                                        } else {
+                                            as.sys.bootstrapAlert(data.msg || "Возникли ошибки при выполнении операции!", { type: 'danger' });
+                                        }
+                                    },
+                                    error: function(error) {
+                                        as.sys.bootstrapAlert(data.msg || "Возникли ошибки!", { type: 'danger' });
+                                    }
+                                });
+                            } else {
+                                alert("Браузер не поддерживает загрузку файлов HTML5!");
+                            }
+                        });
+                    } else {
+                        as.sys.bootstrapAlert(data.msg || "Возникли ошибки при выполнении операции!", { type: 'danger' });
+                    }
+                });
+            },
+
+            IsNumber: function(input)
+            {
+                var RE = /^-{0,1}\d*\.{0,1}\d+$/;
+                return (RE.test(input));
+            },
+            uploadDoc: function() {
+                var fileUpload = $("#uploadDoc").get(0);
+                var files = fileUpload.files;
+                $('.dmNewPath').val(files[0].name);
+            },
+
+            
+            downloadDoc:function(sender) {
+                var id = $(sender).closest('tr').attr('data-itemid');
+                if (!!!id)
+                    id = $(this).closest('tr').attr('data-itemid');
+
+                window.location = asdemo.basePathController+'DownloadDoc/'+id;
+        }
+    }
+
+        $(function () {
+            asdemo.init();
+
+        });
+    </script>
+
+}

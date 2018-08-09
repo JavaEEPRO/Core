@@ -1,0 +1,151 @@
+﻿<error errorId="26dc0a3b-61d4-48a8-bffc-567fae461b86" host="WI-U26835" type="System.UnauthorizedAccessException" message="Отказано в доступе по пути &quot;C:\sites\core\arkAS\uploads\crud\excel\f948c3e3-48d0-4eec-89a3-56c653896072.xlsx&quot;." source="mscorlib" detail="System.UnauthorizedAccessException: Отказано в доступе по пути &quot;C:\sites\core\arkAS\uploads\crud\excel\f948c3e3-48d0-4eec-89a3-56c653896072.xlsx&quot;.&#xD;&#xA;   в System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)&#xD;&#xA;   в System.IO.File.InternalDelete(String path, Boolean checkHost)&#xD;&#xA;   в arkAS.Controllers.DemoController.СleaningDirectory(String path) в d:\RudenSoftProject\arkAS\Controllers\DemoController.cs:строка 1183&#xD;&#xA;   в arkAS.Controllers.DemoController.export(List`1 items, Dictionary`2 mode, String modeType) в d:\RudenSoftProject\arkAS\Controllers\DemoController.cs:строка 1274&#xD;&#xA;   в arkAS.Controllers.DemoController.ExportExcelTable_getItems() в d:\RudenSoftProject\arkAS\Controllers\DemoController.cs:строка 1165&#xD;&#xA;   в lambda_method(Closure , ControllerBase , Object[] )&#xD;&#xA;   в System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)&#xD;&#xA;   в System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;BeginInvokeSynchronousActionMethod&gt;b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.&lt;InvokeActionMethodFilterAsynchronouslyRecursive&gt;b__3d()&#xD;&#xA;   в System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.&lt;&gt;c__DisplayClass46.&lt;InvokeActionMethodFilterAsynchronouslyRecursive&gt;b__3f()&#xD;&#xA;   в System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.&lt;&gt;c__DisplayClass46.&lt;InvokeActionMethodFilterAsynchronouslyRecursive&gt;b__3f()&#xD;&#xA;   в System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c__DisplayClass33.&lt;BeginInvokeActionMethodWithFilters&gt;b__32(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c__DisplayClass21.&lt;&gt;c__DisplayClass2b.&lt;BeginInvokeAction&gt;b__1c()&#xD;&#xA;   в System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c__DisplayClass21.&lt;BeginInvokeAction&gt;b__1e(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.Controller.&lt;BeginExecuteCore&gt;b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.MvcHandler.&lt;BeginProcessRequest&gt;b__5(IAsyncResult asyncResult, ProcessRequestState innerState)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()&#xD;&#xA;   в System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)" user="core-admin@mail.ru" time="2015-12-24T19:09:13.7340698Z">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CONNECTION:keep-alive&#xD;&#xA;HTTP_CONTENT_LENGTH:344&#xD;&#xA;HTTP_CONTENT_TYPE:application/json; charset=UTF-8&#xD;&#xA;HTTP_ACCEPT:application/json, text/javascript, */*; q=0.01&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip, deflate&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4&#xD;&#xA;HTTP_COOKIE:_ym_uid=1449517796431405381; userGuid=1162f2bb-8626-4ffd-af3a-f5d7b60cce36; __RequestVerificationToken=C6SLVPIZo2BwMVH1oCN_PqXIvHsAgimI2X8EfsNfGlX2e1FqwFroLgdJWMS5f83Hzklk4ui4iAnA8TYLggdhk0enw7Q1; as-crud-specTable-selectParams_PartnersSpec={&quot;page&quot;:1,&quot;pageSize&quot;:150,&quot;filter&quot;:{},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}; as-crud-partnersTable-selectParams_usCont={&quot;page&quot;:1,&quot;pageSize&quot;:150,&quot;filter&quot;:{&quot;statusName&quot;:[&quot;1&quot;,&quot;3&quot;,&quot;4&quot;],&quot;text&quot;:&quot;&quot;,&quot;statuses&quot;:[{&quot;id&quot;:&quot;0&quot;,&quot;check&quot;:false},{&quot;id&quot;:&quot;1&quot;,&quot;check&quot;:true},{&quot;id&quot;:&quot;2&quot;,&quot;check&quot;:false},{&quot;id&quot;:&quot;3&quot;,&quot;check&quot;:true},{&quot;id&quot;:&quot;4&quot;,&quot;check&quot;:true},{&quot;id&quot;:&quot;14&quot;,&quot;check&quot;:false}]},&quot;sort&quot;:&quot;,&quot;,&quot;direction&quot;:&quot;,&quot;}; as-crud-opinionsTable-selectParams_usCont={&quot;page&quot;:1,&quot;pageSize&quot;:10,&quot;filter&quot;:{&quot;username&quot;:&quot;0&quot;,&quot;created&quot;:&quot;&quot;,&quot;like&quot;:&quot;0&quot;,&quot;comment&quot;:&quot;&quot;},&quot;sort&quot;:&quot;itemID&quot;,&quot;direction&quot;:&quot;up&quot;}; as-crud-partnersStatusesTable-selectParams_statuses={&quot;page&quot;:1,&quot;pageSize&quot;:150,&quot;filter&quot;:{},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}; as-crud-ItemsDict-selectParams_usCont={&quot;page&quot;:1,&quot;pageSize&quot;:150,&quot;filter&quot;:{&quot;name&quot;:&quot;&quot;},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}; as-crud-ItemLogsDict-selectParams_usCont={&quot;page&quot;:1,&quot;pageSize&quot;:150,&quot;filter&quot;:{&quot;created&quot;:&quot;&quot;,&quot;isImport&quot;:&quot;-1&quot;,&quot;withBackup&quot;:&quot;-1&quot;},&quot;sort&quot;:&quot;withBackup&quot;,&quot;direction&quot;:&quot;down&quot;}; arkAS=030B148BBBF273CB357A1FEBD24A0ABF4052264678B4DBFD87F361F583DED6C1B9CAD32C2DE8DCA8EA4A2B64FFBAB60231856065C0F989A95EB19F3EA74FA30FFD28E893BED36B4231F254D8AFECFDEE9BF913002FC0E3A03023BC8E90A0F5705EF007B1; _ym_isad=0; _ym_visorc_32000186=w; as-crud-expertExcelTable-selectParams_dmCont={&quot;page&quot;:1,&quot;pageSize&quot;:15,&quot;filter&quot;:{&quot;orderNum&quot;:&quot;&quot;,&quot;clientID&quot;:&quot;0&quot;,&quot;statusIDs&quot;:[]},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}&#xD;&#xA;HTTP_HOST:core.web-automation.ru&#xD;&#xA;HTTP_REFERER:http://core.web-automation.ru/Demo/ExportExcelTable&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36&#xD;&#xA;HTTP_ORIGIN:http://core.web-automation.ru&#xD;&#xA;HTTP_X_REQUESTED_WITH:XMLHttpRequest&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Connection: keep-alive&#xD;&#xA;Content-Length: 344&#xD;&#xA;Content-Type: application/json; charset=UTF-8&#xD;&#xA;Accept: application/json, text/javascript, */*; q=0.01&#xD;&#xA;Accept-Encoding: gzip, deflate&#xD;&#xA;Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4&#xD;&#xA;Cookie: _ym_uid=1449517796431405381; userGuid=1162f2bb-8626-4ffd-af3a-f5d7b60cce36; __RequestVerificationToken=C6SLVPIZo2BwMVH1oCN_PqXIvHsAgimI2X8EfsNfGlX2e1FqwFroLgdJWMS5f83Hzklk4ui4iAnA8TYLggdhk0enw7Q1; as-crud-specTable-selectParams_PartnersSpec={&quot;page&quot;:1,&quot;pageSize&quot;:150,&quot;filter&quot;:{},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}; as-crud-partnersTable-selectParams_usCont={&quot;page&quot;:1,&quot;pageSize&quot;:150,&quot;filter&quot;:{&quot;statusName&quot;:[&quot;1&quot;,&quot;3&quot;,&quot;4&quot;],&quot;text&quot;:&quot;&quot;,&quot;statuses&quot;:[{&quot;id&quot;:&quot;0&quot;,&quot;check&quot;:false},{&quot;id&quot;:&quot;1&quot;,&quot;check&quot;:true},{&quot;id&quot;:&quot;2&quot;,&quot;check&quot;:false},{&quot;id&quot;:&quot;3&quot;,&quot;check&quot;:true},{&quot;id&quot;:&quot;4&quot;,&quot;check&quot;:true},{&quot;id&quot;:&quot;14&quot;,&quot;check&quot;:false}]},&quot;sort&quot;:&quot;,&quot;,&quot;direction&quot;:&quot;,&quot;}; as-crud-opinionsTable-selectParams_usCont={&quot;page&quot;:1,&quot;pageSize&quot;:10,&quot;filter&quot;:{&quot;username&quot;:&quot;0&quot;,&quot;created&quot;:&quot;&quot;,&quot;like&quot;:&quot;0&quot;,&quot;comment&quot;:&quot;&quot;},&quot;sort&quot;:&quot;itemID&quot;,&quot;direction&quot;:&quot;up&quot;}; as-crud-partnersStatusesTable-selectParams_statuses={&quot;page&quot;:1,&quot;pageSize&quot;:150,&quot;filter&quot;:{},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}; as-crud-ItemsDict-selectParams_usCont={&quot;page&quot;:1,&quot;pageSize&quot;:150,&quot;filter&quot;:{&quot;name&quot;:&quot;&quot;},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}; as-crud-ItemLogsDict-selectParams_usCont={&quot;page&quot;:1,&quot;pageSize&quot;:150,&quot;filter&quot;:{&quot;created&quot;:&quot;&quot;,&quot;isImport&quot;:&quot;-1&quot;,&quot;withBackup&quot;:&quot;-1&quot;},&quot;sort&quot;:&quot;withBackup&quot;,&quot;direction&quot;:&quot;down&quot;}; arkAS=030B148BBBF273CB357A1FEBD24A0ABF4052264678B4DBFD87F361F583DED6C1B9CAD32C2DE8DCA8EA4A2B64FFBAB60231856065C0F989A95EB19F3EA74FA30FFD28E893BED36B4231F254D8AFECFDEE9BF913002FC0E3A03023BC8E90A0F5705EF007B1; _ym_isad=0; _ym_visorc_32000186=w; as-crud-expertExcelTable-selectParams_dmCont={&quot;page&quot;:1,&quot;pageSize&quot;:15,&quot;filter&quot;:{&quot;orderNum&quot;:&quot;&quot;,&quot;clientID&quot;:&quot;0&quot;,&quot;statusIDs&quot;:[]},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}&#xD;&#xA;Host: core.web-automation.ru&#xD;&#xA;Referer: http://core.web-automation.ru/Demo/ExportExcelTable&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36&#xD;&#xA;Origin: http://core.web-automation.ru&#xD;&#xA;X-Requested-With: XMLHttpRequest&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="/LM/W3SVC/9/ROOT" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="C:\sites\core\arkAS\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="Forms" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="core-admin@mail.ru" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="core-admin@mail.ru" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="344" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="application/json; charset=UTF-8" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="CGI/1.1" />
+    </item>
+    <item name="HTTPS">
+      <value string="off" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="9" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="/LM/W3SVC/9" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="193.124.64.149" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/Demo/ExportExcelTable_getItems" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="C:\sites\core\arkAS\Demo\ExportExcelTable_getItems" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="5.139.67.28" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="5.139.67.28" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="53320" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="POST" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/Demo/ExportExcelTable_getItems" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="core.web-automation.ru" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="80" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="Microsoft-IIS/8.5" />
+    </item>
+    <item name="URL">
+      <value string="/Demo/ExportExcelTable_getItems" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="keep-alive" />
+    </item>
+    <item name="HTTP_CONTENT_LENGTH">
+      <value string="344" />
+    </item>
+    <item name="HTTP_CONTENT_TYPE">
+      <value string="application/json; charset=UTF-8" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="application/json, text/javascript, */*; q=0.01" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip, deflate" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string="_ym_uid=1449517796431405381; userGuid=1162f2bb-8626-4ffd-af3a-f5d7b60cce36; __RequestVerificationToken=C6SLVPIZo2BwMVH1oCN_PqXIvHsAgimI2X8EfsNfGlX2e1FqwFroLgdJWMS5f83Hzklk4ui4iAnA8TYLggdhk0enw7Q1; as-crud-specTable-selectParams_PartnersSpec={&quot;page&quot;:1,&quot;pageSize&quot;:150,&quot;filter&quot;:{},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}; as-crud-partnersTable-selectParams_usCont={&quot;page&quot;:1,&quot;pageSize&quot;:150,&quot;filter&quot;:{&quot;statusName&quot;:[&quot;1&quot;,&quot;3&quot;,&quot;4&quot;],&quot;text&quot;:&quot;&quot;,&quot;statuses&quot;:[{&quot;id&quot;:&quot;0&quot;,&quot;check&quot;:false},{&quot;id&quot;:&quot;1&quot;,&quot;check&quot;:true},{&quot;id&quot;:&quot;2&quot;,&quot;check&quot;:false},{&quot;id&quot;:&quot;3&quot;,&quot;check&quot;:true},{&quot;id&quot;:&quot;4&quot;,&quot;check&quot;:true},{&quot;id&quot;:&quot;14&quot;,&quot;check&quot;:false}]},&quot;sort&quot;:&quot;,&quot;,&quot;direction&quot;:&quot;,&quot;}; as-crud-opinionsTable-selectParams_usCont={&quot;page&quot;:1,&quot;pageSize&quot;:10,&quot;filter&quot;:{&quot;username&quot;:&quot;0&quot;,&quot;created&quot;:&quot;&quot;,&quot;like&quot;:&quot;0&quot;,&quot;comment&quot;:&quot;&quot;},&quot;sort&quot;:&quot;itemID&quot;,&quot;direction&quot;:&quot;up&quot;}; as-crud-partnersStatusesTable-selectParams_statuses={&quot;page&quot;:1,&quot;pageSize&quot;:150,&quot;filter&quot;:{},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}; as-crud-ItemsDict-selectParams_usCont={&quot;page&quot;:1,&quot;pageSize&quot;:150,&quot;filter&quot;:{&quot;name&quot;:&quot;&quot;},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}; as-crud-ItemLogsDict-selectParams_usCont={&quot;page&quot;:1,&quot;pageSize&quot;:150,&quot;filter&quot;:{&quot;created&quot;:&quot;&quot;,&quot;isImport&quot;:&quot;-1&quot;,&quot;withBackup&quot;:&quot;-1&quot;},&quot;sort&quot;:&quot;withBackup&quot;,&quot;direction&quot;:&quot;down&quot;}; arkAS=030B148BBBF273CB357A1FEBD24A0ABF4052264678B4DBFD87F361F583DED6C1B9CAD32C2DE8DCA8EA4A2B64FFBAB60231856065C0F989A95EB19F3EA74FA30FFD28E893BED36B

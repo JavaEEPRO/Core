@@ -1,0 +1,424 @@
+﻿@using arkAS.BLL
+@{
+    ViewBag.Title = "Documents";
+    var js = new System.Web.Script.Serialization.JavaScriptSerializer();
+}
+<select class='usCheckDocTypes hide'>
+    <option value="0">Не выбрано</option>
+    @foreach (var item in ViewBag.DocTypes)
+    {
+        <option value='@item.id'>@item.name</option>
+    }
+</select>
+<select class='usCheckDocStatuses hide'>
+    <option value="0">Не выбрано</option>
+    @foreach (var item in ViewBag.DocStatuses)
+    {
+        <option value='@item.id'>@item.name</option>
+    }
+</select>
+
+<select class='usCheckFinContragents hide'>
+    <option value="0">Не выбрано</option>
+    @foreach (var item in ViewBag.Contragents)
+    {
+        <option value='@item.id'>@item.name</option>
+    }
+</select>
+<div class='usCont'>
+</div>
+@section js{
+    <script type="text/javascript">
+
+        var sourceDocTypes = @Html.Raw(js.Serialize(((List<pdv_documentType>) ViewBag.DocTypes).Select(x => new {Value = x.id, Text = x.name, Selected = false})));
+        var sourceDocTypesEditable = @Html.Raw(js.Serialize(((List<pdv_documentType>) ViewBag.DocTypes).Select(x => new {value = x.id, text = x.name})));
+        var sourceDocStatuses = @Html.Raw(js.Serialize(((List<pdv_documentStatuses>) ViewBag.DocStatuses).Select(x => new {Value = x.id, Text = x.name, Selected = false})));
+        var sourceDocStatusesEditable = @Html.Raw(js.Serialize(((List<pdv_documentStatuses>) ViewBag.DocStatuses).Select(x => new {value = x.id, text = x.name})));
+        var sourceFinContragents = @Html.Raw(js.Serialize(((List<pdv_contractors>)ViewBag.Contragents).Select(x => new { Value = x.id, Text = x.name, Selected = false })));
+        var sourceFinContragentsEditable = @Html.Raw(js.Serialize(((List<pdv_contractors>)ViewBag.Contragents).Select(x => new { value = x.id, text = x.name })));
+        var asdemo = {
+            init: function() {
+                asdemo.initMainTable();
+                $(document).delegate('.usCreateDoc', 'click', function(e) {
+                    e.preventDefault();
+                    asdemo.createItem();
+                });
+                $(document).delegate('.usNewTypeID', 'change', function(e) {
+                    var typeId = $(this).val();
+                    e.preventDefault();
+                    asdemo.createListTemplates(typeId);
+                });
+                $(document).delegate('#downloadDoc', 'click', function(e) {
+                    e.preventDefault();
+                    asdemo.downloadDoc();
+                });
+                $(document).delegate('#uploadDoc', 'change', function(e) {
+                    e.preventDefault();
+                    asdemo.uploadDoc();
+                });
+            },
+            initMainTable: function() {
+                as.crud.init({
+                    cont: $('.usCont'),
+                    title: 'Документы',
+                    toolbarAdditional: '<a href="#" class="btn btn-primary usCreateDoc">Создать</a>&nbsp;&nbsp;',
+                    groupOperationsToolbar: '',
+                    ajaxURLFormat: '/Podvashetskyi/Documents/Documents_{0}',
+                    inlineAjaxURL: "/Podvashetskyi/Documents/DocumentsInline",
+                    pageSize: 150,
+                    cookiePrefix: "as-crud-documentsTable-",
+                    emptyText: 'Нет элементов',
+                    createLinkTitle: 'Создать',
+                    filterLinkTitle: 'Найти',
+                    filterTitle: 'Фильтрация данных',
+                    showChecksCol: false,
+                    showNumsCol: true,
+                    showToolbar: true,
+                    showColSettings: false,
+                    showReplaceTool: false,
+                    showExcelExport: false,
+                    additionalSort: false,
+                    cols: [
+                        { code: "id", title: "ID", tooltip: "Идентификатор", isVisible: false, isPK: true, datatype: "int", isRequired: false, editHide: true },
+                        {
+                            code: "name", title: "Название", tooltip: "Название", isVisible: true, isPK: false, datatype: "string", isRequired: true, format: "{0}", isSort: true, callback: null,
+                            editable: { type: "text", format: "{0}", callback: function(el, newValue) {}}
+                        },
+                        { code: "createdDate", filter: { type: "daterange" }, title: "Дата создания", editHide: true, tooltip: "Дата создания", isVisible: true, isPK: false, datatype: "date", isRequired: false, format: "{0}", isSort: true, callback: null },
+                        {
+                            code: "number", title: "Номер", tooltip: "Номер", isVisible: true, isPK: false, datatype: "string", isRequired: true, format: "{0}", isSort: true, callback: null,
+                            editable: { type: "text", format: "{0}", callback: function(el, newValue) {} }
+                        },
+                        {
+                            code: "link", title: "Путь", tooltip: "Путь", isVisible: true, isPK: false, datatype: "string", isRequired: true, format: "{0}", isSort: true, callback: null
+                        },
+                        {
+                            code: "typeName", title: "Тип", tooltip: "Тип", isVisible: true, isPK: false, datatype: "select", isRequired: false, format: "{0}", isSort: true, editSources: sourceDocTypes, callback: null,
+                            editable: { type: "select", format: "{0}", source: sourceDocTypesEditable, notSelected: "Не установлено", callback: function(el, newValue) {} },
+                        },
+                        {
+                            code: "statusName", title: "Статус", tooltip: "Статус", isVisible: true, isPK: false, datatype: "select", isRequired: false, format: "{0}", isSort: true, editSources: sourceDocStatuses, callback: null,
+                            editable: { type: "select", format: "{0}", source: sourceDocStatusesEditable, notSelected: "Не установлено", callback: function(el, newValue) {} },
+                        },
+                        {
+                            code: "contractorName", title: "Контрагент", tooltip: "Контрагент", isVisible: true, isPK: false, datatype: "select", isRequired: false, format: "{0}", isSort: true, editSources: sourceFinContragents, callback: null,
+                            editable: { type: "select", format: "{0}", source: sourceFinContragentsEditable, notSelected: "Не установлено", callback: function(el, newValue) {} },
+                        }
+                    ],
+                    operations: {
+                        create: false,
+                        remove: true,
+                        edit: false,
+                        other: [
+                            {
+                                linkClass: 'crdTo2', iconClass: 'glyphicon glyphicon-pencil', title: 'Редактировать', callback: asdemo.editItem
+                            }
+                        ]
+                    },
+                    getFilterMakeup: function(filter) {
+                        var s = [];
+                        s.push("<div class='crdFilterItem'><span class='gCap'>Название</span><input type='text' class='usName' value='" + (filter.name || '') + "' /></div>");
+
+                        $('.usCheckDocTypes option').removeAttr('selected');
+                        $('.usCheckDocTypes option[value=' + filter.documentTypeID + ']').attr('selected', 'selected');
+                        s.push("<div class='crdFilterItem'><span class='gCap'>Тип</span><select class='usDocType'>" + $('.usCheckDocTypes').html() + "</select></div>");
+
+                        $('.usCheckDocStatuses option').removeAttr('selected');
+                        $('.usCheckDocStatuses option[value=' + filter.documentStatusID + ']').attr('selected', 'selected');
+                        s.push("<div class='crdFilterItem'><span class='gCap'>Статус</span><select class='usDocStatus'>" + $('.usCheckDocStatuses').html() + "</select></div>");
+
+                        $('.usCheckFinContragents option').removeAttr('selected');
+                        $('.usCheckFinContragents option[value=' + filter.contractorID + ']').attr('selected', 'selected');
+                        s.push("<div class='crdFilterItem'><span class='gCap'>Контрагент</span><select class='usFinContragent'>" + $('.usCheckFinContragents').html() + "</select></div>");
+
+                        return s.join("");
+                    },
+                    filter: function() {
+                        var filter = {
+                            name: $('.usName').val() || "",
+                            documentTypeID: $('.usDocType option:selected').val(),
+                            documentStatusID: $('.usDocStatus option:selected').val(),
+                            contractorID: $('.usFinContragent option:selected').val()
+                        };
+                        return filter;
+                    }
+                });
+            },
+            createItem: function() {
+                var s = [];
+                s.push("<span>Название</span><input type='text' class='form-control usNewName' /><br />");
+                s.push("<span>Номер</span><input type='text' class='form-control usNewNumber' /><br />");
+
+                $('.usCheckDocTypes option').removeAttr('selected');
+                $('.usCheckDocTypes option:first').attr('selected', 'selected');
+                s.push("<span>Тип</span><select class='form-control usNewTypeID' >" + $('.usCheckDocTypes').html() + "</select><br />");
+
+                s.push("<div id='template' class='hide'>");
+                s.push("<span>Шаблон</span><select class='form-control usNewPath' id='listTemplate'></select><br />");
+                s.push("</div>");
+
+                $('.usCheckFinContragents option').removeAttr('selected');
+                $('.usCheckFinContragents option:first').attr('selected', 'selected');
+                s.push("<span>Контрагент</span><select class='form-control usNewContragentID' >" + $('.usCheckFinContragents').html() + "</select><br />");
+
+                setTimeout(function() { $('.usNewName').focus(); }, 200);
+                as.sys.showDialog("Создание", s.join(""), "Сохранить", function() {
+                    var name = $('.usNewName').val();
+                    var number = $('.usNewNumber').val();
+                    var link = $('.usNewPath option:selected').text();
+                    var documentTypeID = $('.usNewTypeID option:selected').val();
+                    var contractorID = $('.usNewContragentID option:selected').val();
+
+                    if (!name) {
+                        as.sys.bootstrapAlert("Укажите пожалуйста название", { type: 'warning' });
+                        $('.usNewName').focus();
+                        return;
+                    }
+                    if (!number) {
+                        as.sys.bootstrapAlert("Укажите пожалуйста номер", { type: 'warning' });
+                        $('.usNewNumber').focus();
+                        return;
+                    }
+                    if (!documentTypeID || documentTypeID == 0) {
+                        as.sys.bootstrapAlert("Укажите пожалуйста тип", { type: 'warning' });
+                        $('.usNewTypeID').focus();
+                        return;
+                    }
+
+                    if (!contractorID || contractorID == 0) {
+                        as.sys.bootstrapAlert("Укажите пожалуйста контрагента", { type: 'warning' });
+                        $('.usNewContragentID').focus();
+                        return;
+                    }
+
+                    var params = {
+                        name: name,
+                        number: number,
+                        link: link,
+                        documentTypeID: documentTypeID,
+                        contractorID: contractorID
+                    };
+                    as.sys.ajaxSend("/Podvashetskyi/Documents/CreateDocument", params, function(data) {
+                        if (typeof (data) != "object") data = eval('(' + data + ')');
+                        if (data.result) {
+                            as.sys.bootstrapAlert("Элемент сохранен", { type: 'success' });
+                            as.sys.closeDialog();
+                            as.crud.getItems();
+                            setTimeout(function() {
+                                as.crud.gotoItem(data.textID);
+                            }, 1000);
+                        } else {
+                            as.sys.bootstrapAlert(data.msg || "Возникли ошибки при выполнении операции!", { type: 'danger' });
+                        }
+                    });
+                });
+            },
+            editItem: function() {
+                var params = { id: $(this).closest('tr').attr('data-itemid') };
+                var p = params;
+                as.sys.ajaxSend("/Podvashetskyi/Documents/GetDocument", params, function(data) {
+                    if (typeof (data) != "object") data = eval('(' + data + ')');
+                    if (data.id) {
+                        var s = [];
+                        s.push("<input type='hidden' id='docId' value='" + data.id + "'/><br />");
+
+                        s.push("<span>Название</span><input type='text' class='form-control usNewName' value='" + data.name + "' /><br />");
+                        s.push("<span>Номер</span><input type='text' class='form-control usNewNumber' value='" + data.number + "' /><br />");
+
+                        var createdDate = asdemo.formatDate(data.createdDate);
+                        s.push("<input  type='hidden' disabled data-date-format='DD MM YYYY' value='" + createdDate + "' class='form-control usCreated'/>");
+
+                        $('.usCheckDocTypes option').removeAttr('selected');
+                        $(".usCheckDocTypes option[value='" + data.documentTypeID + "']").attr("selected", "selected");
+                        s.push("<span>Тип</span><select class='form-control usNewTypeID' >" + $('.usCheckDocTypes').html() + "</select><br />");
+
+                        s.push("<span>Документ</span><input type='text' class='form-control usNewPath' value='" + data.link + "' readonly/><br />");
+
+                        s.push("<div id='partUpload'>");
+                        s.push("<input type='submit' class='btn btn-default' id='downloadDoc' value='Скачать документ' /></span><br /><br />");
+
+                        s.push("<span>Загрузить документ</span>");
+                        s.push("<textarea id='note' class='form-control' placeholder='Изменения...' cols='30' rows='2'></textarea>");
+                        s.push("<input type='file' id='uploadDoc' multiple/><br />");
+                        s.push("</div>");
+
+                        $('.usCheckDocStatuses option').removeAttr('selected');
+                        $(".usCheckDocStatuses option[value='" + data.documentStatusID + "']").attr("selected", "selected");
+                        s.push("<span>Статус</span><select class='form-control usNewStatusID' >" + $('.usCheckDocStatuses').html() + "</select><br />");
+
+
+                        $('.usCheckFinContragents option').removeAttr('selected');
+                        $(".usCheckFinContragents  option[value='" + data.contractorID + "']").attr("selected", "selected");
+                        s.push("<span>Контрагент</span><select class='form-control usNewContragentID' >" + $('.usCheckFinContragents').html() + "</select><br />");
+
+                        s.push("<span>Укажите сумму</span>");
+                        s.push("<input type='text' class='form-control usNewSumma' value='" + data.sum + "'/><br />");
+
+                        s.push("<textarea id='note' class='form-control' placeholder='Описание...' cols='30' rows='2'>" + data.comment + "</textarea>");
+
+                        setTimeout(function() { $('.usNewName').focus(); }, 200);
+                        as.sys.showDialog("Редактирование", s.join(""), "Сохранить", function() {
+                            var id = parseInt(params.id);
+                            var name = $('.usNewName').val();
+                            var number = $('.usNewNumber').val();
+                            var link = $('.usNewPath').val();
+                            var createdDate = $('.usCreated').val();
+                            var documentTypeID = $('.usNewTypeID option:selected').val();
+                            var documentStatusID = $('.usNewStatusID option:selected').val();
+                            var contractorID = $('.usNewContragentID option:selected').val();
+                            var comment = $('#note').val();
+                            var sum = $('.usNewSumma').val();
+                            var sum1 = asdemo.isNumber(sum);
+
+                            if (!name) {
+                                as.sys.bootstrapAlert("Укажите пожалуйста название", { type: 'warning' });
+                                $('.usNewName').focus();
+                                return;
+                            }
+                            if (!number) {
+                                as.sys.bootstrapAlert("Укажите пожалуйста номер", { type: 'warning' });
+                                $('.usNewNumber').focus();
+                                return;
+                            }
+                            if (!link) {
+                                as.sys.bootstrapAlert("Укажите пожалуйста путь", { type: 'warning' });
+                                $('.usNewPath').focus();
+                                return;
+                            }
+                            if (!documentTypeID || documentTypeID == 0) {
+                                as.sys.bootstrapAlert("Укажите пожалуйста тип", { type: 'warning' });
+                                $('.usNewTypeID').focus();
+                                return;
+                            }
+                            if (!documentStatusID || documentStatusID == 0) {
+                                as.sys.bootstrapAlert("Укажите пожалуйста статус", { type: 'warning' });
+                                $('.usNewStatusID').focus();
+                                return;
+                            }
+
+                            if (!contractorID || contractorID == 0) {
+                                as.sys.bootstrapAlert("Укажите пожалуйста контрагента", { type: 'warning' });
+                                $('.usNewContragentID').focus();
+                                return;
+                            }
+                            if (!sum || sum == 0 || !sum1) {
+                                as.sys.bootstrapAlert("Укажите пожалуйста сумму в формате 00.00", { type: 'warning' });
+                                $('.usNewSumma').focus();
+                                return;
+                            }
+                            if (!comment) {
+                                as.sys.bootstrapAlert("Укажите пожалуйста описание", { type: 'warning' });
+                                $('#note').focus();
+                                return;
+                            }
+                            sum = parseFloat(sum);
+                            var paramsEdit = {
+                                id: id,
+                                name: name,
+                                number: number,
+                                link: link,
+                                documentTypeID: documentTypeID,
+                                documentStatusID: documentStatusID,
+                                contractorID: contractorID,
+                                comment: comment,
+                                createdDate: createdDate,
+                                sum: sum,
+                            };
+
+                            as.sys.ajaxSend("/Podvashetskyi/Documents/EditDocument", paramsEdit, function(data) {
+                                if (typeof (data) != "object") data = eval('(' + data + ')');
+                                if (data.result) {
+                                    as.sys.bootstrapAlert("Документ успешно отредактирован", { type: 'success' });
+                                    as.sys.closeDialog();
+                                    as.crud.getItems();
+                                    setTimeout(function() {
+                                        as.crud.gotoItem(data.itemID);
+                                    }, 1000);
+                                } else {
+                                    as.sys.bootstrapAlert(data.msg || "Возникли ошибки при выполнении операции!", { type: 'danger' });
+                                }
+                            });
+                        });
+                    } else {
+                        as.sys.bootstrapAlert(data.msg || "Возникли ошибки при выполнении операции!", { type: 'danger' });
+                    }
+                });
+            },
+            formatDate:function(dateString) {
+                var date_mas = dateString.split('.');
+                return [date_mas[2], date_mas[1], date_mas[0]].join('-');
+            },
+            // возможно надо изменить
+            createListTemplates: function(documentTypeID) {
+                var params = { documentTypeID: documentTypeID };
+                as.sys.ajaxSend("/Docs/GetListTemplatesByTypeId", params, function(data) {
+                    if (typeof (data) != "object") data = eval('(' + data + ')');
+                    if (data.result) {
+                        var s = [];
+                        $.each(data.result, function(i, item) {
+                            s.push('<option value="' + data.result[i].id + '">' + data.result[i].link + '</option>');
+                        });
+                        $('#template').removeClass('hide');
+                        $('#listTemplate').empty();
+                        $('#listTemplate').html(s.join(''));
+
+                    } else {
+                        as.sys.bootstrapAlert(data.msg || "Возникли ошибки при выполнении операции!", { type: 'danger' });
+                    }
+                });
+            },
+            downloadDoc:function() {
+                var link =$('.usNewPath').val();
+                var documentId = $('#docId').val();
+                var params = { link: link, documentId: documentId };
+                as.sys.ajaxSend("/Podvashetskyi/Documents/DownloadDocument", params, function(data) {
+                    if (typeof (data) != "object") data = eval('(' + data + ')');
+                    if (data.result) {
+                        window.location = data.result;
+                    }
+                });
+            },
+            uploadDoc: function() {
+                var fileUpload = $("#uploadDoc").get(0);
+                var files = fileUpload.files;
+                var formData = new FormData();
+                formData.append(files[0].name, files[0]);
+                var docId = $('#docId').val();
+                var note = $('#note').text();
+                formData.append('docId', docId);
+                formData.append('note', note);
+
+                $.ajax({
+                    type: "POST",
+                    url: '/Podvashetskyi/Documents/UploadDocuments',
+                    data: formData,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    success: function(data) {
+                        if (data.result) {
+                            $('.usNewPath').val(data.fileName);
+                            $('#partUpload').hide();
+                            as.sys.bootstrapAlert("Документ загружен", { type: 'success' });
+                        } else {
+                            as.sys.bootstrapAlert(data.msg || data.exMessage, { type: 'danger' });
+                        }
+                    },
+                    error: function(error) {
+                        as.sys.bootstrapAlert(data.msg || "Возникли ошибки!", { type: 'danger' });
+                    }
+                });
+            },
+            isNumber: function(value) {
+                var str = value.toString();
+                if (!str.match(/^-?[0-9]*[.][0-9]+$/)) {return false;} else {return true;}
+            }
+        }
+
+        $(function()
+        {
+            asdemo.init();
+
+        });
+    </script>
+}

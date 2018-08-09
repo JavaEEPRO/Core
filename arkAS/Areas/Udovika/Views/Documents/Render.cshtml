@@ -1,0 +1,175 @@
+﻿@using arkAS.BLL
+@model arkAS.Areas.Udovika.Models.DocumentView
+@{
+    ViewBag.Title = "Render";
+    Layout = "~/Areas/Udovika/Views/Shared/_Layout.cshtml";
+    var js = new System.Web.Script.Serialization.JavaScriptSerializer();
+}
+
+<style type="text/css">
+    .pop-outer {
+        background-color: rgba(0,0,0,0.5);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9050;
+        
+    }
+    .pop-inner {
+        background-color: #fff;
+        width: 600px;
+        margin: 30px auto;
+        box-shadow: 0 5px 15px rgba(0,0,0,.5);
+    }
+    .modal-content{
+        border-radius:6px;
+    }
+</style>
+
+<h2>Render</h2>
+<div class='dmCont'>
+    <table class="table table-condensed" id="myTable">
+        <thead>
+            <tr>
+                <th class="crdItemHeader" data-code="id" title="Идентификатор">#</th>
+                <th class="crdItemHeader" data-code="number" title="Номер документа">Номер документа</th>
+                <th class="crdItemHeader" data-code="date" title="Дата">Дата создания</th>
+                <th class="crdItemHeader" data-code="link" title="Cсылка">Cсылка</th>
+                <th class="crdItemHeader" data-code="contractor" title="Контрагент">Контрагент</th>
+                <th class="crdItemHeader" data-code="total" title="Сумма">Сумма</th>
+                <th class="crdItemHeader" data-code="edit" title="Редактировать">Другое</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+<div style="display:none;" id="modal" class="pop-outer" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Редактирование</h4>
+            </div>
+            <div class="modal-body">
+                <div class="cont"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-primary">Сохранить</button>
+            </div>
+        </div>
+            
+        </div>
+</div>
+@section js{
+    <script id="templateContractors" type="text/x-jsrender">
+            <option value="{{>id}}">{{>name}}</option>
+    </script>
+    <script id="templateDocuments" type="text/x-jsrender">
+        <option value="{{>id}}">{{>name}}</option>
+    </script>
+
+    <script id="template" type="text/x-jsrender">
+        <input type="hidden" disabled="" data-date-format="DD MM YYYY" value="{{:date}}" class="form-control usCreated">
+        <label for="number">Номер документа</label>
+        <input type="text" id="number" class="form-control newNumber" value="{{:number}}"><br>
+        <label for="contractor">Контрагент</label>
+        <select id="tcontr" class="dmContractors form-control"></select>><br>
+        <label for="total">Сумма</label>
+        <input type="text" id="total" class="form-control newTotal" value="{{:total}}">
+        <label for="typeDoc">Тип документа</label>
+        <select id="typeDoc" class="dmTypes form-control"></select>
+        <label for="link">Ссылка</label>
+        <input type="text" id="link" class="form-control newLink" value="{{:link}}">
+        <label for="comment">Описание:</label>
+        <textarea rows="5" id="comment" class="form-control newComment">test</textarea>
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("body").delegate("button", "click", function () {
+                id = $(this).closest("tr").attr("data-itemid");
+                contrID = $(this).closest("tr").find("td#contrID").text();
+                docID = $(this).closest("tr").find("td#docID").text();
+                EditModal(id);
+            });
+            $('#tcontr').val(contrID);
+            $('#typeDoc').val(docID);
+        });
+        $(".close").click(function () {
+            $(".pop-outer").fadeOut("slow");
+        });
+        var id = 0;
+        var contrID = 0;
+        var docID = 0;
+        
+        function contractors() {
+            $.ajax({
+                url: "/Udovika/Documents/GetContractors",
+                dataType: 'json',
+                success: processData,
+            });
+            function processData(contractors, status) {
+                $("#tcontr").html($("#templateContractors").render(contractors));
+            }
+        }
+        function documentsType() {
+            $.ajax({
+                url: "/Udovika/Documents/GetDocumentsType",
+                dataType: 'json',
+                success: processData,
+            });
+            function processData(documentsType, status) {
+                $("#tcontr").html($("#templateDocuments").render(documentsType));
+            }
+        }
+        function EditModal(id) {
+            var params = { id: id };
+            $.ajax({
+                url: "/Udovika/Documents/GetDocument",
+                dataType: 'json',
+                data: params,
+                success: processData,
+                error: handlError
+            });
+            function processData(data, status) {
+                $(".cont").html($("#template").render(data));
+                contractors();
+                $(".pop-outer").fadeIn("slow");
+            }
+            function handlError(msg, data) {
+                as.sys.bootstrapAlert(msg, { type: "warning" });
+            }
+        }
+    </script>
+
+    <script id="templates" type="text/x-jsrender">
+        <tr data-itemid="{{:id}}">
+            <td id="{{:id}}">{{:#index + 1}}</td>
+            <td>{{:number}}</td>
+            <td>{{:date}}</td>
+            <td>{{:link}}</td>
+            <td>{{:contractor}}</td>
+            <td>{{:total}}</td>
+            <td class="hide" id="docID" data-code="contractType" title="ID ">{{:contractType}}</td>
+            <td class="hide" id="contrID" data-code="contractorID" title="ID Контрагента">{{:contractorID}}</td>
+            <td><button type="button" class="btn btn-default">Edit</button></td>
+        </tr>
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            LoadData();
+        });
+        function LoadData() {
+            $.post('/Udovika/Documents/docum', function (data) {
+                var tpl = $.templates("#templates");
+                var outHtml = tpl.render(data);
+                console.log(data);
+                $(".dmCont #myTable tbody").html(outHtml);
+            }, 'json');
+        }
+    </script>
+}
+

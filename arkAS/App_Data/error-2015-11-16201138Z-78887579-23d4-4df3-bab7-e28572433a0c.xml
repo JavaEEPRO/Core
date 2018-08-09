@@ -1,0 +1,210 @@
+﻿<error errorId="78887579-23d4-4df3-bab7-e28572433a0c" host="WI-U26835" type="System.Web.HttpException" message="A public action method 'Less' was not found on controller 'arkAS.Controllers.DemoController'." source="System.Web.Mvc" detail="System.Web.HttpException (0x80004005): A public action method 'Less' was not found on controller 'arkAS.Controllers.DemoController'.&#xD;&#xA;   в System.Web.Mvc.Controller.HandleUnknownAction(String actionName)&#xD;&#xA;   в System.Web.Mvc.Controller.&lt;BeginExecuteCore&gt;b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.MvcHandler.&lt;BeginProcessRequest&gt;b__5(IAsyncResult asyncResult, ProcessRequestState innerState)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()&#xD;&#xA;   в System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)" user="core-admin@mail.ru" time="2015-11-16T20:11:38.1904081Z" statusCode="404">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CACHE_CONTROL:max-age=0&#xD;&#xA;HTTP_CONNECTION:keep-alive&#xD;&#xA;HTTP_ACCEPT:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip, deflate, sdch&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:uk-UA,uk;q=0.8,ru;q=0.6,en-US;q=0.4,en;q=0.2&#xD;&#xA;HTTP_COOKIE:_ym_uid=14468841551018404853; userGuid=3cb9e2e5-915a-474a-b439-70d5c9b61b55; __RequestVerificationToken=Gm0T39UYTQGVKIlX0Ww_rQEmgi27NhcIZXv3D7Q38Qabm-bT6oTI5ZkRZbrTtnSYanOyCnC3aZ3srQSrgbN5GQV7xDA1; as-crud-textsTable-selectParams_usCont={&quot;page&quot;:1,&quot;pageSize&quot;:150,&quot;filter&quot;:{&quot;text&quot;:&quot;&quot;,&quot;categoryID&quot;:&quot;0&quot;},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}; as-crud-simpleTable-selectParams_dmCont={&quot;page&quot;:1,&quot;pageSize&quot;:15,&quot;filter&quot;:{},&quot;sort&quot;:&quot;orderNum&quot;,&quot;direction&quot;:&quot;up&quot;}; as-crud-filterTable2-filterCollapsed_dmCont=0; as-crud-filterTable2-selectParams_dmCont={&quot;page&quot;:1,&quot;pageSize&quot;:5,&quot;filter&quot;:{&quot;statusName&quot;:[&quot;0&quot;,&quot;1&quot;,&quot;3&quot;,&quot;4&quot;]},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}; as-crud-inlineEditTable-selectParams_dmCont={&quot;page&quot;:1,&quot;pageSize&quot;:15,&quot;filter&quot;:{&quot;orderNum&quot;:&quot;&quot;,&quot;clientID&quot;:&quot;3&quot;,&quot;statusIDs&quot;:[&quot;1&quot;]},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}; as-crud-fullEditTable-selectParams_dmCont={&quot;page&quot;:1,&quot;pageSize&quot;:15,&quot;filter&quot;:{&quot;orderNum&quot;:&quot;&quot;,&quot;clientID&quot;:&quot;4&quot;,&quot;statusIDs&quot;:[]},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}; as-crud-doubleSortTable-selectParams_dmCont={&quot;page&quot;:1,&quot;pageSize&quot;:15,&quot;filter&quot;:{&quot;orderNum&quot;:&quot;&quot;,&quot;clientID&quot;:&quot;1&quot;,&quot;statusIDs&quot;:[&quot;0&quot;,&quot;1&quot;,&quot;3&quot;]},&quot;sort&quot;:&quot;,&quot;,&quot;direction&quot;:&quot;,&quot;}; as-crud-colSettingsTable-selectParams_dmCont={&quot;page&quot;:1,&quot;pageSize&quot;:15,&quot;filter&quot;:{&quot;orderNum&quot;:&quot;&quot;,&quot;clientID&quot;:&quot;2&quot;,&quot;statusIDs&quot;:[]},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}; as-crud-colSettingsTable-colSettings_dmCont=[{&quot;colName&quot;:&quot;id&quot;,&quot;isVisible&quot;:true,&quot;position&quot;:0},{&quot;colName&quot;:&quot;created&quot;,&quot;isVisible&quot;:true,&quot;position&quot;:1},{&quot;colName&quot;:&quot;orderNum&quot;,&quot;isVisible&quot;:false,&quot;position&quot;:2},{&quot;colName&quot;:&quot;statusName&quot;,&quot;isVisible&quot;:false,&quot;position&quot;:3},{&quot;colName&quot;:&quot;statusID&quot;,&quot;isVisible&quot;:false,&quot;position&quot;:4},{&quot;colName&quot;:&quot;clientName&quot;,&quot;isVisible&quot;:true,&quot;position&quot;:5},{&quot;colName&quot;:&quot;clientID&quot;,&quot;isVisible&quot;:false,&quot;position&quot;:6}]; as-crud-expertExcelTable-selectParams_dmCont={&quot;page&quot;:1,&quot;pageSize&quot;:15,&quot;filter&quot;:{&quot;orderNum&quot;:&quot;&quot;,&quot;clientID&quot;:&quot;0&quot;,&quot;statusIDs&quot;:[]},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}; arkAS=499E2595E43198234176D29CF6DFFB76E792ECF36E55A3EE01B0F02CAA8DDE17202D82FD588F751F5137A641E38F388B7A9E93F541177E7BF6F92691CBB5C5711F52519909FDA2CF2896C023D4D3D3BE05BD35540017F72FB65ECF98C2EF7E091761C74C; _ym_visorc_32000186=w&#xD;&#xA;HTTP_HOST:core.web-automation.ru&#xD;&#xA;HTTP_REFERER:http://core.web-automation.ru/&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36&#xD;&#xA;HTTP_UPGRADE_INSECURE_REQUESTS:1&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Cache-Control: max-age=0&#xD;&#xA;Connection: keep-alive&#xD;&#xA;Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&#xD;&#xA;Accept-Encoding: gzip, deflate, sdch&#xD;&#xA;Accept-Language: uk-UA,uk;q=0.8,ru;q=0.6,en-US;q=0.4,en;q=0.2&#xD;&#xA;Cookie: _ym_uid=14468841551018404853; userGuid=3cb9e2e5-915a-474a-b439-70d5c9b61b55; __RequestVerificationToken=Gm0T39UYTQGVKIlX0Ww_rQEmgi27NhcIZXv3D7Q38Qabm-bT6oTI5ZkRZbrTtnSYanOyCnC3aZ3srQSrgbN5GQV7xDA1; as-crud-textsTable-selectParams_usCont={&quot;page&quot;:1,&quot;pageSize&quot;:150,&quot;filter&quot;:{&quot;text&quot;:&quot;&quot;,&quot;categoryID&quot;:&quot;0&quot;},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}; as-crud-simpleTable-selectParams_dmCont={&quot;page&quot;:1,&quot;pageSize&quot;:15,&quot;filter&quot;:{},&quot;sort&quot;:&quot;orderNum&quot;,&quot;direction&quot;:&quot;up&quot;}; as-crud-filterTable2-filterCollapsed_dmCont=0; as-crud-filterTable2-selectParams_dmCont={&quot;page&quot;:1,&quot;pageSize&quot;:5,&quot;filter&quot;:{&quot;statusName&quot;:[&quot;0&quot;,&quot;1&quot;,&quot;3&quot;,&quot;4&quot;]},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}; as-crud-inlineEditTable-selectParams_dmCont={&quot;page&quot;:1,&quot;pageSize&quot;:15,&quot;filter&quot;:{&quot;orderNum&quot;:&quot;&quot;,&quot;clientID&quot;:&quot;3&quot;,&quot;statusIDs&quot;:[&quot;1&quot;]},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}; as-crud-fullEditTable-selectParams_dmCont={&quot;page&quot;:1,&quot;pageSize&quot;:15,&quot;filter&quot;:{&quot;orderNum&quot;:&quot;&quot;,&quot;clientID&quot;:&quot;4&quot;,&quot;statusIDs&quot;:[]},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}; as-crud-doubleSortTable-selectParams_dmCont={&quot;page&quot;:1,&quot;pageSize&quot;:15,&quot;filter&quot;:{&quot;orderNum&quot;:&quot;&quot;,&quot;clientID&quot;:&quot;1&quot;,&quot;statusIDs&quot;:[&quot;0&quot;,&quot;1&quot;,&quot;3&quot;]},&quot;sort&quot;:&quot;,&quot;,&quot;direction&quot;:&quot;,&quot;}; as-crud-colSettingsTable-selectParams_dmCont={&quot;page&quot;:1,&quot;pageSize&quot;:15,&quot;filter&quot;:{&quot;orderNum&quot;:&quot;&quot;,&quot;clientID&quot;:&quot;2&quot;,&quot;statusIDs&quot;:[]},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}; as-crud-colSettingsTable-colSettings_dmCont=[{&quot;colName&quot;:&quot;id&quot;,&quot;isVisible&quot;:true,&quot;position&quot;:0},{&quot;colName&quot;:&quot;created&quot;,&quot;isVisible&quot;:true,&quot;position&quot;:1},{&quot;colName&quot;:&quot;orderNum&quot;,&quot;isVisible&quot;:false,&quot;position&quot;:2},{&quot;colName&quot;:&quot;statusName&quot;,&quot;isVisible&quot;:false,&quot;position&quot;:3},{&quot;colName&quot;:&quot;statusID&quot;,&quot;isVisible&quot;:false,&quot;position&quot;:4},{&quot;colName&quot;:&quot;clientName&quot;,&quot;isVisible&quot;:true,&quot;position&quot;:5},{&quot;colName&quot;:&quot;clientID&quot;,&quot;isVisible&quot;:false,&quot;position&quot;:6}]; as-crud-expertExcelTable-selectParams_dmCont={&quot;page&quot;:1,&quot;pageSize&quot;:15,&quot;filter&quot;:{&quot;orderNum&quot;:&quot;&quot;,&quot;clientID&quot;:&quot;0&quot;,&quot;statusIDs&quot;:[]},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}; arkAS=499E2595E43198234176D29CF6DFFB76E792ECF36E55A3EE01B0F02CAA8DDE17202D82FD588F751F5137A641E38F388B7A9E93F541177E7BF6F92691CBB5C5711F52519909FDA2CF2896C023D4D3D3BE05BD35540017F72FB65ECF98C2EF7E091761C74C; _ym_visorc_32000186=w&#xD;&#xA;Host: core.web-automation.ru&#xD;&#xA;Referer: http://core.web-automation.ru/&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36&#xD;&#xA;Upgrade-Insecure-Requests: 1&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="/LM/W3SVC/9/ROOT" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="C:\sites\core\arkAS\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="Forms" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="core-admin@mail.ru" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="core-admin@mail.ru" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="0" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="CGI/1.1" />
+    </item>
+    <item name="HTTPS">
+      <value string="off" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="9" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="/LM/W3SVC/9" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="193.124.64.149" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/Demo/Less" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="C:\sites\core\arkAS\Demo\Less" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="178.137.208.140" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="178.137.208.140" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="7782" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="GET" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/Demo/Less" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="core.web-automation.ru" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="80" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="Microsoft-IIS/8.5" />
+    </item>
+    <item name="URL">
+      <value string="/Demo/Less" />
+    </item>
+    <item name="HTTP_CACHE_CONTROL">
+      <value string="max-age=0" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="keep-alive" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip, deflate, sdch" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="uk-UA,uk;q=0.8,ru;q=0.6,en-US;q=0.4,en;q=0.2" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string="_ym_uid=14468841551018404853; userGuid=3cb9e2e5-915a-474a-b439-70d5c9b61b55; __RequestVerificationToken=Gm0T39UYTQGVKIlX0Ww_rQEmgi27NhcIZXv3D7Q38Qabm-bT6oTI5ZkRZbrTtnSYanOyCnC3aZ3srQSrgbN5GQV7xDA1; as-crud-textsTable-selectParams_usCont={&quot;page&quot;:1,&quot;pageSize&quot;:150,&quot;filter&quot;:{&quot;text&quot;:&quot;&quot;,&quot;categoryID&quot;:&quot;0&quot;},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}; as-crud-simpleTable-selectParams_dmCont={&quot;page&quot;:1,&quot;pageSize&quot;:15,&quot;filter&quot;:{},&quot;sort&quot;:&quot;orderNum&quot;,&quot;direction&quot;:&quot;up&quot;}; as-crud-filterTable2-filterCollapsed_dmCont=0; as-crud-filterTable2-selectParams_dmCont={&quot;page&quot;:1,&quot;pageSize&quot;:5,&quot;filter&quot;:{&quot;statusName&quot;:[&quot;0&quot;,&quot;1&quot;,&quot;3&quot;,&quot;4&quot;]},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}; as-crud-inlineEditTable-selectParams_dmCont={&quot;page&quot;:1,&quot;pageSize&quot;:15,&quot;filter&quot;:{&quot;orderNum&quot;:&quot;&quot;,&quot;clientID&quot;:&quot;3&quot;,&quot;statusIDs&quot;:[&quot;1&quot;]},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}; as-crud-fullEditTable-selectParams_dmCont={&quot;page&quot;:1,&quot;pageSize&quot;:15,&quot;filter&quot;:{&quot;orderNum&quot;:&quot;&quot;,&quot;clientID&quot;:&quot;4&quot;,&quot;statusIDs&quot;:[]},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}; as-crud-doubleSortTable-selectParams_dmCont={&quot;page&quot;:1,&quot;pageSize&quot;:15,&quot;filter&quot;:{&quot;orderNum&quot;:&quot;&quot;,&quot;clientID&quot;:&quot;1&quot;,&quot;statusIDs&quot;:[&quot;0&quot;,&quot;1&quot;,&quot;3&quot;]},&quot;sort&quot;:&quot;,&quot;,&quot;direction&quot;:&quot;,&quot;}; as-crud-colSettingsTable-selectParams_dmCont={&quot;page&quot;:1,&quot;pageSize&quot;:15,&quot;filter&quot;:{&quot;orderNum&quot;:&quot;&quot;,&quot;clientID&quot;:&quot;2&quot;,&quot;statusIDs&quot;:[]},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}; as-crud-colSettingsTable-colSettings_dmCont=[{&quot;colName&quot;:&quot;id&quot;,&quot;isVisible&quot;:true,&quot;position&quot;:0},{&quot;colName&quot;:&quot;created&quot;,&quot;isVisible&quot;:true,&quot;position&quot;:1},{&quot;colName&quot;:&quot;orderNum&quot;,&quot;isVisible&quot;:false,&quot;position&quot;:2},{&quot;colName&quot;:&quot;statusName&quot;,&quot;isVisible&quot;:false,&quot;position&quot;:3},{&quot;colName&quot;:&quot;statusID&quot;,&quot;isVisible&quot;:false,&quot;position&quot;:4},{&quot;colName&quot;:&quot;clientName&quot;,&quot;isVisible&quot;:true,&quot;position&quot;:5},{&quot;colName&quot;:&quot;clientID&quot;,&quot;isVisible&quot;:false,&quot;position&quot;:6}]; as-crud-expertExcelTable-selectParams_dmCont={&quot;page&quot;:1,&quot;pageSize&quot;:15,&quot;filter&quot;:{&quot;orderNum&quot;:&quot;&quot;,&quot;clientID&quot;:&quot;0&quot;,&quot;statusIDs&quot;:[]},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}; arkAS=499E2595E43198234176D29CF6DFFB76E792ECF36E55A3EE01B0F02CAA8DDE17202D82FD588F751F5137A641E38F388B7A9E93F541177E7BF6F92691CBB5C5711F52519909FDA2CF2896C023D4D3D3BE05BD35540017F72FB65ECF98C2EF7E091761C74C; _ym_visorc_32000186=w" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="core.web-automation.ru" />
+    </item>
+    <item name="HTTP_REFERER">
+      <value string="http://core.web-automation.ru/" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36" />
+    </item>
+    <item name="HTTP_UPGRADE_INSECURE_REQUESTS">
+      <value string="1" />
+    </item>
+  </serverVariables>
+  <cookies>
+    <item name="_ym_uid">
+      <value string="14468841551018404853" />
+    </item>
+    <item name="userGuid">
+      <value string="3cb9e2e5-915a-474a-b439-70d5c9b61b55" />
+    </item>
+    <item name="__RequestVerificationToken">
+      <value string="Gm0T39UYTQGVKIlX0Ww_rQEmgi27NhcIZXv3D7Q38Qabm-bT6oTI5ZkRZbrTtnSYanOyCnC3aZ3srQSrgbN5GQV7xDA1" />
+    </item>
+    <item name="as-crud-textsTable-selectParams_usCont">
+      <value string="{&quot;page&quot;:1,&quot;pageSize&quot;:150,&quot;filter&quot;:{&quot;text&quot;:&quot;&quot;,&quot;categoryID&quot;:&quot;0&quot;},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}" />
+    </item>
+    <item name="as-crud-simpleTable-selectParams_dmCont">
+      <value string="{&quot;page&quot;:1,&quot;pageSize&quot;:15,&quot;filter&quot;:{},&quot;sort&quot;:&quot;orderNum&quot;,&quot;direction&quot;:&quot;up&quot;}" />
+    </item>
+    <item name="as-crud-filterTable2-filterCollapsed_dmCont">
+      <value string="0" />
+    </item>
+    <item name="as-crud-filterTable2-selectParams_dmCont">
+      <value string="{&quot;page&quot;:1,&quot;pageSize&quot;:5,&quot;filter&quot;:{&quot;statusName&quot;:[&quot;0&quot;,&quot;1&quot;,&quot;3&quot;,&quot;4&quot;]},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}" />
+    </item>
+    <item name="as-crud-inlineEditTable-selectParams_dmCont">
+      <value string="{&quot;page&quot;:1,&quot;pageSize&quot;:15,&quot;filter&quot;:{&quot;orderNum&quot;:&quot;&quot;,&quot;clientID&quot;:&quot;3&quot;,&quot;statusIDs&quot;:[&quot;1&quot;]},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}" />
+    </item>
+    <item name="as-crud-fullEditTable-selectParams_dmCont">
+      <value string="{&quot;page&quot;:1,&quot;pageSize&quot;:15,&quot;filter&quot;:{&quot;orderNum&quot;:&quot;&quot;,&quot;clientID&quot;:&quot;4&quot;,&quot;statusIDs&quot;:[]},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}" />
+    </item>
+    <item name="as-crud-doubleSortTable-selectParams_dmCont">
+      <value string="{&quot;page&quot;:1,&quot;pageSize&quot;:15,&quot;filter&quot;:{&quot;orderNum&quot;:&quot;&quot;,&quot;clientID&quot;:&quot;1&quot;,&quot;statusIDs&quot;:[&quot;0&quot;,&quot;1&quot;,&quot;3&quot;]},&quot;sort&quot;:&quot;,&quot;,&quot;direction&quot;:&quot;,&quot;}" />
+    </item>
+    <item name="as-crud-colSettingsTable-selectParams_dmCont">
+      <value string="{&quot;page&quot;:1,&quot;pageSize&quot;:15,&quot;filter&quot;:{&quot;orderNum&quot;:&quot;&quot;,&quot;clientID&quot;:&quot;2&quot;,&quot;statusIDs&quot;:[]},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}" />
+    </item>
+    <item name="as-crud-colSettingsTable-colSettings_dmCont">
+      <value string="[{&quot;colName&quot;:&quot;id&quot;,&quot;isVisible&quot;:true,&quot;position&quot;:0},{&quot;colName&quot;:&quot;created&quot;,&quot;isVisible&quot;:true,&quot;position&quot;:1},{&quot;colName&quot;:&quot;orderNum&quot;,&quot;isVisible&quot;:false,&quot;position&quot;:2},{&quot;colName&quot;:&quot;statusName&quot;,&quot;isVisible&quot;:false,&quot;position&quot;:3},{&quot;colName&quot;:&quot;statusID&quot;,&quot;isVisible&quot;:false,&quot;position&quot;:4},{&quot;colName&quot;:&quot;clientName&quot;,&quot;isVisible&quot;:true,&quot;position&quot;:5},{&quot;colName&quot;:&quot;clientID&quot;,&quot;isVisible&quot;:false,&quot;position&quot;:6}]" />
+    </item>
+    <item name="as-crud-expertExcelTable-selectParams_dmCont">
+      <value string="{&quot;page&quot;:1,&quot;pageSize&quot;:15,&quot;filter&quot;:{&quot;orderNum&quot;:&quot;&quot;,&quot;clientID&quot;:&quot;0&quot;,&quot;statusIDs&quot;:[]},&quot;sort&quot;:&quot;&quot;,&quot;direction&quot;:&quot;&quot;}" />
+    </item>
+    <item name="arkAS">
+      <value string="499E2595E43198234176D29CF6DFFB76E792ECF36E55A3EE01B0F02CAA8DDE17202D82FD588F751F5137A641E38F388B7A9E93F541177E7BF6F92691CBB5C5711F52519909FDA2CF2896C023D4D3D3BE05BD35540017F72FB65ECF98C2EF7E091761C74C" />
+    </item>
+    <item name="_ym_visorc_32000186">
+      <value string="w" />
+    </item>
+  </cookies>
+</error>

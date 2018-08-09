@@ -1,0 +1,336 @@
+﻿@using arkAS.BLL
+@model arkAS.Areas.Udovika.Models.DocumentView
+@{
+    ViewBag.Title = "Documents";
+    var js = new System.Web.Script.Serialization.JavaScriptSerializer();
+}
+
+
+
+<div class='dmCont'></div>
+    <select class='usCheckDocTypes hide'>
+        <option value="0">Не выбрано</option>
+        @foreach (var item in Model.contractTypes)
+        {
+            <option value='@item.id'>@item.name</option>
+        }
+    </select>
+    <select class='usCheckDocStatuses hide'>
+        <option value="0">Не выбрано</option>
+        @foreach (var item in Model.contractStatuses)
+        {
+            <option value='@item.id'>@item.name</option>
+        }
+    </select>
+
+    <select class='usCheckFinContragents hide'>
+        <option value="0">Не выбрано</option>
+        @foreach (var item in Model.contractors)
+        {
+            <option value='@item.id'>@item.name</option>
+        }
+    </select>
+        <div class='dmStatusesTemplate hide'>
+            @foreach (var item in Model.contractStatuses)
+            {
+                <div class="form-group inline" style="margin-bottom: 4px;">
+                    <input type="checkbox" data-code='@item.name' value='@item.id' id='svOurSup@(item.id)' />
+                    <label for='svOurSup@(item.id)'>@item.name</label>@Html.Raw("&nbsp; &nbsp; &nbsp; &nbsp;")<br />
+                </div>
+            }
+    </div>
+
+@section js{
+    <script type="text/javascript">
+        var sourceContractorsfilter = @Html.Raw(js.Serialize((Model.contractors).Select(x => new { text = x.name, value = x.id, Selected = false })));
+        var sourceContractors = @Html.Raw(js.Serialize((Model.contractors).Select(x => new { Text = x.name, Value = x.id, Selected = false })));
+        var sourceDocumentStatusesfilter = @Html.Raw(js.Serialize((Model.contractStatuses).Select(x => new { Text = x.name, Value = x.id, Selected = false })));
+        var sourceDocumentStatuses = @Html.Raw(js.Serialize((Model.contractStatuses).Select(x => new { text = x.name, value = x.id, Selected = false })));
+        var sourceDocumentTypesfilter = @Html.Raw(js.Serialize((Model.contractTypes).Select(x => new { Text = x.name, Value = x.id, Selected = false })));
+        var sourceDocumentTypes = @Html.Raw(js.Serialize((Model.contractTypes).Select(x => new { text = x.name, value = x.id, Selected = false })));
+        
+    var us = {
+        init: function () {
+            us.initMainTable();
+            $(document).delegate(".crdCreate", "click", function (e) {
+                e.preventDefault();
+                us.createItem();
+            });
+           
+        },
+        initMainTable: function () {
+            var cols = [
+                    { code: "id", title: "ID", tooltip: "Идентификатор", isVisible: false, isPK: true, datatype: "int", isRequired: false, editHide: true },
+                    { code: "date", title: "Дата создания", tooltip: "Дата", isVisible: true, isPK: false, datatype: "date", isRequired: true, isSort: true, callback: null },
+                    { code: "number", title: "Номер документа", tooltip: "Номер документа", isVisible: true, isPK: false, datatype: "string", isRequired: true, isSort: false, callback: null,
+                    editable: { type: "text", format: "{0}", callback: function(el, newValue){}}
+                    },
+                    { code: "contractor", title: "Контрагент", tooltip: "Контрагент", isVisible: true, isPK: false, datatype: "select", isRequired: false, format: "{0}", isSort: true, editSources: sourceContractors, callback: null,
+                    editable: { type: "select", source: sourceContractorsfilter, callback: function(el, newValue) {}}
+                    },
+                    { code: "total", title: "Сумма", tooltip: "Сумма", isVisible: true, isPK: false, datatype: "float", isRequired: false, isSort: false, callback: null },
+                    { code: "type", title: "Документ", tooltip: "Вид документа", isVisible: true, isPK: false, datatype: "select", isRequired: true, isSort: true, editSources: sourceDocumentTypesfilter, callback: null,
+                        editable: { type: "select", format:"{0}", source: sourceDocumentTypes, callback: function (el, newValue) { } }
+                    },
+                    { code: "status", title: "Статус", tooltip: "Статус", isVisible: true, isPK: false, datatype: "select", isRequired: false, format: "{0}", isSort: false, editHide: true, callback: null,
+                        editable: { type: "select", format:"{0}", source: sourceDocumentStatuses, callback: function (el, newValue) { }, }
+                    },
+                    { code: "comment", title: "Примечание", tooltip: "Примечание", isVisible: true, isPK: false, datatype: "text", isRequired: false, isSort: false, callback: null },
+                    { code: "link", title: "Cсылка", tooltip: "Cсылка", isVisible: true, isPK: false, datatype: "string", isRequired: false, isSort: false, callback: null },
+                    { code: "typeID", title: "ID документа", tooltip: "ID документа", isVisible: false, isPK: false, datatype: "int", isRequired: false, isSort: false, editHide: true, callback: null },
+                    { code: "statusID", title: "ID статуса", tooltip: "ID статуса", isVisible: false, isPK: false, datatype: "int", isRequired: false, isSort: false, editHide: true, callback: null, },
+                    { code: "contractorID", title: "ID Контрагента",  tooltip: "ID Контрагента", isVisible: false, isPK: false, datatype: "int", isRequired: true, isSort: false, editHide: true, callback: null },
+            ];
+            as.crud.init({
+                cont: $(".dmCont"),
+                title: "Документы",
+                ajaxURLFormat: '/Udovika/Documents/Documents_{0}',
+                inlineAjaxURL: "/Udovika/Documents/DocumentsInlineEdit",
+                showChecksCol: false,
+                showNumsCol: false,
+                showToolbar: true,
+                showColSettings: false,
+                showReplaceTool: false,
+                showExcelExport: false,
+                additionalSort: false,
+                pageSize: 20,
+                cookiePrefix: "as-crud-contractTypeTable-",
+                emptyText: 'Ничего не найдено',
+                createLinkTitle: 'Создать',
+                filterLinkTitle: 'Найти',
+                filterTitle: 'Фильтрация',
+                cols: cols, 
+                
+                operations: {
+                    create: true,
+                    edit: false,
+                    remove: true,
+                    other:[
+                        {linkClass: 'crdTo2', iconClass: 'glyphicon glyphicon-pencil', title: 'Редактировать', callback: us.editItem}
+                    ]
+                },
+                getFilterMakeup: function (filter) {
+                    var s = "";
+                    s+="<div class='set-left' style='float:left'><span class='gCap'>Номер документа</span><input type='text' class='dmNum form-control' value='" + (filter.number || '') + "' />";
+                    $('.dmTypesTemplate option').removeAttr('selected');
+                    $('.dmTypesTemplate option[value=' + filter.typeID + ']').attr('selected', 'selected');
+                    s+="<span class='gCap'>Тип документа</span><select class='dmTypes form-control'>" + $('.usCheckDocTypes').html() + "</select>";
+                    $('.dmContractorsTemplate option').removeAttr('selected');
+                    $('.dmContractorsTemplate option[value=' + filter.contractorID + ']').attr('selected', 'selected');
+                    s+="<span class='gCap'>Контрагент</span><select class='dmContractors form-control'>" + $('.usCheckFinContragents').html() + "</select>";
+                    $('.dmStatusesTemplate input').removeAttr('checked');
+                    if (filter.statusIDs) {
+                        $.each(filter.statusIDs, function (i, item) {
+                            $('.dmStatusesTemplate input[value=' + item + ']').attr('checked', 'checked');
+                        })
+                    }
+                    s+="</div><div class='set-right' style='margin-left:240px; min-height: 175px;'><span class='gCap'>Статус</span><div class='dmStatuses'>" + $('.dmStatusesTemplate').html() + "</div></div>";
+                    
+                    return s;
+                },
+                filter: function () {
+                    var statusIDs = [];
+                    $('.dmStatuses input:checked').each(function () {
+                        statusIDs.push($(this).attr('value'));
+                    });
+                    var filter = {
+                        number: $('.dmNum').val() || "",
+                        typeID: $('.dmTypes option:selected').val(),
+                        contractorID: $('.dmContractors option:selected').val(),
+                        statusIDs: statusIDs
+                    };
+                    return filter;
+                }
+                
+            });
+        },
+        formatDate: function(dateString) {
+            var date_mas = dateString.split('.');
+            return [date_mas[2], date_mas[1], date_mas[0]].join('-');
+        },
+        getStatusID: function(element) {
+            var el = element.find('td');
+            var status = 0;
+            el.each(function(i, item){
+                if ($(item).attr('data-code') == 'status') {
+                    status = ($(item).find('a').attr('data-value'));
+                }
+            });
+            return status;
+        },
+        isNumeric: function(str){
+             return !!str.trim() && !!Number(str+.1);
+        },
+        editItem: function() {
+            var params = { id: $(this).closest('tr').attr('data-itemid'), status: us.getStatusID($(this).closest('tr')) };
+            as.sys.ajaxSend("/Udovika/Documents/GetDocument", params, function(data) {
+                if (typeof (data) != "object") data = eval('(' + data + ')');
+                if (data.id) {
+                    var s = "";
+                    var date = us.formatDate(data.date);
+                    $('.usCheckDocStatuses option').removeAttr('selected');
+                    s+="<input  type='hidden' disabled data-date-format='DD MM YYYY' value='" + date + "' class='form-control usCreated'/>";
+                    s+="<label for='number'>Номер документа</label>";
+                    s+="<input type='text' id='number' class='form-control newNumber' value='" + data.number + "' /><br />";
+                    s+="<label for='contractor'>Контрагент</label>";
+                    $('.usCheckFinContragents option').removeAttr('selected');
+                    $(".usCheckFinContragents option[value='"+data.contractorID+"']").attr("selected", "selected");
+                    s+="<select id='tcontr' class='dmContractors form-control'>" + $('.usCheckFinContragents').html() + "</select><br />";
+                    s+="<label for='total'>Сумма</label>";
+                    s+="<input type='text' id='total' class='form-control newTotal' value='" + data.total + "' />";
+                    $('.usCheckDocTypes option').removeAttr('selected');
+                    $(".usCheckDocTypes option[value='"+data.typeID+"']").attr("selected", "selected");
+                    s+="<label for='typeDoc'>Тип документа</label>";
+                    s+="<select id='typeDoc' class='dmTypes form-control'>" + $('.usCheckDocTypes').html() + "</select>";
+                    s+="<label for='link'>Ссылка</label>";
+                    s+="<input type='text' id='link' class='form-control newLink' value='"+data.link+"' />";
+                    s+="<label for='comment'>Описание:</label>";
+                    s+="<textarea rows='5' id='comment' class='form-control newComment' >"+data.comment+"</textarea>";
+                    setTimeout(function() { $('.newNumber').focus(); }, 200);
+                    as.sys.showDialog("Редактирование", s, "Сохранить", function() {
+                        var id = parseInt(params.id);
+                        var comment = $('#comment').val();
+                        var number = $('#number').val();
+                        var date = $('.usCreated').val();
+                        var typeDoc = $('#typeDoc option:selected').val();
+                        var statusID = parseInt(params.status);
+                        var tcontr = $('#tcontr option:selected').val();
+                        var total = $('#total').val();
+                        var link = $('#link').val();
+                        
+                        if (!number) {
+                            as.sys.bootstrapAlert("Укажите пожалуйста номер", { type: 'warning' });
+                            $('.newNumber').focus();
+                            return;
+                        }
+                        if (!total) {
+                            $('#total').text("0");
+                        }
+                        if (!typeDoc || typeDoc == 0) {
+                            as.sys.bootstrapAlert("Выберите тим документа", {type: 'warning'});
+                            $('#typeDoc').focus();
+                            return;
+                        }
+                        if (!link) {
+                            $('#link').text("");
+                        }
+                        if (!comment) {
+                            $('#comment').text("");
+                        }
+                            
+                        total = parseFloat(total);
+                        var paramsEdit = {
+                            id: id,
+                            comment: comment,
+                            number: number,
+                            typeID: typeDoc,
+                            statusID: statusID,
+                            total: total,
+                            contractorID: tcontr,
+                            date: date,
+                            link: link
+                        };
+                        as.sys.ajaxSend("/Udovika/Documents/EditDocument", paramsEdit, function(data) {
+                            if (typeof (data) != "object") data = eval('(' + data + ')');
+                            if (data.result) {                         
+                                as.sys.bootstrapAlert("Документ успешно отредактирован", { type: 'success' });
+                                as.sys.closeDialog();
+                                as.crud.getItems();
+                                $('.usCheckDocTypes option').removeAttr('selected');
+                                $('.usCheckFinContragents option').removeAttr('selected');
+                            } else {
+                                as.sys.bootstrapAlert(data.msg || "Возникли ошибки при выполнении операции!", { type: 'danger' });
+                            }
+                        });
+                    });
+                } else {
+                    as.sys.bootstrapAlert(data.msg || "Возникли ошибки при выполнении операции!", { type: 'danger' });
+                }
+            });
+        },
+        createItem: function(){
+            var s = "";
+            s+="<label for='number'>Номер документа</label>";
+            s+="<input type='text' id='number' class='form-control newNumber' /><br />";
+            s+="<label for='contractor'>Контрагент</label>";
+            $('.usCheckFinContragents option').removeAttr('selected');
+            $('.usCheckFinContragents option:first').attr('selected', 'selected');
+            s+="<select id='tcontr' class='dmContractors form-control'>" + $('.usCheckFinContragents').html() + "</select><br />";
+            s+="<label for='total'>Сумма</label>";
+            s+="<input type='text' id='total' class='form-control newTotal' />";
+            s+="<label for='typeDoc'>Тип документа</label>";
+            $('.usCheckDocTypes option').removeAttr('selected');
+            $('.usCheckDocTypes option:first').attr('selected', 'selected');
+            s+="<select id='typeDoc' class='dmTypes form-control'>" + $('.usCheckDocTypes').html() + "</select>";
+            s+="<label for='link'>Ссылка</label>";
+            s+="<input type='text' id='link' class='form-control newLink' />";
+            s+="<label for='comment'>Описание:</label>";
+            s+="<textarea rows='5' id='comment' class='form-control newComment' /></textarea>";
+            setTimeout(function() { $('.newNumber').focus(); }, 200);
+            as.sys.showDialog("Создание", s, "Сохранить", function() {
+                var number = $("#number").val();
+                var tcontr = $("#tcontr option:selected").val();
+                var total = $("#total").val();
+                var typeDoc = $("#typeDoc option:selected").val();
+                var link = $("#link").val();
+                var comment = $("#comment").val();
+
+                if(!number){
+                    as.sys.bootstrapAlert("Введите номер документа", {type: 'warning'});
+                    $('#number').focus();
+                    return;
+                }
+                if (!tcontr || tcontr == 0) {
+                    as.sys.bootstrapAlert("Выберите контрагента", {type: 'warning'});
+                    $('#tcontr').focus();
+                    return;
+                }
+                if (!total) {
+                    as.sys.bootstrapAlert("Укажите сумму", {type: 'warning'});
+                    $('#total').focus();
+                    return;
+                }
+                if(!us.isNumeric(total)){
+                    as.sys.bootstrapAlert("Укажите корректную сумму", {type: 'warning'});
+                    return;
+                }
+                if (!typeDoc || typeDoc == 0) {
+                    as.sys.bootstrapAlert("Выберите тим документа", {type: 'warning'});
+                    $('#typeDoc').focus();
+                    return;
+                }
+                if (!link) {
+                    $('#link').text("");
+                }
+                if (!comment) {
+                    $('#comment').text("");
+                }
+                var params = {
+                    number: number,
+                    tcontr: tcontr,
+                    total: total,
+                    typeDoc: typeDoc,
+                    link: link,
+                    comment: comment
+                };
+                console.log(params);
+                as.sys.ajaxSend("/Udovika/Documents/Documents_Create", params, function (data) {
+                    if (typeof(data)!="object") {
+                        data = eval('('+data+')');
+                    }
+                    if (data.result) {
+                        as.sys.bootstrapAlert("Документ сохранет", {type:"success"});
+                        as.sys.closeDialog();
+                        as.crud.getItems();
+                    }else {
+                        as.sys.bootstrapAlert(data.msg || "Ошибка сохранения.", {type:"warning"});
+                    }
+                });
+            });
+        }
+    }
+    $(function () {
+        us.init();
+    });
+</script>
+}

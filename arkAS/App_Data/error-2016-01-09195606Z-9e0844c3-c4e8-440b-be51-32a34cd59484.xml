@@ -1,0 +1,186 @@
+﻿<error errorId="9e0844c3-c4e8-440b-be51-32a34cd59484" host="WI-U26835" type="System.ArgumentNullException" message="Значение не может быть неопределенным.&#xD;&#xA;Имя параметра: source" source="System.Core" detail="System.ArgumentNullException: Значение не может быть неопределенным.&#xD;&#xA;Имя параметра: source&#xD;&#xA;   в System.Linq.Enumerable.Select[TSource,TResult](IEnumerable`1 source, Func`2 selector)&#xD;&#xA;   в ASP._Page_Views_TextMistakes_GetTextMistakesTable_cshtml.&lt;&gt;c__DisplayClass15.&lt;Execute&gt;b__e() в c:\sites\core\arkAS\Views\TextMistakes\GetTextMistakesTable.cshtml:строка 16&#xD;&#xA;   в System.Web.WebPages.WebPageBase.&lt;&gt;c__DisplayClass7.&lt;RenderSection&gt;b__5(TextWriter tw)&#xD;&#xA;   в ASP._Page_Views_Shared__CabinetLayout_cshtml.Execute() в c:\sites\core\arkAS\Views\Shared\_CabinetLayout.cshtml:строка 395&#xD;&#xA;   в System.Web.WebPages.WebPageBase.ExecutePageHierarchy()&#xD;&#xA;   в System.Web.Mvc.WebViewPage.ExecutePageHierarchy()&#xD;&#xA;   в System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)&#xD;&#xA;   в System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)&#xD;&#xA;   в System.Web.WebPages.WebPageBase.PopContext()&#xD;&#xA;   в System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)&#xD;&#xA;   в System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)&#xD;&#xA;   в System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)&#xD;&#xA;   в System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)&#xD;&#xA;   в System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c__DisplayClass21.&lt;BeginInvokeAction&gt;b__1e(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.Controller.&lt;BeginExecuteCore&gt;b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.MvcHandler.&lt;BeginProcessRequest&gt;b__5(IAsyncResult asyncResult, ProcessRequestState innerState)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()&#xD;&#xA;   в System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)" user="core-admin@mail.ru" time="2016-01-09T19:56:06.0567509Z">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CACHE_CONTROL:no-cache&#xD;&#xA;HTTP_CONNECTION:keep-alive&#xD;&#xA;HTTP_PRAGMA:no-cache&#xD;&#xA;HTTP_ACCEPT:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip, deflate, lzma, sdch&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4&#xD;&#xA;HTTP_COOKIE:__RequestVerificationToken=T42nVOE9RPtdTjNvsM6_Nj1Qnl-NDpUeuAaSh_YgmAdmPQPymXoIo6tRjgdElzdHVFAYLBFoEawkkWeu9xBBJsTP83g1; _ym_uid=1452369279131340586; _ym_visorc_32000186=w; _ym_isad=0; userGuid=e04e342f-fb56-4c06-ac2f-28b002e11156; arkAS=44462351ACA9A1A5C0673C6837B46C170284C3645C9589D8F3323D3B820EC09D0131B4F7AF82CEA25902050B9874546279B932F39537605D62E8B35292579CD81DDA18FB4DD9C5E994176BEEE9006800E62255EB17CEA6FAA8D615DD814B44718AB8D282&#xD;&#xA;HTTP_HOST:core.web-automation.ru&#xD;&#xA;HTTP_REFERER:http://core.web-automation.ru/Account/Login?ReturnUrl=%2fTextMistakes%2fGetTextMistakesTable&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36 OPR/34.0.2036.25&#xD;&#xA;HTTP_UPGRADE_INSECURE_REQUESTS:1&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Cache-Control: no-cache&#xD;&#xA;Connection: keep-alive&#xD;&#xA;Pragma: no-cache&#xD;&#xA;Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&#xD;&#xA;Accept-Encoding: gzip, deflate, lzma, sdch&#xD;&#xA;Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4&#xD;&#xA;Cookie: __RequestVerificationToken=T42nVOE9RPtdTjNvsM6_Nj1Qnl-NDpUeuAaSh_YgmAdmPQPymXoIo6tRjgdElzdHVFAYLBFoEawkkWeu9xBBJsTP83g1; _ym_uid=1452369279131340586; _ym_visorc_32000186=w; _ym_isad=0; userGuid=e04e342f-fb56-4c06-ac2f-28b002e11156; arkAS=44462351ACA9A1A5C0673C6837B46C170284C3645C9589D8F3323D3B820EC09D0131B4F7AF82CEA25902050B9874546279B932F39537605D62E8B35292579CD81DDA18FB4DD9C5E994176BEEE9006800E62255EB17CEA6FAA8D615DD814B44718AB8D282&#xD;&#xA;Host: core.web-automation.ru&#xD;&#xA;Referer: http://core.web-automation.ru/Account/Login?ReturnUrl=%2fTextMistakes%2fGetTextMistakesTable&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36 OPR/34.0.2036.25&#xD;&#xA;Upgrade-Insecure-Requests: 1&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="/LM/W3SVC/9/ROOT" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="C:\sites\core\arkAS\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="Forms" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="core-admin@mail.ru" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="core-admin@mail.ru" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="0" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="CGI/1.1" />
+    </item>
+    <item name="HTTPS">
+      <value string="off" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="9" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="/LM/W3SVC/9" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="193.124.64.149" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/TextMistakes/GetTextMistakesTable" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="C:\sites\core\arkAS\TextMistakes\GetTextMistakesTable" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="178.121.193.16" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="178.121.193.16" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="65187" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="GET" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/TextMistakes/GetTextMistakesTable" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="core.web-automation.ru" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="80" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="Microsoft-IIS/8.5" />
+    </item>
+    <item name="URL">
+      <value string="/TextMistakes/GetTextMistakesTable" />
+    </item>
+    <item name="HTTP_CACHE_CONTROL">
+      <value string="no-cache" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="keep-alive" />
+    </item>
+    <item name="HTTP_PRAGMA">
+      <value string="no-cache" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip, deflate, lzma, sdch" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string="__RequestVerificationToken=T42nVOE9RPtdTjNvsM6_Nj1Qnl-NDpUeuAaSh_YgmAdmPQPymXoIo6tRjgdElzdHVFAYLBFoEawkkWeu9xBBJsTP83g1; _ym_uid=1452369279131340586; _ym_visorc_32000186=w; _ym_isad=0; userGuid=e04e342f-fb56-4c06-ac2f-28b002e11156; arkAS=44462351ACA9A1A5C0673C6837B46C170284C3645C9589D8F3323D3B820EC09D0131B4F7AF82CEA25902050B9874546279B932F39537605D62E8B35292579CD81DDA18FB4DD9C5E994176BEEE9006800E62255EB17CEA6FAA8D615DD814B44718AB8D282" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="core.web-automation.ru" />
+    </item>
+    <item name="HTTP_REFERER">
+      <value string="http://core.web-automation.ru/Account/Login?ReturnUrl=%2fTextMistakes%2fGetTextMistakesTable" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36 OPR/34.0.2036.25" />
+    </item>
+    <item name="HTTP_UPGRADE_INSECURE_REQUESTS">
+      <value string="1" />
+    </item>
+  </serverVariables>
+  <cookies>
+    <item name="__RequestVerificationToken">
+      <value string="T42nVOE9RPtdTjNvsM6_Nj1Qnl-NDpUeuAaSh_YgmAdmPQPymXoIo6tRjgdElzdHVFAYLBFoEawkkWeu9xBBJsTP83g1" />
+    </item>
+    <item name="_ym_uid">
+      <value string="1452369279131340586" />
+    </item>
+    <item name="_ym_visorc_32000186">
+      <value string="w" />
+    </item>
+    <item name="_ym_isad">
+      <value string="0" />
+    </item>
+    <item name="userGuid">
+      <value string="e04e342f-fb56-4c06-ac2f-28b002e11156" />
+    </item>
+    <item name="arkAS">
+      <value string="44462351ACA9A1A5C0673C6837B46C170284C3645C9589D8F3323D3B820EC09D0131B4F7AF82CEA25902050B9874546279B932F39537605D62E8B35292579CD81DDA18FB4DD9C5E994176BEEE9006800E62255EB17CEA6FAA8D615DD814B44718AB8D282" />
+    </item>
+  </cookies>
+</error>

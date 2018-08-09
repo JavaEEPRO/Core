@@ -1,0 +1,28 @@
+﻿@model arkAS.Areas.Rosh.Models.OrdersViewModel
+
+<h3>@ViewBag.Message</h3>
+
+@foreach (var item in Model.Orders)
+{
+    <tr>
+        <td>
+            @item.orderDate
+        </td>
+        <td>
+            @item.orderNumber
+        </td>
+        <td>
+            @item.rosh_contragents.name
+        </td>
+        <td>
+            @item.rosh_orderStatuses.name
+        </td>
+        <td>
+            @item.description
+        </td>
+        <td>
+            @Html.ActionLink("Изменить", "Orders_editItem", new { id = item.id }, new { @class = "viewDialog" }) |
+            @Html.ActionLink("Удалить", "Orders_deleteItem", new { id = item.id }, new { @class = "viewDialog" })
+        </td>
+    </tr>
+}

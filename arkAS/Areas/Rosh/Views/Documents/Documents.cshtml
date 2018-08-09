@@ -1,0 +1,395 @@
+﻿@model arkAS.Areas.Rosh.Models.DocumentsViewModel
+
+@{
+    ViewBag.Title = "Documents";
+    Layout = "~/Areas/Rosh/Views/Shared/_Layout.cshtml";
+    //Layout = arkAS.BLL.Core.CoreManager.GetCabinetLayout();
+    var js = new System.Web.Script.Serialization.JavaScriptSerializer();
+}
+
+<select class='usCheckDocTypes hide'>
+    <option value="0">Не выбрано</option>
+    @foreach (var item in Model.DocTypes)
+    {
+        <option value='@item.id'>@item.name</option>
+    }
+</select>
+<select class='usCheckDocStatuses hide'>
+    <option value="0">Не выбрано</option>
+    @foreach (var item in Model.DocStatuses)
+    {
+        <option value='@item.id'>@item.name</option>
+    }
+</select>
+<select class='usCheckContragents hide'>
+    <option value="0">Не выбрано</option>
+    @foreach (var item in Model.Contragents)
+    {
+        <option value='@item.id'>@item.name</option>
+    }
+</select>
+
+@*@if (User.Identity.IsAuthenticated && !Roles.IsUserInRole("admin"))
+{
+    <li>@Html.ActionLink("Лог изменений", "DocLogs", new { area = "Rosh", controller = "Documents" })</li>
+}*@
+
+<div class='usCont'>
+</div>
+
+@section js{
+    <script type="text/javascript">
+
+    var sourceDocTypes = @Html.Raw(js.Serialize((Model.DocTypes).Select(x => new { Value = x.id, Text = x.name, Selected = false })));
+    var sourceDocTypesEditable = @Html.Raw(js.Serialize((Model.DocTypes).Select(x => new {value = x.id, text = x.name})));
+
+    var sourceDocStatuses = @Html.Raw(js.Serialize((Model.DocStatuses).Select(x => new {Value = x.id, Text = x.name, Selected = false})));
+    var sourceDocStatusesEditable = @Html.Raw(js.Serialize((Model.DocStatuses).Select(x => new {value = x.id, text = x.name})));
+
+    var sourceContragents = @Html.Raw(js.Serialize((Model.Contragents).Select(x => new {Value = x.id, Text = x.name, Selected = false})));
+    var sourceContragentsEditable = @Html.Raw(js.Serialize((Model.Contragents).Select(x => new {value = x.id, text = x.name})));
+
+        var asdemo = {
+            init: function() {
+                asdemo.initMainTable();
+                $(document).delegate('.usCreateDoc', 'click', function(e) {
+                    e.preventDefault();
+                    asdemo.createItem();
+                });
+                //$(document).delegate('.usNewTypeID', 'change', function(e) {
+                //    var typeId = $(this).val();
+                //    e.preventDefault();
+                //    asdemo.createListTemplates(typeId);
+                //});
+                //$(document).delegate('#downloadDoc', 'click', function(e) {
+                //    e.preventDefault();
+                //    asdemo.downloadDoc();
+                //});
+                //$(document).delegate('#uploadDoc', 'change', function(e) {
+                //    e.preventDefault();
+                //    asdemo.uploadDoc();
+                //});
+            },
+            initMainTable: function() {
+                as.crud.init({
+                    cont: $('.usCont'),
+                    title: 'Документы',
+                    toolbarAdditional: '<a href="#" class="btn btn-primary usCreateDoc">Создать</a>&nbsp;&nbsp;',
+                    groupOperationsToolbar: '',
+                    ajaxURLFormat: '/Rosh/Documents/Documents_{0}',
+                    inlineAjaxURL: "/Rosh/Documents/DocumentsInline",
+                    pageSize: 150,
+                    cookiePrefix: "as-crud-DocsDict-",
+                    emptyText: 'Нет элементов',
+                    createLinkTitle: 'Создать',
+                    filterLinkTitle: 'Найти',
+                    filterTitle: 'Фильтрация данных',
+                    showChecksCol: false,
+                    showNumsCol: true,
+                    showToolbar: true,
+                    showColSettings: false,
+                    showReplaceTool: false,
+                    showExcelExport: false,
+                    additionalSort: false,
+                    cols: [
+                        { code: "id", title: "ID", tooltip: "Идентификатор", isVisible: false, isPK: true, datatype: "int", isRequired: false, editHide: true },
+                        {
+                            code: "docDate", title: "Дата", tooltip: "Дата", isVisible: true, isPK: false, datatype: "string", isRequired: true, format: "{0}", isSort: false, callback: null,
+                            //editable: { type: "text", format: "{0}", callback: function(el, newValue) {} }
+                        },
+                        {
+                            code: "docTypeName", title: "Тип документа", tooltip: "Тип документа", isVisible: true, isPK: false, datatype: "select", isRequired: false, format: "{0}", isSort: false, editSources: sourceDocTypes, callback: null,
+                            //editable: { type: "select", format: "{0}", source: sourceDocTypesEditable, notSelected: "Не установлено", callback: function(el, newValue) {} },
+                        },
+                        {
+                            code: "docNumber", title: "Номер", tooltip: "Номер", isVisible: true, isPK: false, datatype: "string", isRequired: true, format: "{0}", isSort: false, callback: null,
+                            //editable: { type: "text", format: "{0}", callback: function(el, newValue) {} }
+                        },
+                        {
+                            code: "contragentName", title: "Контрагент", tooltip: "Контрагент", isVisible: true, isPK: false, datatype: "select", isRequired: false, format: "{0}", isSort: false, editSources: sourceContragents, callback: null,
+                            //editable: { type: "select", format: "{0}", source: sourceContragentsEditable, notSelected: "Не установлено", callback: function(el, newValue) {} },
+                        },
+                        {
+                            code: "docStatusName", title: "Статус документа", tooltip: "Статус документа", isVisible: true, isPK: false, datatype: "select", isRequired: false, format: "{0}", isSort: false, editSources: sourceDocStatuses, callback: null,
+                            editable: { type: "select", format: "{0}", source: sourceDocStatusesEditable, notSelected: "Не установлено", callback: function(el, newValue) {} },
+                        },
+                        {
+                            code: "amount", title: "Сумма", tooltip: "Сумма", isVisible: true, isPK: false, datatype: "string", isRequired: true, format: "{0}", isSort: false, callback: null,
+                            //editable: { type: "text", format: "{0}", callback: function (el, newValue) { } }
+                        },
+                        {
+                            code: "description", title: "Описание", tooltip: "Описание", isVisible: true, isPK: false, datatype: "string", isRequired: true, format: "{0}", isSort: false, callback: null,
+                            editable: { type: "text", format: "{0}", callback: function (el, newValue) { } }
+                        },
+                    ],
+                    operations: {
+                        create: false,
+                        remove: false,
+                        edit: false,
+                        other: [
+                            { linkClass: 'crdTo2', iconClass: 'glyphicon glyphicon-pencil', title: 'Редактировать', callback: asdemo.editItem },
+                            { linkClass: 'crdTo3', iconClass: 'glyphicon glyphicon-trash', title: 'Удалить', callback: asdemo.deleteItem }]                   
+                    },
+                  
+                    getFilterMakeup: function(filter) {
+                        var s = [];
+                        s.push("<div class='crdFilterItem'><span class='gCap'>Номер документа</span><input type='text' class='usDocNumber' value='" + (filter.docNumber || '') + "' /></div>");
+
+                        $('.usCheckDocTypes option').removeAttr('selected');
+                        $('.usCheckDocTypes option[value=' + filter.docTypeID + ']').attr('selected', 'selected');
+                        s.push("<div class='crdFilterItem'><span class='gCap'>Тип</span><select class='usDocType'>" + $('.usCheckDocTypes').html() + "</select></div>");
+
+                        $('.usCheckDocStatuses option').removeAttr('selected');
+                        $('.usCheckDocStatuses option[value=' + filter.docStatusID + ']').attr('selected', 'selected');
+                        s.push("<div class='crdFilterItem'><span class='gCap'>Статус</span><select class='usDocStatus'>" + $('.usCheckDocStatuses').html() + "</select></div>");
+
+                        $('.usCheckContragents option').removeAttr('selected');
+                        $('.usCheckContragents option[value=' + filter.contragentID + ']').attr('selected', 'selected');
+                        s.push("<div class='crdFilterItem'><span class='gCap'>Контрагент</span><select class='usContragent'>" + $('.usCheckContragents').html() + "</select></div>");
+
+                        return s.join("");
+                    },
+                    filter: function() {
+                        var filter = {
+                            docNumber: $('.usDocNumber').val() || "",
+                            docTypeID: $('.usDocType option:selected').val(),
+                            docStatusID: $('.usDocStatus option:selected').val(),
+                            contragentID: $('.usContragent option:selected').val()
+                        };
+                        return filter;
+                    }
+                });
+            },
+
+            createItem: function() {
+                var s = [];
+                //s.push("<span>Дата</span><input type='hidden' class='form-control usNewDocDate' /><br />");
+
+                $('.usCheckDocTypes option').removeAttr('selected');
+                $('.usCheckDocTypes option:first').attr('selected', 'selected');
+                s.push("<span>Тип документа</span><select class='form-control usNewTypeID' >" + $('.usCheckDocTypes').html() + "</select><br />");
+
+                s.push("<span>Номер</span><input type='text' class='form-control usNewDocNumber' /><br />");
+
+                $('.usCheckContragents option').removeAttr('selected');
+                $('.usCheckContragents option:first').attr('selected', 'selected');
+                s.push("<span>Контрагент</span><select class='form-control usNewContragentID' >" + $('.usCheckContragents').html() + "</select><br />");
+
+                $('.usCheckDocStatuses option').removeAttr('selected');
+                $('.usCheckDocStatuses option:first').attr('selected', 'selected');
+                s.push("<span>Статус документа</span><select class='form-control usNewDocStatusID' >" + $('.usCheckDocStatuses').html() + "</select><br />");
+
+                s.push("<span>Сумма</span><input type='text' class='form-control usNewAmount' /><br />");
+
+                s.push("<span>Примечание</span><input type='text' class='form-control usNewDescription' /><br />");
+
+                setTimeout(function() { $('.usNewTypeID').focus(); }, 200);
+                as.sys.showDialog("Создание", s.join(""), "Сохранить", function() {
+                    var docTypeID = $('.usNewTypeID option:selected').val();
+                    var docNumber = $('.usNewDocNumber').val();
+                    var contragentID = $('.usNewContragentID option:selected').val();
+                    var docStatusID = $('.usNewDocStatusID option:selected').val();
+                    var amount = $('.usNewAmount').val();
+                    var description = $('.usNewDescription').val();
+
+                    if (!docTypeID || docTypeID == 0) {
+                        as.sys.bootstrapAlert("Укажите пожалуйста тип документа", { type: 'warning' });
+                        $('.usNewTypeID').focus();
+                        return;
+                    }
+                    if (!docNumber) {
+                        as.sys.bootstrapAlert("Укажите пожалуйста номер", { type: 'warning' });
+                        $('.usNewDocNumber').focus();
+                        return;
+                    }
+                    if (!contragentID || contragentID == 0) {
+                        as.sys.bootstrapAlert("Укажите пожалуйста контрагента", { type: 'warning' });
+                        $('.usNewContragentID').focus();
+                        return;
+                    }
+                    if (!docStatusID || docStatusID == 0) {
+                        as.sys.bootstrapAlert("Укажите пожалуйста статус", { type: 'warning' });
+                        $('.usNewDocStatusID').focus();
+                        return;
+                    }
+                    if (!amount) {
+                        as.sys.bootstrapAlert("Укажите пожалуйста сумму", { type: 'warning' });
+                        $('.usNewAmount').focus();
+                        return;
+                    }
+
+                    var params = {
+                        docTypeID: docTypeID,
+                        docNumber: docNumber,
+                        contragentID: contragentID,
+                        docStatusID: docStatusID,
+                        amount: amount,
+                        description: description
+                    };
+                    as.sys.ajaxSend("/Rosh/Documents/Documents_createItem", params, function(data) {
+                        if (typeof (data) != "object") data = eval('(' + data + ')');
+                        if (data.result) {
+                            as.sys.bootstrapAlert("Элемент сохранен", { type: 'success' });
+                            as.sys.closeDialog();
+                            as.crud.getItems();
+                            setTimeout(function() {
+                                as.crud.gotoItem(data.textID);
+                            }, 1000);
+                        } else {
+                            as.sys.bootstrapAlert(data.msg || "Возникли ошибки при выполнении операции!", { type: 'danger' });
+                        }
+                    });
+                });
+            },
+            editItem: function() {
+                var params = { id: $(this).closest('tr').attr('data-itemid') };
+                var p = params;
+                as.sys.ajaxSend("/Rosh/Documents/Documents_GetItem", params, function(data) {
+                    if (typeof (data) != "object") data = eval('(' + data + ')');
+                    if (data.id) {
+                        var s = [];
+                        s.push("<input type='hidden' id='docId' value='" + data.id + "'/><br />");
+
+                        s.push("<span>Дата</span><input type='text' class='form-control usNewDocDate' value='" + data.docDate + "' /><br />");
+
+
+                        $('.usCheckDocTypes option').removeAttr('selected');
+                        $(".usCheckDocTypes option[value='" + data.docTypeID + "']").attr("selected", "selected");
+                        s.push("<span>Тип документа</span><select class='form-control usNewTypeID' >" + $('.usCheckDocTypes').html() + "</select><br />");
+
+                        s.push("<span>Номер</span><input type='text' class='form-control usNewDocNumber' value='" + data.docNumber + "' /><br />");
+
+                        $('.usCheckContragents option').removeAttr('selected');
+                        $(".usCheckContragents  option[value='" + data.contragentID + "']").attr("selected", "selected");
+                        s.push("<span>Контрагент</span><select class='form-control usNewContragentID' >" + $('.usCheckContragents').html() + "</select><br />");
+
+                        $('.usCheckDocStatuses option').removeAttr('selected');
+                        $(".usCheckDocStatuses option[value='" + data.docStatusID + "']").attr("selected", "selected");
+                        s.push("<span>Статус</span><select class='form-control usNewDocStatusID' >" + $('.usCheckDocStatuses').html() + "</select><br />");
+
+                        s.push("<span>Сумма</span><input type='text' class='form-control usNewAmount' value='" + data.amount + "' /><br />");
+
+                        s.push("<span>Примечание</span><input type='text' class='form-control usNewDescription' value='" + data.description + "' /><br />");
+
+                        setTimeout(function() { $('.usNewTypeID').focus(); }, 200);
+                        as.sys.showDialog("Редактирование", s.join(""), "Сохранить", function() {
+                            var id = parseInt(params.id);
+                            var docDate = $('.usNewDocDate').val();
+                            var docTypeID = $('.usNewTypeID option:selected').val();
+                            var docNumber = $('.usNewDocNumber').val();
+                            var contragentID = $('.usNewContragentID option:selected').val();
+                            var docStatusID = $('.usNewDocStatusID option:selected').val();
+                            var amount = $('.usNewAmount').val();
+                            var description = $('.usNewDescription').val();
+
+                            if (!docTypeID || docTypeID == 0) {
+                                as.sys.bootstrapAlert("Укажите пожалуйста тип документа", { type: 'warning' });
+                                $('.usNewTypeID').focus();
+                                return;
+                            }
+                            if (!docNumber) {
+                                as.sys.bootstrapAlert("Укажите пожалуйста номер", { type: 'warning' });
+                                $('.usNewDocNumber').focus();
+                                return;
+                            }
+                            if (!contragentID || contragentID == 0) {
+                                as.sys.bootstrapAlert("Укажите пожалуйста контрагента", { type: 'warning' });
+                                $('.usNewContragentID').focus();
+                                return;
+                            }
+                            if (!docStatusID || docStatusID == 0) {
+                                as.sys.bootstrapAlert("Укажите пожалуйста статус", { type: 'warning' });
+                                $('.usNewDocStatusID').focus();
+                                return;
+                            }
+                            if (!amount) {
+                                as.sys.bootstrapAlert("Укажите пожалуйста сумму", { type: 'warning' });
+                                $('.usNewAmount').focus();
+                                return;
+                            }
+
+                            var paramsEdit = {
+                                id: id,
+                                docDate: docDate,
+                                docTypeID: docTypeID,
+                                docNumber: docNumber,
+                                contragentID: contragentID,
+                                docStatusID: docStatusID,
+                                amount: amount,
+                                description: description
+                            };
+                            as.sys.ajaxSend("/Rosh/Documents/Documents_editItem", paramsEdit, function(data) {
+                                if (typeof (data) != "object") data = eval('(' + data + ')');
+                                if (data.result) {
+                                    as.sys.bootstrapAlert("Документ успешно отредактирован", { type: 'success' });
+                                    as.sys.closeDialog();
+                                    as.crud.getItems();
+                                    setTimeout(function() {
+                                        as.crud.gotoItem(data.itemID);
+                                    }, 1000);
+                                } else {
+                                    as.sys.bootstrapAlert(data.msg || "Возникли ошибки при выполнении операции!", { type: 'danger' });
+                                }
+                            });
+                        });
+                    } else {
+                        as.sys.bootstrapAlert(data.msg || "Возникли ошибки при выполнении операции!", { type: 'danger' });
+                    }
+                });
+            },
+
+            deleteItem: function() {
+                var params = { id: $(this).closest('tr').attr('data-itemid') };
+                var p = params;
+                as.sys.ajaxSend("/Rosh/Documents/Documents_GetItem", params, function(data) {
+                    if (typeof (data) != "object") data = eval('(' + data + ')');
+                    if (data.id) {
+                        var s = [];
+                        s.push("<input type='hidden' id='docId' value='" + data.id + "'/><br />");
+
+                        s.push("<span>Дата: </span> <label class='control-label'> "+ data.docDate +" </label><br />");
+
+                        s.push("<span>Тип документа: </span><label class='control-label'>" + data.docTypeName + " </label><br />");
+
+                        s.push("<span>Номер: </span><label class='control-label'>" + data.docNumber + "</label><br />");
+
+                        s.push("<span>Контрагент: </span><label class='control-label'>" + data.contragentName + "</label><br />");
+
+                        s.push("<span>Статус: </span><label class='control-label'>" + data.docStatusName + "</label><br />");
+
+                        s.push("<span>Сумма: </span><label class='control-label'>" + data.amount + " </label><br />");
+
+                        s.push("<span>Примечание: </span><label class='control-label'>" + data.description + " </label><br />");
+
+                        setTimeout(function() { $('.usNewTypeID').focus(); }, 200);
+                        as.sys.showDialog("Вы действительно хотите удалить этот документ?", s.join(""), "Удалить", function() {
+                            var id = parseInt(params.id);
+
+                            var paramsDelete = {
+                                id: id,
+                            };
+                            as.sys.ajaxSend("/Rosh/Documents/Documents_deleteItem", paramsDelete, function(data) {
+                                if (typeof (data) != "object") data = eval('(' + data + ')');
+                                if (data.result) {                                   
+                                    as.sys.bootstrapAlert(data.msg || "Документ удален", { type: 'success' });                                    
+                                    as.sys.closeDialog();
+                                    as.crud.getItems();
+                                    //setTimeout(function() {
+                                    //    as.crud.gotoItem(data.itemID);
+                                    //}, 1000);
+                                } else {
+                                    as.sys.bootstrapAlert(data.msg || "Возникли ошибки при выполнении операции!", { type: 'danger' });
+                                }
+                            });
+                        });
+                    } else {
+                        as.sys.bootstrapAlert(data.msg || "Возникли ошибки при выполнении операции!", { type: 'danger' });
+                    }
+                });
+            },
+        }
+        $(function () {
+            asdemo.init();
+        });
+</script>
+}

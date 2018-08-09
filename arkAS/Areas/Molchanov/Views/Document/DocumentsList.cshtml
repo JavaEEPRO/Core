@@ -1,0 +1,179 @@
+﻿@model arkAS.Areas.Molchanov.Models.DocumentViewModel
+@{
+    ViewBag.Title = "Список документов";
+    Layout = "~/Areas/Molchanov/Views/Shared/_CabinetLayout.cshtml";
+    var js = new System.Web.Script.Serialization.JavaScriptSerializer();
+}
+
+<div class='docCont'>
+</div>
+<select class='dmContragentsTemplate hide'>
+    <option value="0">Не выбрано</option>
+    @foreach (var item in Model.Contragent)
+    {
+        <option value='@item.id'>@item.name</option>
+    }
+</select>
+<select class='dmDocTypesTemplate hide'>
+    <option value="0">Не выбрано</option>
+    @foreach (var item in Model.DocTypes)
+    {
+        <option value='@item.id'>@item.name</option>
+    }
+</select>
+<select class='dmParentsDocsTemplate hide'>
+    <option value="0">Не выбрано</option>
+    @foreach (var item in Model.Documents)
+    {
+        <option value='@item.id'>@item.number</option>
+    }
+</select>
+
+
+<div class='dmStatusesTemplate hide'>
+    <input type="checkbox" data-code='nostatus' value='0' /><label>Не установлен</label>&nbsp;&nbsp;&nbsp;&nbsp;
+    @foreach (var item in Model.DocStatuses)
+    {
+        <input type="checkbox" data-code='@item.code' value='@item.id' id='svOurSup@(item.id)' /><label for='svOurSup@(item.id)'>@item.name</label>@Html.Raw("&nbsp; &nbsp; &nbsp; &nbsp;")
+    }
+</div>
+
+@section js{
+    <script type="text/javascript">
+        var contragentSource = @Html.Raw(js.Serialize((Model.Contragent).Select(x => new { Value = x.id, Text = x.name, Selected = false})));
+        var statusesSource =  @Html.Raw(js.Serialize((Model.DocStatuses).Select(x => new { Value = x.id, Text = x.name, Selected = false})));
+        var typesSourses =  @Html.Raw(js.Serialize((Model.DocTypes).Select(x => new { Value = x.id, Text = x.name, Selected = false})));
+        var docsSourses = @Html.Raw(js.Serialize((Model.Documents).Select(x => new { Value = x.id, Text = x.number, Selected = false})));
+        var statusesSourceForInline =  @Html.Raw(js.Serialize((Model.DocStatuses).Select(x => new { value = x.id, text = x.name, Selected = false})));
+
+        var asApp = {
+            init: function () {
+                asApp.initMainTable();
+            },
+
+            initMainTable: function () {
+                as.crud.init({
+                    cont: $('.docCont'),
+                    title: 'Список документов',
+                    toolbarAdditional: '',
+                    groupOperationsToolbar: '',
+                    ajaxURLFormat: '/Molchanov/Document/DocumentsList_{0}',
+                    inlineAjaxURL: "/Molchanov/Document/Documents_changeInline",
+                    pageSize: 5,
+                    cookiePrefix: 'as-crud-molch-docs',
+                    emptyText: 'Нет элементов',
+                    createLinkTitle: 'Создать',
+                    filterLinkTitle: 'Найти',
+                    filterTitle: 'Фильтрация данных',
+                    showChecksCol: false,
+                    showNumsCol: true,
+                    showToolbar: true,
+                    showColSettings: false,
+                    showReplaceTool: false,
+                    showPDFExport: false,
+                    showExcelExport: false,
+                    additionalSort: false,
+                    cols: [
+                        { code: "id", title: "ID", tooltip: "Идентификатор", isVisible: false, isPK: true, datatype: "int", isRequired: false, editHide: true,  callback: null},
+                         { code: "uniqueCode", title: "uniqueCode", tooltip: "Уникальный идентификатор", isVisible: false, isPK: false, datatype: "int", isRequired: false, editHide: true },
+                        { code: "date", title: "Дата", tooltip: "Дата", isVisible: true, isPK: false, datatype: "date", isRequired: true, format: "{0}", isSort: true, editHide: false},
+                        { code: "number", title: "Номер", tooltip: "Номер", isVisible: true, isPK: false, datatype: "string", isRequired: true, format: "{0}", isSort: true, callback: null },
+                        { code: "sum", title: "Сумма", tooltip: "Сумма", isVisible: true, isPK: false, datatype: "string", isRequired: true, format: "{0}", isSort: true, editable: { type: "number", format: "{0}", callback: function (el, newValue) { } } },
+                        { code: "description", title: "Описание", tooltip: "Описание", isVisible: true, isPK: false, datatype: "string", isRequired: true, format: "{0}", isSort: false, callback: null },
+                        { code: "link", title: "Ссылка", tooltip: "Ссылка на документ", isVisible: true, isPK: false, datatype: "string", isRequired: true, format: "{0}", isSort: false, editable: { type: "text", format: "{0}", callback: function (el, newValue) { } } },
+                        { code: "isDeleted", title: "isDeleted", tooltip: "isDeleted", isVisible: false, isPK: false, datatype: "string", isRequired: false, format: "{0}", isSort: false, editHide: true,  callback: null },
+                        { code: "contragentName", title: "Контрагент", tooltip: "Контрагент", isVisible: true, isPK: false, datatype: "select", isRequired: true, format: "{0}", isSort: false, editSources: contragentSource, editHide: false, callback: null },
+                        {code: "docStatus", title: "Статус", tooltip: "Статус", isVisible: true, isPK: false, datatype: "select", isRequired: false, format: "{0}", isSort: false,  editSources: statusesSource,  editHide: false, editable: { type: "select", format: "{0}", source: statusesSourceForInline, callback: function (el, newValue) { } } },
+                        { code: "docTypes", title: "Тип", tooltip: "Тип документа", isVisible: true, isPK: false, datatype: "select", isRequired: true, format: "{0}", isSort: false, editSources: typesSourses, editHide: false, callback: null },
+                        { code: "ParentDocs", title: "Базовый документ", tooltip: "Базовый документ", isVisible: true, isPK: false, datatype: "select", isRequired: true, format: "{0}", isSort: false, editSources: docsSourses, editHide: false, callback: null }
+                    ],
+                    operations: {
+                        create: true,
+                        remove: true,
+                        edit: true,
+                        other: [
+                            {
+                                linkClass: 'crdTo2', iconClass: 'fa fa-info-circle', title: 'Просмотреть логи по записи', callback: asApp.showDocLogs
+                            }
+                        ]
+                    },
+                    getFilterMakeup: function (filter) {
+                        var s = [];
+                        s.push( "<div class='form-group'><label  for='usText'>Номер:</label><input type='text' placeholder='Поиск по номеру' class='form-control' id = 'usText' value='" + (filter.text || '') + "' /></div>");
+
+                        $('.dmContragentsTemplate option').removeAttr('selected');
+                        $('.dmContragentsTemplate option[value=' + filter.ctrgID + ']').attr('selected', 'selected');
+                        s.push("<label  for='dmCtrg'>Контрагент:</label><select class='form-control' id = 'dmCtrg'>" + $('.dmContragentsTemplate').html() + "</select><br />");
+
+                        $('.dmDocTypesTemplate option').removeAttr('selected');
+                        $('.dmDocTypesTemplate option[value=' + filter.docTypeID + ']').attr('selected', 'selected');
+                        s.push("<label  for='dmDocT'>Тип документа:</label><select class='form-control' id = 'dmDocT'>" + $('.dmDocTypesTemplate').html() + "</select><br />");
+
+                        $('.dmParentsDocsTemplate option').removeAttr('selected');
+                        $('.dmParentsDocsTemplate option[value=' + filter.parentDocID + ']').attr('selected', 'selected');
+                        s.push("<label  for='dmDocParent'>Базовый документ:</label><select class='form-control' id = 'dmDocParent'>" + $('.dmParentsDocsTemplate').html() + "</select><br />");
+
+                        $('.dmStatusesTemplate input').removeAttr('checked');
+                        if (filter.statusIDs) {
+                            $.each(filter.statusIDs, function (i, item) {
+                                $('.dmStatusesTemplate input[value=' + item + ']').attr('checked', 'checked');
+                            })
+                        }
+                        s.push("<label for='dmStatuses'>Статус:</label><div id='dmStatuses'>" + $('.dmStatusesTemplate').html() + "</div><br />");
+
+                        return s.join("");
+                    },
+                    filter: function () {
+                        var statusIDs = [];
+                        $('#dmStatuses input:checked').each(function () {
+                            statusIDs.push($(this).attr('value'));
+                        });
+                        var filter = {
+                            text: $('#usText').val() || "",
+                            ctrgID: $('#dmCtrg option:selected').val(),
+                            docTypeID: $('#dmDocT option:selected').val(),
+                            parentDocID: $('#dmDocParent option:selected').val(),
+                            statusIDs: statusIDs
+                        };
+                        return filter;
+                    }
+                });
+            },
+            showDocLogs : function () {
+                var btn = $(this);
+                var tr = btn.closest('tr');
+                if (tr.next().hasClass('crdAddRow')) {
+                    tr.next().hide(50, function () { $(this).remove() });
+                }
+                else {
+                    var documentID = tr.attr('data-itemid');
+                    var s = "<tr class='crdAddRow'><td colspan='13'>"
+                    var params = {id : documentID};
+                    as.sys.ajaxSend('/Molchanov/Document/GetDocumentLogs', params, function(data) {
+
+                        if (data.items) {
+                            s+="<table class='table'><thead><tr><th>Дата</th><th>Запись</th><th>Пользователь</th></thead>";
+                            s+="<tbody>";
+                            for (var i=0; i<data.items.length;i++)
+                            {
+                                s+="<tr><td>"+data.items[i].date+"</td>";
+                                s+="<td>"+data.items[i].notice+"</td>";
+                                s+="<td>"+data.items[i].userName+"</td></tr>";
+                            }
+                            s+="</td></tr>";
+                            s+="</tbody></table>";
+                        }
+                        else {
+                            as.sys.bootstrapAlert("Возникли ошибки при выполнении операции!", { type: 'danger' });
+                        }
+                        $(s).insertAfter(tr);
+                    });
+                }
+            }
+        }
+        $(function () {
+            asApp.init();
+        });
+    </script>
+
+}

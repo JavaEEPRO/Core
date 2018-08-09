@@ -1,0 +1,155 @@
+﻿@model arkAS.Areas.Motskin.Models.MailsViewModel
+
+@{
+    ViewBag.Title = "Управление почтой";
+    var js = new System.Web.Script.Serialization.JavaScriptSerializer();
+}
+
+<select class='mlSendSystemTemplate hide'>
+    <option value="0">Не выбрано</option>
+    @foreach (var item in Model.System)
+    {
+        <option value='@item.id'>@item.name</option>
+    }
+</select>
+
+<div class='mlStatusesTemplate hide'>
+    @foreach (var item in Model.Statuses)
+    {
+        <div class="statusCont">
+            <input type="checkbox" value='@item.id' id='svOurSup@(item.id)' />
+            <label for='svOurSup@(item.id)'>@item.name</label>
+        </div>
+    }
+</div>
+
+@Html.Partial("_StatusHistoryModal")
+
+<div class='mailCont'>
+</div>
+
+@section js{
+    <script type="text/javascript">
+        var statusSource = @Html.Raw(js.Serialize((Model.Statuses).Select(x => new { value = x.id, text = x.name, Selected = false })));
+        var systemSource = @Html.Raw(js.Serialize((Model.System).Select(x => new { Value = x.id, Text = x.name, Selected = false })));
+        var asdemo = {
+            init: function () {
+                asdemo.initMainTable();
+            },
+
+            basePathController: '/Motskin/Mail/',
+
+            initMainTable: function () {
+                as.crud.init({
+                    cont: $('.mailCont'),
+                    title: 'Редактирование и создание почты',
+                    toolbarAdditional: '',
+                    groupOperationsToolbar: '',
+                    ajaxURLFormat: asdemo.basePathController+'Mails_{0}',
+                    inlineAjaxURL: asdemo.basePathController+'ChangeMailStatus',
+                    pageSize: 15,
+                    cookiePrefix: 'as-crud-m-mail-',
+                    emptyText: 'Нет элементов',
+                    createLinkTitle: 'Создать новый',
+                    filterLinkTitle: 'Найти',
+                    filterTitle: 'Фильтрация данных',
+                    showChecksCol: false,
+                    showNumsCol: true,
+                    showToolbar: true,
+                    showColSettings: false,
+                    showReplaceTool: false,
+                    showExcelExport: false,
+                    additionalSort: false,
+                    cols: [
+                        { code: "id", title: "ID", tooltip: "Идентификатор", isVisible: false, isPK: true, datatype: "int", isRequired: false, editHide: true },
+                        { code: "fromAddress", title: "От кого", tooltip: "Адрес отправителя", isVisible: true, isPK: false, datatype: "string", isRequired: true, format: "{0}", isSort: true, callback: null},
+                        { code: "toAddress", title: "Куда", tooltip: "Адрес доставки", isVisible: true, isPK: false, datatype: "string", isRequired: true, format: "{0}", isSort: true, callback: null},
+                        { code: "trackNumber", title: "Номер", tooltip: "Номер сообщения", isVisible: true, isPK: false, datatype: "string", isRequired: false, format: "{0}", isSort: false, callback: null},
+                        { code: "sendSystemName", title: "Система", tooltip: "Почтовая система", isVisible: true, isPK: false, datatype: "select", isRequired: false, format: "{0}", isSort: true, editSources: systemSource, callback: null},
+                        { code: "date", title: "Дата создания", tooltip: "Дата создания", isVisible: true, isPK: false, datatype: "date", isRequired: false, format: "{0}", isSort: true, editHide: true, callback: null },
+                        { code: "backTrackNumber", title: "Обратный номер", tooltip: "Обратный номер", isVisible: true, isPK: false, datatype: "string", isRequired: false, format: "{0}", isSort: false, callback: null},
+                        { code: "backDateReceived", title: "Дата ответа", editHide: false, tooltip: "Дата ответа", isVisible: true, isPK: false, datatype: "date", isRequired: false, format: "{0}", isSort: true, callback: null },
+                        {
+                            code: "mailStatusName", title: "Статус", tooltip: "Статус", isVisible: true, isPK: false, datatype: "select", isRequired: false, format: "{0}", isSort: true,  editHide: true, editSources: statusSource, callback: null,
+                            editable: { type: "select", format: "{0}", source: statusSource, callback: function (el, newValue) { } }
+                        },
+                        { code: "history", title: "История", tooltip: "Нажмите для получения истории смены статуса", isVisible: true, isPK: false, datatype: "string", isRequired: false, format: "История", editHide: true, isSort: false, callback: asdemo.showHistory },
+                        { code: "description", title: "Описание", tooltip: "Описание", isVisible: true, isPK: false, datatype: "string", isRequired: false, format: "{0}", isSort: false, callback: null },
+                    ],
+                    operations: {
+                        create: true,
+                        remove: true,
+                        edit: true,
+                        other: [
+                        ]
+                    },
+                    getFilterMakeup: function (filter) {
+                        var s = "";
+                        s+=("<div class='crdFilterItem'><span class='gCap'>От</span><input type='text' class='mailFrom' value='" + (filter.fromAddress || '') + "' /></div>");
+                        s+=("<div class='crdFilterItem'><span class='gCap'>Кому</span><input type='text' class='mailTo' value='" + (filter.toAddress || '') + "' /></div>");
+
+                        $('.mlSendSystemTemplate option').removeAttr('selected');
+                        $('.mlSendSystemTemplate option[value=' + filter.sendSystemID + ']').attr('selected', 'selected');
+                        s+=("<div class='crdFilterItem'><span class='gCap'>Система отправки</span><select class='mlSendSystem'>" + $('.mlSendSystemTemplate').html() + "</select></div>");
+
+                        $('.mlStatusesTemplate input').removeAttr('checked');
+                        if (filter.statusIDs) {
+                            $.each(filter.statusIDs, function (i, item) {
+                                $('.mlStatusesTemplate input[value=' + item + ']').attr('checked', 'checked');
+                            })
+                        }
+                        s+=("<div class='crdFilterItem'><span class='gCap'>Статус</span><div class='mailStatuses'>" + $('.mlStatusesTemplate').html() + "</div></div>");
+                        return s;
+                    },
+                    filter: function () {
+                        var statusIDs = [];
+                        $('.mailStatuses input:checked').each(function () {
+                            statusIDs.push($(this).attr('value'));
+                        });
+                        var strStatusIDs = statusIDs.length >0 ? statusIDs.join(';') : '';
+                        var filter = {
+                            fromAddress: $('.mailFrom').val() || "",
+                            toAddress: $('.mailTo').val() || "",
+                            sendSystemID: $('.mlSendSystem option:selected').val(),
+                            statusIDs: statusIDs,
+                            strStatusIDs: strStatusIDs
+                        };
+                        return filter;
+                    }
+                });
+            },
+            showHistory:function(sender) 
+            {
+                var params = { id: $(sender).closest('tr').attr('data-itemid') };
+                as.sys.ajaxSend(asdemo.basePathController+'LogMailStatuses', params, function(data) 
+                {
+                    if (data.items) {
+                        var s = "";
+                        s+="<table class='table'><thead><tr><th>Статус</th><th>Дата</th><th>Примечание</th></thead>";
+                        s+="<tbody>";
+                        for (var i=0; i<data.items.length;i++)
+                        {
+                            var item = data.items[i];
+                            s+=("<tr><td>"+item.status+"</td>");
+                            s+=("<td>"+item.created+"</td>");
+                            s+=("<td>"+item.note+"</td></tr>");
+                        }
+                        s+="</tbody></table>";
+
+                        var modalWindow = $('#statusHistoryModal');
+                        $('.modal-body', modalWindow).html(s);
+                        modalWindow.modal('show');
+                    } else {
+                        as.sys.bootstrapAlert("Возникли ошибки при выполнении операции!", { type: 'danger' });
+                    }
+                });
+            }
+        }
+        $(function () {
+            asdemo.init();
+
+        });
+    </script>
+
+}
+

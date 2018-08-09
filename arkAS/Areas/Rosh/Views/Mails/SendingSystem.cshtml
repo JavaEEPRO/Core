@@ -1,0 +1,38 @@
+﻿@model arkAS.Areas.Rosh.Models.MailsViewModel
+
+@{
+    ViewBag.Title = "SendingSystem";
+    Layout = "~/Areas/Rosh/Views/Shared/_LayoutRefBooks.cshtml";
+}
+
+<div id="menu">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Создать", "SendingSystem_createItem", "Mails", new { area = "Rosh" })</li>
+        <li>@Html.ActionLink("Изменить", "SendingSystem_editItem", "Mails", new { area = "Rosh" })</li>
+        <li>@Html.ActionLink("Удалить", "SendingSystem_deleteItem", "Mails", new { area = "Rosh" })</li>
+    </ul>
+</div>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                <h4>id</h4>
+            </th>
+            <th>
+                <h4>Наименование</h4>
+            </th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model.SendingSystems)
+    {
+        <tr>
+            <td>
+                @item.id
+            </td>
+            <td>
+                @item.name
+            </td>
+        </tr>
+    }
+</table>

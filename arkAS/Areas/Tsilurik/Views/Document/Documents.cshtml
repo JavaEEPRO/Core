@@ -1,0 +1,133 @@
+﻿@using arkAS.BLL
+@model arkAS.Areas.Tsilurik.Models.DocumentViewModel
+@{
+    ViewBag.Title = "Documents";
+    var js = new System.Web.Script.Serialization.JavaScriptSerializer();
+}
+
+<h2>Documents</h2>
+
+<div class='dmCont'>
+</div>
+
+<select class='dmTypesTemplate hide'>
+    <option value="0">Не выбрано</option>
+    @foreach (var item in Model.Types)
+    {
+        <option value='@item.id'>@item.name</option>
+    }
+</select>
+
+<select class='dmContractorsTemplate hide'>
+    <option value="0">Не выбрано</option>
+    @foreach (var item in Model.Contractors)
+    {
+        <option value='@item.id'>@item.name</option>
+    }
+</select>
+
+
+<div class='dmStatusesTemplate hide'>
+    <input type="checkbox" data-code='nostatus' value='0' /><label>Не установлен</label>&nbsp;&nbsp;&nbsp;&nbsp;
+    @foreach (var item in Model.Statuses)
+    {
+        <input type="checkbox"  value='@item.id' id='svOurSup@(item.id)' /><label for='svOurSup@(item.id)'>@item.name</label>@Html.Raw("&nbsp; &nbsp; &nbsp; &nbsp;")
+    }
+</div>
+
+@section js{
+    <script type="text/javascript">
+        var statusesSource = @Html.Raw(js.Serialize((Model.Statuses).Select(x => new { value = x.id, text = x.name, Selected = false })));
+        var contractorsSource = @Html.Raw(js.Serialize((Model.Contractors).Select(x => new { Value = x.id, Text = x.name, Selected = false })));
+        var typesSource = @Html.Raw(js.Serialize((Model.Types).Select(x => new { Value = x.id, Text = x.name, Selected = false })));
+    var asdemo = {
+        init: function () {
+            asdemo.initMainTable();
+        },
+        initMainTable: function () {
+            as.crud.init({
+                cont: $('.dmCont'),
+                title: 'Редактирование документов и создание новых документов',
+                toolbarAdditional: '',
+                groupOperationsToolbar: '',
+                ajaxURLFormat: '/Tsilurik/Document/Documents_{0}',
+                inlineAjaxURL: "/Tsilurik/Document/ChangeDocumentStatus",
+                pageSize: 15,
+                cookiePrefix: "as-crud-fullEditTable-",
+                emptyText: 'Нет элементов',
+                createLinkTitle: 'Создать',
+                filterLinkTitle: 'Найти',
+                filterTitle: 'Фильтрация данных',
+                showChecksCol: false,
+                showNumsCol: true,
+                showToolbar: true,
+                showColSettings: false,
+                showReplaceTool: false,
+                showExcelExport: false,
+                additionalSort: false,
+                cols: [
+                    { code: "id", title: "ID", tooltip: "Идентификатор", isVisible: false, isPK: true, datatype: "int", isRequired: false, editHide: true },
+                    { code: "date", title: "Дата создания", tooltip: "Дата создания", isVisible: true, isPK: false, datatype: "date", isRequired: false, format: "{0}", isSort: true, editHide: true, callback: null },
+                    { code: "number", title: "Номер  документа", tooltip: "Номер  документа", isVisible: true, isPK: false, datatype: "string", isRequired: true, format: "{0}", isSort: true, callback: null },
+                    { code: "contractor", title: "Контрагент", tooltip: "Контрагент", isVisible: true, isPK: false, datatype: "select", isRequired: true, format: "{0}", isSort: true,editSources: contractorsSource,  callback: null },
+                    { code: "sum", title: "Сумма", tooltip: "Сумма", isVisible: true, isPK: false, datatype: "string", isRequired: true, format: "{0}", isSort: true, callback: null },
+                    { code: "type", title: "Тип", tooltip: "Тип", isVisible: true, isPK: false, datatype: "select", isRequired: true, format: "{0}", isSort: true,editSources: typesSource, callback: null },
+                    {
+                        code: "status", title: "Статус", tooltip: "Статус", isVisible: true, isPK: false, datatype: "select", isRequired: false, format: "{0}", isSort: false,  editHide: true, callback: null,
+                        editable: { type: "select", format: "{0}", source: statusesSource, callback: function (el, newValue) { } }
+                    },
+                    { code: "note", title: "Комментарий", tooltip: "Комментарий", isVisible: true, isPK: false, datatype: "string", isRequired: false, format: "{0}", isSort: true, callback: null },
+                    { code: "link", title: "Ссылка", tooltip: "Ссылка", isVisible: true, isPK: false, datatype: "string", isRequired: false, format: "{0}", isSort: true, callback: null },
+                ],
+                operations: {
+                    create: true,
+                    remove: false,
+                    edit: true,
+                    other: [
+                    ]
+                },
+                getFilterMakeup: function (filter) {
+                    var s = '';
+                    s+=("<span class='gCap'>Номер документа</span><input type='text' class='dmNum' value='" + (filter.number || '') + "' /><br /><br />");
+
+                    $('.dmTypesTemplate option').removeAttr('selected');
+                    $('.dmTypesTemplate option[value=' + filter.typeID + ']').attr('selected', 'selected');
+                    s+=("<span class='gCap'>Тип документа</span><select class='dmTypes'>" + $('.dmTypesTemplate').html() + "</select><br /><br />");
+
+                    $('.dmContractorsTemplate option').removeAttr('selected');
+                    $('.dmContractorsTemplate option[value=' + filter.contractorID + ']').attr('selected', 'selected');
+                    s+=("<span class='gCap'>Контрагент</span><select class='dmContractors'>" + $('.dmContractorsTemplate').html() + "</select><br /><br />");
+
+                    $('.dmStatusesTemplate input').removeAttr('checked');
+                    if (filter.statusIDs) {
+                        $.each(filter.statusIDs, function (i, item) {
+                            $('.dmStatusesTemplate input[value=' + item + ']').attr('checked', 'checked');
+                        })
+                    }
+                    s+=("<span class='gCap'>Статус</span><div class='dmStatuses'>" + $('.dmStatusesTemplate').html() + "</div><br /><br />");
+                    return s;
+                },
+                filter: function () {
+                    var statusIDs = [];
+                    $('.dmStatuses input:checked').each(function () {
+                        statusIDs.push($(this).attr('value'));
+                    });
+
+                    var filter = {
+                        number: $('.dmNum').val() || "",
+                        typeID: $('.dmTypes option:selected').val(),
+                        contractorID: $('.dmContractors option:selected').val(),
+                        statusIDs: statusIDs
+                    };
+                    return filter;
+                }
+            });
+        }
+    }
+    $(function () {
+        asdemo.init();
+
+    });
+    </script>
+
+}

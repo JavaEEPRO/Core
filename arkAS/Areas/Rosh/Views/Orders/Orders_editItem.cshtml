@@ -1,0 +1,54 @@
+﻿@model arkAS.Areas.Rosh.Models.OrdersViewModel
+ 
+@using (Html.BeginForm("Orders_editItem", "Orders",
+        FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+
+        @Html.HiddenFor(model => model.id)
+
+        <div class="editor-field">
+            <label for="orderDate" class="control-label">Дата</label>
+            @Html.EditorFor(model => model.orderDate)
+            @Html.ValidationMessageFor(model => model.orderDate)
+        </div>
+
+        <div class="editor-field">
+            <label for="orderNumber" class="control-label">Номер счета</label>
+            @Html.EditorFor(model => model.orderNumber)
+            @Html.ValidationMessageFor(model => model.orderNumber)
+        </div>
+
+        <div class="editor-field">
+            <label for="contragentID" class="control-label">Контрагент</label>
+            @Html.DropDownListFor(model => model.contragentID, new SelectList(Model.Contragents, "id", "name"), htmlAttributes: new { @class = "form-control" }) 
+            @Html.ValidationMessageFor(model => model.contragentID)                             
+        </div>
+
+        <div class="editor-field">
+            <label for="orderStatusID" class="control-label">Статус счета</label>
+            @Html.DropDownListFor(model => model.orderStatusID, new SelectList(Model.OrdersStatuses, "id", "name"),
+                                  htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.orderStatusID)
+        </div>
+
+         <div class="editor-field">
+            <label for="description" class="control-label">Примечание</label>
+            @Html.EditorFor(model => model.description)
+            @Html.ValidationMessageFor(model => model.description)
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Сохранить" class="btn btn-default" />
+        </div>
+
+        @*<div>
+            @Html.ActionLink("Возврат к списку", "Orders")
+        </div>*@
+
+        <h3>@ViewBag.Message</h3>
+
+</fieldset>
+}

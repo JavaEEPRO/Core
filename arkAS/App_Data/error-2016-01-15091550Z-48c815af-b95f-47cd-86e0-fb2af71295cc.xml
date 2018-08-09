@@ -1,0 +1,209 @@
+﻿<error errorId="48c815af-b95f-47cd-86e0-fb2af71295cc" host="WI-U26835" type="System.ComponentModel.Win32Exception" message="The wait operation timed out" detail="System.Data.SqlClient.SqlException (0x80131904): Истекло время ожидания (Timeout). Время ожидания истекло до завершения операции или сервер не отвечает. ---&gt; System.ComponentModel.Win32Exception (0x80004005): The wait operation timed out&#xD;&#xA;   в System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)&#xD;&#xA;   в System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)&#xD;&#xA;   в System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean&amp; dataReady)&#xD;&#xA;   в System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()&#xD;&#xA;   в System.Data.SqlClient.SqlDataReader.get_MetaData()&#xD;&#xA;   в System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)&#xD;&#xA;   в System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task&amp; task, Boolean asyncWrite, SqlDataReader ds)&#xD;&#xA;   в System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task&amp; task, Boolean asyncWrite)&#xD;&#xA;   в System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)&#xD;&#xA;   в System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)&#xD;&#xA;   в System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)&#xD;&#xA;   в System.Web.Security.SqlMembershipProvider.FindUsersByEmail(String emailToMatch, Int32 pageIndex, Int32 pageSize, Int32&amp; totalRecords)&#xD;&#xA;   в System.Web.Security.Membership.FindUsersByEmail(String emailToMatch, Int32 pageIndex, Int32 pageSize, Int32&amp; totalRecords)&#xD;&#xA;   в System.Web.Security.Membership.FindUsersByEmail(String emailToMatch)&#xD;&#xA;   в arkAS.Controllers.AccountController.Login(LoginViewModel model, String returnUrl) в c:\Users\Roman\Desktop\arkASproj\arkAS\Controllers\AccountController.cs:строка 76&#xD;&#xA;   в lambda_method(Closure , ControllerBase , Object[] )&#xD;&#xA;   в System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)&#xD;&#xA;   в System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;BeginInvokeSynchronousActionMethod&gt;b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.&lt;InvokeActionMethodFilterAsynchronouslyRecursive&gt;b__3d()&#xD;&#xA;   в System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.&lt;&gt;c__DisplayClass46.&lt;InvokeActionMethodFilterAsynchronouslyRecursive&gt;b__3f()&#xD;&#xA;   в System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.&lt;&gt;c__DisplayClass46.&lt;InvokeActionMethodFilterAsynchronouslyRecursive&gt;b__3f()&#xD;&#xA;   в System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c__DisplayClass33.&lt;BeginInvokeActionMethodWithFilters&gt;b__32(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c__DisplayClass21.&lt;&gt;c__DisplayClass2b.&lt;BeginInvokeAction&gt;b__1c()&#xD;&#xA;   в System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c__DisplayClass21.&lt;BeginInvokeAction&gt;b__1e(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.Controller.&lt;BeginExecuteCore&gt;b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.Mvc.MvcHandler.&lt;BeginProcessRequest&gt;b__5(IAsyncResult asyncResult, ProcessRequestState innerState)&#xD;&#xA;   в System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   в System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()&#xD;&#xA;   в System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)&#xD;&#xA;ClientConnectionId:bfd69feb-28b9-4d09-ba32-86e04adaf927" time="2016-01-15T09:15:50.1960604Z">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CACHE_CONTROL:max-age=0&#xD;&#xA;HTTP_CONNECTION:keep-alive&#xD;&#xA;HTTP_CONTENT_LENGTH:189&#xD;&#xA;HTTP_CONTENT_TYPE:application/x-www-form-urlencoded&#xD;&#xA;HTTP_ACCEPT:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip, deflate&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4&#xD;&#xA;HTTP_COOKIE:__RequestVerificationToken=c5zp75Ct-9oGXx_m7TrJ5-S64KovLUdjCO7Ns0FsO125uXhqMs4kkyN3jOy4JbvS6WnQvHwlHNRvkSf0Va5_jD08ORs1; _ym_uid=1450790761879225027; userGuid=3036a56f-0c17-4c12-abdb-c9d0369acf50; arkAS=8596CB96B565B0DD14D6D49A4149DA03E349B15B7C856194C15E169B56E30983B6ECC379B5BEB2EACD704B7F621EAA7DFEBEACB1C0B53394134B51725E1EC3BCD2F2D0EDA4F7069A3B4F6DD0AE9133055D25CF5DB60A1D96B0E73DC8EC103A9877E5C191; as-crud-GetTextMistakesTable-selectParams_dmCont={&quot;page&quot;:1,&quot;pageSize&quot;:150,&quot;filter&quot;:{&quot;correct&quot;:&quot;0&quot;},&quot;sort&quot;:&quot;correct&quot;,&quot;direction&quot;:&quot;down&quot;}; _ym_isad=0; _ym_visorc_32000186=w&#xD;&#xA;HTTP_HOST:core.web-automation.ru&#xD;&#xA;HTTP_REFERER:http://core.web-automation.ru/Account/Login&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36&#xD;&#xA;HTTP_ORIGIN:http://core.web-automation.ru&#xD;&#xA;HTTP_UPGRADE_INSECURE_REQUESTS:1&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Cache-Control: max-age=0&#xD;&#xA;Connection: keep-alive&#xD;&#xA;Content-Length: 189&#xD;&#xA;Content-Type: application/x-www-form-urlencoded&#xD;&#xA;Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&#xD;&#xA;Accept-Encoding: gzip, deflate&#xD;&#xA;Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4&#xD;&#xA;Cookie: __RequestVerificationToken=c5zp75Ct-9oGXx_m7TrJ5-S64KovLUdjCO7Ns0FsO125uXhqMs4kkyN3jOy4JbvS6WnQvHwlHNRvkSf0Va5_jD08ORs1; _ym_uid=1450790761879225027; userGuid=3036a56f-0c17-4c12-abdb-c9d0369acf50; arkAS=8596CB96B565B0DD14D6D49A4149DA03E349B15B7C856194C15E169B56E30983B6ECC379B5BEB2EACD704B7F621EAA7DFEBEACB1C0B53394134B51725E1EC3BCD2F2D0EDA4F7069A3B4F6DD0AE9133055D25CF5DB60A1D96B0E73DC8EC103A9877E5C191; as-crud-GetTextMistakesTable-selectParams_dmCont={&quot;page&quot;:1,&quot;pageSize&quot;:150,&quot;filter&quot;:{&quot;correct&quot;:&quot;0&quot;},&quot;sort&quot;:&quot;correct&quot;,&quot;direction&quot;:&quot;down&quot;}; _ym_isad=0; _ym_visorc_32000186=w&#xD;&#xA;Host: core.web-automation.ru&#xD;&#xA;Referer: http://core.web-automation.ru/Account/Login&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36&#xD;&#xA;Origin: http://core.web-automation.ru&#xD;&#xA;Upgrade-Insecure-Requests: 1&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="/LM/W3SVC/9/ROOT" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="C:\sites\core\arkAS\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="189" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="application/x-www-form-urlencoded" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="CGI/1.1" />
+    </item>
+    <item name="HTTPS">
+      <value string="off" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="9" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="/LM/W3SVC/9" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="193.124.64.149" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/Account/Login" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="C:\sites\core\arkAS\Account\Login" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="86.57.222.58" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="86.57.222.58" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="53397" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="POST" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/Account/Login" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="core.web-automation.ru" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="80" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="Microsoft-IIS/8.5" />
+    </item>
+    <item name="URL">
+      <value string="/Account/Login" />
+    </item>
+    <item name="HTTP_CACHE_CONTROL">
+      <value string="max-age=0" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="keep-alive" />
+    </item>
+    <item name="HTTP_CONTENT_LENGTH">
+      <value string="189" />
+    </item>
+    <item name="HTTP_CONTENT_TYPE">
+      <value string="application/x-www-form-urlencoded" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip, deflate" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string="__RequestVerificationToken=c5zp75Ct-9oGXx_m7TrJ5-S64KovLUdjCO7Ns0FsO125uXhqMs4kkyN3jOy4JbvS6WnQvHwlHNRvkSf0Va5_jD08ORs1; _ym_uid=1450790761879225027; userGuid=3036a56f-0c17-4c12-abdb-c9d0369acf50; arkAS=8596CB96B565B0DD14D6D49A4149DA03E349B15B7C856194C15E169B56E30983B6ECC379B5BEB2EACD704B7F621EAA7DFEBEACB1C0B53394134B51725E1EC3BCD2F2D0EDA4F7069A3B4F6DD0AE9133055D25CF5DB60A1D96B0E73DC8EC103A9877E5C191; as-crud-GetTextMistakesTable-selectParams_dmCont={&quot;page&quot;:1,&quot;pageSize&quot;:150,&quot;filter&quot;:{&quot;correct&quot;:&quot;0&quot;},&quot;sort&quot;:&quot;correct&quot;,&quot;direction&quot;:&quot;down&quot;}; _ym_isad=0; _ym_visorc_32000186=w" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="core.web-automation.ru" />
+    </item>
+    <item name="HTTP_REFERER">
+      <value string="http://core.web-automation.ru/Account/Login" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36" />
+    </item>
+    <item name="HTTP_ORIGIN">
+      <value string="http://core.web-automation.ru" />
+    </item>
+    <item name="HTTP_UPGRADE_INSECURE_REQUESTS">
+      <value string="1" />
+    </item>
+    <item name="IS_LOGIN_PAGE">
+      <value string="1" />
+    </item>
+  </serverVariables>
+  <form>
+    <item name="__RequestVerificationToken">
+      <value string="v7gSEql0GnzG-ZBPfa_Cqn9VVmNs0glNOufkdt49wRmrfYLl4bS2f9FAvB-Mr5nApd6UEwKzTE6Zn38yp3bUv6DHrHQ1" />
+    </item>
+    <item name="Email">
+      <value string="core-admin@mail.ru" />
+    </item>
+    <item name="Password">
+      <value string="slow#27&amp;down" />
+    </item>
+    <item name="RememberMe">
+      <value string="false" />
+    </item>
+  </form>
+  <cookies>
+    <item name="__RequestVerificationToken">
+      <value string="c5zp75Ct-9oGXx_m7TrJ5-S64KovLUdjCO7Ns0FsO125uXhqMs4kkyN3jOy4JbvS6WnQvHwlHNRvkSf0Va5_jD08ORs1" />
+    </item>
+    <item name="_ym_uid">
+      <value string="1450790761879225027" />
+    </item>
+    <item name="userGuid">
+      <value string="3036a56f-0c17-4c12-abdb-c9d0369acf50" />
+    </item>
+    <item name="as-crud-GetTextMistakesTable-selectParams_dmCont">
+      <value string="{&quot;page&quot;:1,&quot;pageSize&quot;:150,&quot;filter&quot;:{&quot;correct&quot;:&quot;0&quot;},&quot;sort&quot;:&quot;correct&quot;,&quot;direction&quot;:&quot;down&quot;}" />
+    </item>
+    <item name="_ym_isad">
+      <value string="0" />
+    </item>
+    <item name="_ym_visorc_32000186">
+      <value string="w" />
+    </item>
+  </cookies>
+</error>

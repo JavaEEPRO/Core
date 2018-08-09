@@ -1,0 +1,67 @@
+﻿@model arkAS.Areas.Rosh.Models.ContragentsViewModel
+
+@{
+    ViewBag.Title = "Contragents";
+    Layout = "~/Areas/Rosh/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                <h4>Наименование</h4>
+            </th>
+            <th>
+                <h4>Номер телефона</h4>
+            </th>
+            <th>
+                <h4>Адрес</h4>
+            </th>
+            <th>
+                <h4>Источник</h4>
+            </th>
+            <th>
+                <h4>Статус контрагента</h4>
+            </th>
+            <th>
+                <h4>Активизировать</h4>
+            </th>
+            <th>
+                <h4>Дата создания</h4>
+            </th>
+            <th>
+                <h4>Следующий контакт</h4>
+            </th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model.Contragents)
+    {
+        <tr>
+            <td>
+                @item.name
+            </td>
+            <td>
+                @item.phoneNumber
+            </td>
+            <td>
+                @item.address
+            </td>
+            <td>
+                @item.rosh_contragentSources.name
+            </td>
+              <td>
+                    @item.rosh_contragentStatuses.name
+                </td>
+            <td>
+                @item.needActive
+            </td>
+            <td>
+                @item.createdDate
+            </td>
+            <td>
+                @item.nextContact
+            </td>
+        </tr>
+    }
+</table>

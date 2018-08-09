@@ -1,0 +1,112 @@
+﻿@using arkAS.BLL
+@model IEnumerable<tsilurik_status>
+@{
+    ViewBag.Title = "Mails";
+    var js = new System.Web.Script.Serialization.JavaScriptSerializer();
+}
+
+<h2>Mails</h2>
+
+<div class='mlCont'>
+</div>
+
+
+<div class='dmStatusesTemplate hide'>
+    <input type="checkbox" data-code='nostatus' value='0' /><label>Не установлен</label>&nbsp;&nbsp;&nbsp;&nbsp;
+    @foreach (var item in Model)
+    {
+        <input type="checkbox" value='@item.id' id='svOurSup@(item.id)' /><label for='svOurSup@(item.id)'>@item.name</label>@Html.Raw("&nbsp; &nbsp; &nbsp; &nbsp;")
+    }
+</div>
+
+        @section js{
+            <script type="text/javascript">
+        var statusesSource = @Html.Raw(js.Serialize((Model).Select(x => new { value = x.id, text = x.name, Selected = false })));
+
+    var asmailt = {
+        init: function () {
+            asmailt.initMainTable();
+        },
+        initMainTable: function () {
+            as.crud.init({
+                cont: $('.mlCont'),
+                title: 'Редактирование писем и создание новых писем',
+                toolbarAdditional: '',
+                groupOperationsToolbar: '',
+                ajaxURLFormat: '/Tsilurik/Mail/Mails_{0}',
+                inlineAjaxURL: "/Tsilurik/Mail/ChangeMailStatus",
+                pageSize: 15,
+                cookiePrefix: "as-crud-fullEditTable-",
+                emptyText: 'Нет элементов',
+                createLinkTitle: 'Создать',
+                filterLinkTitle: 'Найти',
+                filterTitle: 'Фильтрация данных',
+                showChecksCol: false,
+                showNumsCol: true,
+                showToolbar: true,
+                showColSettings: false,
+                showReplaceTool: false,
+                showExcelExport: false,
+                additionalSort: false,
+                cols: [
+                    { code: "id", title: "ID", tooltip: "Идентификатор", isVisible: false, isPK: true, datatype: "int", isRequired: false, editHide: true },
+                    { code: "from", title: "От кого", tooltip: "Адрес отправителя", isVisible: true, isPK: false, datatype: "string", isRequired: true, format: "{0}", isSort: true, callback: null},
+                    { code: "to", title: "Куда", tooltip: "Адрес доставки", isVisible: true, isPK: false, datatype: "string", isRequired: true, format: "{0}", isSort: true, callback: null},
+                    { code: "trackNumber", title: "Номер", tooltip: "Номер сообщения", isVisible: true, isPK: false, datatype: "string", isRequired: true, format: "{0}", isSort: true, callback: null},
+                    { code: "mailSystem", title: "Система", tooltip: "Почтовая система", isVisible: true, isPK: false, datatype: "string", isRequired: false, format: "{0}", isSort: true, callback: null},
+                    { code: "date", title: "Дата создания", editHide: true, tooltip: "Дата создания", isVisible: true, isPK: false, datatype: "date", isRequired: false, format: "{0}", isSort: true, callback: null },
+                    { code: "returnTrackNumber", title: "Обратный номер", tooltip: "Обратный номер", isVisible: true, isPK: false, datatype: "string", isRequired: false, format: "{0}", isSort: false, callback: null},
+                    { code: "returnDate", title: "Дата ответа", editHide: false, tooltip: "Дата ответа", isVisible: true, isPK: false, datatype: "date", isRequired: false, format: "{0}", isSort: true, callback: null },
+                    {
+                        code: "status", title: "Статус", tooltip: "Статус", isVisible: true, isPK: false, datatype: "select", isRequired: false, format: "{0}", isSort: false,  editHide: true, callback: null,
+                        editable: { type: "select", format: "{0}", source: statusesSource, callback: function (el, newValue) { } }
+                    },
+                    { code: "description", title: "Описание", tooltip: "Описание", isVisible: true, isPK: false, datatype: "string", isRequired: false, format: "{0}", isSort: true, callback: null },
+                ],
+                operations: {
+                    create: true,
+                    remove: false,
+                    edit: true,
+                    other: [
+                    ]
+                },
+                getFilterMakeup: function (filter) {
+                    var s = '';
+                    s+=("<span class='gCap'>Номер письма</span><input type='text' class='dmNum' value='" + (filter.trackNumber || '') + "' /><br /><br />");
+
+                    s+=("<div class='crdFilterItem'><span class='gCap'>От</span><input type='text' class='mailFrom' value='" + (filter.from || '') + "' /></div>");
+                    s+=("<div class='crdFilterItem'><span class='gCap'>Кому</span><input type='text' class='mailTo' value='" + (filter.to || '') + "' /></div>");
+
+                    $('.dmStatusesTemplate input').removeAttr('checked');
+                    if (filter.statusIDs) {
+                        $.each(filter.statusIDs, function (i, item) {
+                            $('.dmStatusesTemplate input[value=' + item + ']').attr('checked', 'checked');
+                        })
+                    }
+                    s+=("<span class='gCap'>Статус</span><div class='mailStatuses'>" + $('.dmStatusesTemplate').html() + "</div><br /><br />");
+                    return s;
+                },
+                filter: function () {
+                    var statusIDs = [];
+                    $('.mailStatuses input:checked').each(function () {
+                        statusIDs.push($(this).attr('value'));
+                    });
+
+                    var filter = {
+                        trackNumber: $('.dmNum').val() || "",
+                        from: $('.mailFrom').val() || "",
+                        to: $('.mailTo').val() || "",
+                        statusIDs: statusIDs
+                    };
+                    return filter;
+                }
+            });
+        }
+    }
+    $(function () {
+        asmailt.init();
+
+    });
+            </script>
+
+        }

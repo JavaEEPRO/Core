@@ -1,0 +1,53 @@
+﻿@using Glimpse.Mvc.Html
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@(ViewBag.Title ?? "DocSystem")</title>
+    <link href="~/Areas/Molchanov/Content/LayoutStyles.css" rel="stylesheet">
+    @Styles.Render("~/bundles/css")
+    @Html.Raw(arkAS.BLL.Core.CoreManager.StyleForDev())
+    @RenderSection("css", false)
+    @RenderSection("ogp", false)
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Ark AS: DocSystem", "Index", "DocSystem", new { area = "Molchanov" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="@Url.Action("Index", "DocSystem")">Главная</a></li>
+                    <li><a href="@Url.Action("About", "DocSystem")">О нас</a></li>
+                    <li><a href="@Url.Action("DocumentsList", "Document")">Кабинет</a></li>              
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()      
+    </div>
+    <hr />
+    <div class="container">
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/libs")
+    @Scripts.Render("~/bundles/as")
+    @Scripts.Render("~/bundles/highcharts")
+    @*@StackExchange.Profiling.MiniProfiler.RenderIncludes()*@
+    @Html.GlimpseClient()
+    @RenderSection("js", false)
+    @RenderSection("scripts", required: false)
+</body>
+</html>

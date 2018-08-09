@@ -1,0 +1,87 @@
+﻿@model arkAS.Areas.Rosh.Models.MailsViewModel
+
+@{
+    ViewBag.Title = "Documents";
+    Layout = "~/Areas/Rosh/Views/Shared/_Layout.cshtml";
+}
+
+<div id="menu">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Создать", "Documents_createItem", "Documents", new { area = "Rosh" })</li>
+        <li>@Html.ActionLink("Изменить", "Documents_editItem", "Documents", new { area = "Rosh" })</li>
+        <li>@Html.ActionLink("Удалить", "Documents_deleteItem", "Documents", new { area = "Rosh" })</li>
+    </ul>
+    <div class="input-group">
+        <input type="text" class="form-control pull-right" placeholder="Search">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+        </span>
+    </div><!-- /input-group -->
+</div>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                <h4>Дата</h4>
+            </th>
+            <th>
+                <h4>Откуда</h4>
+            </th>
+            <th>
+                <h4>Куда</h4>
+            </th>
+            <th>
+                <h4>Описание</h4>
+            </th>
+            <th>
+                <h4>Отправитель</h4>
+            </th>
+            <th>
+                <h4>Трекномер</h4>
+            </th>
+            <th>
+                <h4>Обратный трекномер</h4>
+            </th>
+            <th>
+                <h4>Статус</h4>
+            </th>
+            <th>
+                <h4>Дата обратной отправки</h4>
+            </th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model.Mails)
+    {
+        <tr>
+            <td>
+                @item.date
+            </td>
+            <td>
+                @item.fromAdress
+            </td>
+            <td>
+                @item.toAdress
+            </td>
+            <td>
+                @item.description
+            </td>
+            <td>
+                @item.rosh_sendingSystems.name
+            </td>
+            <td>
+                @item.truckNumber
+            </td>
+            <td>
+                @item.backTruckNumber
+            </td>
+            <td>
+                @item.rosh_mailStatuses.name
+            </td>
+            <td>
+                @item.backReceivedDate
+            </td>
+        </tr>
+    }
+</table>

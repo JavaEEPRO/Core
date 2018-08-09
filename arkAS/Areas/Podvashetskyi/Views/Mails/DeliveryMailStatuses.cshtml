@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "DeliveryMailStatuses";
+    var js = new System.Web.Script.Serialization.JavaScriptSerializer();
+}
+
+<div class="usCont">
+</div>
+@section js{
+    <script type="text/javascript">
+
+        var us = {
+            init: function () {
+                us.initMainTable();
+            },
+            initMainTable: function () {
+                as.crud.init({
+                    cont: $(".usCont"),
+                    title: "Статусы доставки",
+                    toolbarAdditional: "",
+                    groupOperationsToolbar: "",
+                    ajaxURLFormat: "/Podvashetskyi/Mails/DeliveryMailStatuses_{0}",
+                    inlineAjaxURL: "/Podvashetskyi/Mails/DeliveryMailStatusesInline",
+                    pageSize: 150,
+                    cookiePrefix: "as-crud-mailsDeliveryMailStatusesTable-",
+                    emptyText: "Нет статусов доставки",
+                    createLinkTitle: "Создать",
+                    filterLinkTitle: "Найти",
+                    filterTitle: "Фильтрация данных",
+                    showChecksCol: false,
+                    showNumsCol: false,
+                    showToolbar: true,
+                    showColSettings: false,
+                    showReplaceTool: false,
+                    showExcelExport: false,
+                    additionalSort: false,
+                    cols: [
+                        { code: "id", title: "ID", tooltip: "Идентификатор", isVisible: false, isPK: true, datatype: "int", isRequired: false },
+                        {
+                            code: "name", title: "Название", tooltip: "Название статуса доставки", isVisible: true, isPK: false, datatype: "string", isRequired: true, format: "{0}", isSort: false,
+                            editable: { type: "text", format: "{0}", callback: function (el, newValue) { } }
+                        },
+                        {
+                            code: "code", title: "Код", tooltip: "Код статуса доставки", isVisible: true, isPK: false, datatype: "string", isRequired: true, format: "{0}", isSort: false,
+                            editable: { type: "text", format: "{0}", callback: function (el, newValue) { } }
+                        }
+                    ],
+                    operations: {
+                        create: true,
+                        remove: true,
+                        edit: false,
+                        other: []
+                    },
+                    getFilterMakeup: function (filter) {
+                        var s = [];
+                        return s.join("");
+                    },
+                    filter: function () {
+                        return {};
+                    },
+                    getItemsCallback: function () {
+                    }
+                });
+            },
+        }
+        $(function () {
+            us.init();
+        });
+    </script>
+}
+
+
+

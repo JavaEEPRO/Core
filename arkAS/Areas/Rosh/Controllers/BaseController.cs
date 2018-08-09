@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using arkAS.Areas.Rosh.BLL;
+
+namespace arkAS.Areas.Rosh.Controllers
+{
+    public class BaseController: Controller
+    {
+        protected IManager mng;
+
+        public BaseController(IManager mng)
+        {
+            this.mng = mng;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (mng != null) mng.Dispose();
+        }
+    }
+}

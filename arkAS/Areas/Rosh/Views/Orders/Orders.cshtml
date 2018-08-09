@@ -1,0 +1,184 @@
+﻿@model arkAS.Areas.Rosh.Models.OrdersViewModel
+
+@{
+        ViewBag.Title = "Orders";
+        Layout = "~/Areas/Rosh/Views/Shared/_Layout.cshtml";
+        //Layout = arkAS.BLL.Core.CoreManager.GetCabinetLayout();
+        //var js = new System.Web.Script.Serialization.JavaScriptSerializer();
+}
+
+@*<div class="createButton">
+    <div class="form-group">
+        <button type="button" class="btn btn-primary btn-md"
+                onclick="location.href='@Url.Action("Orders_createItem", "Orders", new { @class = "viewDialog" })'">
+            Создать         
+        </button>
+    </div>
+</div>*@
+
+<p><h3>@Html.ActionLink("Создать", "Orders_createItem", "Orders", new { }, new { @class = "viewDialog", @*data-dialog-title = "Создать"*@ })</h3></p>
+
+        @using (Html.BeginForm("Orders_searchItem", "Orders", FormMethod.Post))
+        {
+            <div class="selection">
+
+                <div class="form-group col-xs-12 col-sm-12 col-md-12">
+                    <label class="control-label">Фильтрация данных</label>
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <select class="form-control" name="contragentID" id="contragentID">
+                        <option value="0">Сортировка по контрагенту</option>
+                        @foreach (var item in Model.Contragents)
+                        {
+                            <option value='@item.id'>@item.name</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <select class="form-control" name="orderStatusID">
+                        <option value="0">Сортировка по статусу</option>
+                        @foreach (var item in Model.OrdersStatuses)
+                        {
+                            <option value='@item.id'>@item.name</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group col-xs-6 col-sm-5 col-md-4 col-lg-offset-1 col-lg-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Поиск по номеру счета" name="orderNumber" />
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                @*<div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-default btn-md">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </div>*@
+
+            </div>
+        }
+<div id="myTable">
+ <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                <h4>Дата</h4>
+            </th>
+            <th>
+                <h4>Номер</h4>
+            </th>
+            <th>
+                <h4>Контрагент</h4>
+            </th>
+            <th>
+                <h4>Статус счета</h4>
+            </th>            
+            <th>
+                <h4>Примечание</h4>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+         @Html.Partial("Orders_Partial")
+
+ </table>
+</div>
+
+
+@*@*//modal window using BOOTSTRAP*@
+@*<div id="modDialog" class="modal fade">
+    <div id="dialogContent" class="modal-dialog"></div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+
+        $(function ()
+        {
+            //$.ajaxSetup({ cache: false });
+            $(".viewDialog").click(function (e)
+            {
+
+                e.preventDefault();
+                $.get(this.href, function (data)
+                {
+                    $('#dialogContent').html(data);
+                    $('#modDialog').modal('show');
+                });
+            });
+        })
+
+    </script>
+}*@
+
+
+
+@*//modal window using jquery UI*@
+@section scripts
+    {
+    <script type="text/javascript">
+
+    $(document).ready(function ()
+    {
+        //$("#dialog").dialog({
+        //    modal: true,
+        //    zIndex: 3999,
+        //    minWidth: 1180,
+        //    autoOpen: false
+        //});
+
+        $.ajaxSetup({ cache: false });
+
+        $(".viewDialog").on("click", function (e)
+        {
+            e.preventDefault();
+
+            $("<div></div>")
+                .addClass("dialog")
+                .appendTo("body")
+                .dialog({
+                    //title: $(this).attr("data-dialog-title"),
+                    close: function () { $(this).remove() },
+                    modal: true
+                })
+                .load(this.href);
+        });
+
+   
+            @*$('#contragentID').change(function ()
+            {
+                var contragID = $('#contragentID').val();
+
+                if (contragID != 0)
+                {
+                    //кодируем пробельные символы
+                    //contragID = encodeURIComponent(contragID);
+                    $.ajax({
+                        type: 'GET',
+                        url: '@Url.Action("Orders_searchItem")/?contragentID=' + contragID,
+                        success: function (data)
+                        {
+                            // заменяем содержимое присланным частичным представлением
+                            $('#myTable').html(data);
+                        }
+                    });
+                }
+            });*@
+ 
+
+    });
+</script>
+}

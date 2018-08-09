@@ -1,0 +1,245 @@
+﻿@using arkAS.BLL
+@model arkAS.Areas.Udovika.Models.InvoiceView
+@{
+    ViewBag.Title = "Invoices";
+    var js = new System.Web.Script.Serialization.JavaScriptSerializer();
+}
+<div class='dmCont'></div>
+<select class='usCheckFinContragents hide'>
+    <option value="0">Не выбрано</option>
+    @foreach (var item in Model.contractor)
+    {
+        <option value='@item.id'>@item.name</option>
+    }
+</select>
+<select class='usCheckInvoiceStatuces hide'>
+    <option value="0">Не выбрано</option>
+    @foreach (var item in Model.invoiceStatuses)
+    {
+        <option value='@item.id'>@item.name</option>
+    }
+</select>
+<div class='dmStatusesTemplate hide'>
+    @foreach (var item in Model.invoiceStatuses)
+    {
+        <div class="form-group inline" style="margin-bottom: 4px;">
+            <input type="checkbox" data-code='@item.name' value='@item.id' id='svOurSup@(item.id)' />
+            <label for='svOurSup@(item.id)'>@item.name</label>@Html.Raw("&nbsp; &nbsp; &nbsp; &nbsp;")<br />
+        </div>
+    }
+</div>
+
+@section js{
+    <script type="text/javascript">
+        var sourceContractorsfilter = @Html.Raw(js.Serialize((Model.contractor).Select(x => new { text = x.name, value = x.id, Selected = false })));
+        var sourceContractors = @Html.Raw(js.Serialize((Model.contractor).Select(x => new { Text = x.name, Value = x.id, Selected = false })));
+        var sourceInvoiceStatuses = @Html.Raw(js.Serialize((Model.invoiceStatuses).Select(x => new { text = x.name, value = x.id, Selected = false })));
+        var us = {
+            init: function () {
+                us.initMainTable();
+                $(document).delegate(".crdCreate", "click", function (e) {
+                    e.preventDefault();
+                    us.createItem();
+                });
+            },
+            initMainTable: function () {
+                var cols = [
+                    { code: "id", title: "ID", tooltip: "Идентификатор", isVisible: false, isPK: true, datatype: "int", isRequired: false, editHide: true },
+                    { code: "date", title: "Дата создания", tooltip: "Дата", isVisible: true, isPK: false, datatype: "date", isRequired: true, isSort: true, callback: null },
+                    { code: "number", title: "Номер счета", tooltip: "Номер счета", isVisible: true, isPK: false, datatype: "string", isRequired: true, isSort: false, callback: null,
+                        editable: { type: "text", format: "{0}", callback: function(el, newValue){}}
+                    },
+                    { code: "contractor", title: "Контрагент", tooltip: "Контрагент", isVisible: true, isPK: false, datatype: "select", isRequired: false, format: "{0}", isSort: true, editSources: sourceContractors, callback: null,
+                        editable: { type: "select", source: sourceContractorsfilter, callback: function(el, newValue) {}}
+                    },
+                    { code: "status", title: "Статус", tooltip: "Статус", isVisible: true, isPK: false, datatype: "select", isRequired: false, format: "{0}", isSort: false, editHide: true, callback: null,
+                        editable: { type: "select", format:"{0}", source: sourceInvoiceStatuses, callback: function (el, newValue) { }, }
+                    },
+                    { code: "note", title: "Описание", tooltip: "Описание", isVisible: true, isPK: false, datatype: "text", isRequired: false, isSort: false, callback: null },
+                    { code: "statusID", title: "ID статуса", tooltip: "ID статуса", isVisible: false, isPK: false, datatype: "int", isRequired: false, isSort: false, editHide: true, callback: null, },
+                    { code: "contractorID", title: "ID Контрагента",  tooltip: "ID Контрагента", isVisible: false, isPK: false, datatype: "int", isRequired: true, isSort: false, editHide: true, callback: null },
+                ];
+                as.crud.init({
+                    cont: $(".dmCont"),
+                    title: "Счета",
+                    ajaxURLFormat: '/Udovika/Documents/Invoices_{0}',
+                    inlineAjaxURL: "/Udovika/Documents/InvoiceInlineEdit",
+                    showChecksCol: false,
+                    showNumsCol: false,
+                    showToolbar: true,
+                    showColSettings: false,
+                    showReplaceTool: false,
+                    showExcelExport: false,
+                    additionalSort: false,
+                    pageSize: 20,
+                    cookiePrefix: "as-crud-invoiceTypeTable-",
+                    emptyText: 'Ничего не найдено',
+                    createLinkTitle: 'Создать',
+                    filterLinkTitle: 'Найти',
+                    filterTitle: 'Фильтрация',
+                    cols: cols,
+                    operations: {
+                        create: true,
+                        edit: false,
+                        remove: true,
+                        other:[
+                            {linkClass: 'crdTo2', iconClass: 'glyphicon glyphicon-pencil', title: 'Редактировать', callback: us.editItem}
+                        ]
+                    },
+                    getFilterMakeup: function (filter) {
+                        var s = "";
+                        s+="<div class='set-left' style='float:left'><span class='gCap'>Номер счета</span><input type='text' class='dmNum form-control' value='" + (filter.number || '') + "' />";
+                        $('.dmContractorsTemplate option').removeAttr('selected');
+                        $('.dmContractorsTemplate option[value=' + filter.contractorID + ']').attr('selected', 'selected');
+                        s+="<span class='gCap'>Контрагент</span><select class='dmContractors form-control'>" + $('.usCheckFinContragents').html() + "</select>";
+                        $('.dmStatusesTemplate input').removeAttr('checked');
+                        if (filter.statusIDs) {
+                            $.each(filter.statusIDs, function (i, item) {
+                                $('.dmStatusesTemplate input[value=' + item + ']').attr('checked', 'checked');
+                            })
+                        }
+                        s+="</div><div class='set-right' style='margin-left:240px; min-height: 120px;'><span class='gCap'>Статус</span><div class='dmStatuses'>" + $('.dmStatusesTemplate').html() + "</div></div>";
+                        return s;
+                    },
+                    filter: function () {
+                        var statusIDs = [];
+                        $('.dmStatuses input:checked').each(function () {
+                            statusIDs.push($(this).attr('value'));
+                        });
+                        var filter = {
+                            number: $('.dmNum').val() || "",
+                            typeID: $('.dmTypes option:selected').val(),
+                            contractorID: $('.dmContractors option:selected').val(),
+                            statusIDs: statusIDs
+                        };
+                        return filter;
+                    }
+                });                
+            },
+            createItem: function(){
+                var s = "";
+                s+="<label for='number'>Номер счета</label>";
+                s+="<input type='text' id='number' class='form-control newNumber' /><br />";
+                s+="<label for='contractor'>Контрагент</label>";
+                $('.usCheckFinContragents option').removeAttr('selected');
+                $('.usCheckFinContragents option:first').attr('selected', 'selected');
+                s+="<select id='tcontr' class='dmContractors form-control'>" + $('.usCheckFinContragents').html() + "</select><br />";
+                s+="<label for='comment'>Описание:</label>";
+                s+="<textarea rows='5' id='comment' class='form-control newComment' ></textarea>";
+                setTimeout(function() { $('.newNumber').focus(); }, 200);
+                as.sys.showDialog("Создание", s, "Сохранить", function() {
+                    var number = $("#number").val();
+                    var tcontr = $("#tcontr option:selected").val();
+                    var comment = $("#comment").val();
+
+                    if(!number){
+                        as.sys.bootstrapAlert("Введите номер счета", {type: 'warning'});
+                        $('#number').focus();
+                        return;
+                    }
+                    if (!tcontr || tcontr == 0) {
+                        as.sys.bootstrapAlert("Выберите контрагента", {type: 'warning'});
+                        $('#tcontr').focus();
+                        return;
+                    }
+                    if (!comment) {
+                        $('#comment').text("");
+                    }
+                    var params = {
+                        number: number,
+                        tcontr: tcontr,
+                        comment: comment
+                    };
+                    as.sys.ajaxSend("/Udovika/Documents/Invoice_Create", params, function (data) {
+                        if (typeof(data)!="object") {
+                            data = eval('('+data+')');
+                        }
+                        if (data.result) {
+                            as.sys.bootstrapAlert("Счет сохранен", {type:"success"});
+                            as.sys.closeDialog();
+                            as.crud.getItems();
+                        }else {
+                            as.sys.bootstrapAlert(data.msg || "Ошибка сохранения.", {type:"warning"});
+                        }
+                    });
+                });
+            },
+            editItem: function() {
+            var params = { id: $(this).closest('tr').attr('data-itemid'), status: us.getStatusID($(this).closest('tr')) };
+            as.sys.ajaxSend("/Udovika/Documents/GetInvoice", params, function(data) {
+                if (typeof (data) != "object") data = eval('(' + data + ')');
+                if (data.id) {
+                    var s = "";
+                    var date = us.formatDate(data.date);
+                    $('.usCheckInvoiceStatuses option').removeAttr('selected');
+                    s+="<input  type='hidden' disabled data-date-format='DD MM YYYY' value='" + date + "' class='form-control usCreated'/>";
+                    s+="<label for='number'>Номер счета</label>";
+                    s+="<input type='text' id='number' class='form-control newNumber' value='" + data.number + "' /><br />";
+                    s+="<label for='contractor'>Контрагент</label>";
+                    $('.usCheckFinContragents option').removeAttr('selected');
+                    $(".usCheckFinContragents option[value='"+data.contractorID+"']").attr("selected", "selected");
+                    s+="<select id='tcontr' class='dmContractors form-control'>" + $('.usCheckFinContragents').html() + "</select><br />";
+                    s+="<label for='comment'>Описание:</label>";
+                    s+="<textarea rows='5' id='comment' class='form-control newComment' >"+data.comment+"</textarea>";
+                    setTimeout(function() { $('.newNumber').focus(); }, 200);
+                    as.sys.showDialog("Редактирование", s, "Сохранить", function() {
+                        var id = parseInt(params.id);
+                        var comment = $('#comment').val();
+                        var number = $('#number').val();
+                        var date = $('.usCreated').val();
+                        var statusID = parseInt(params.status);
+                        var tcontr = $('#tcontr option:selected').val();
+                        
+                        if (!number) {
+                            as.sys.bootstrapAlert("Укажите пожалуйста номер", { type: 'warning' });
+                            $('.newNumber').focus();
+                            return;
+                        }
+                        if (!comment) {
+                            $('#comment').text("");
+                        }
+                        var paramsEdit = {
+                            id: id,
+                            note: comment,
+                            number: number,
+                            statusID: statusID,
+                            contractorID: tcontr,
+                            date: date,
+                        };
+                        as.sys.ajaxSend("/Udovika/Documents/EditInvoice", paramsEdit, function(data) {
+                            if (typeof (data) != "object") data = eval('(' + data + ')');
+                            if (data.result) {                         
+                                as.sys.bootstrapAlert("Счет успешно отредактирован", { type: 'success' });
+                                as.sys.closeDialog();
+                                as.crud.getItems();
+                                $('.usCheckFinContragents option').removeAttr('selected');
+                            } else {
+                                as.sys.bootstrapAlert(data.msg || "Возникли ошибки при выполнении операции!", { type: 'danger' });
+                            }
+                        });
+                    });
+                } else {
+                    as.sys.bootstrapAlert(data.msg || "Возникли ошибки при выполнении операции!", { type: 'danger' });
+                }
+            });
+            },
+            formatDate: function(dateString) {
+                var date_mas = dateString.split('.');
+                return [date_mas[2], date_mas[1], date_mas[0]].join('-');
+            },
+            getStatusID: function(element) {
+                var el = element.find('td');
+                var status = 0;
+                el.each(function(i, item){
+                    if ($(item).attr('data-code') == 'status') {
+                        status = ($(item).find('a').attr('data-value'));
+                    }
+                });
+                return status;
+            },
+        }
+        $(function () {
+            us.init();
+        });
+</script>
+}

@@ -1,0 +1,73 @@
+﻿@model arkAS.Areas.Motskin.Models.DocumentViewModel
+
+@{
+    ViewBag.Title = "Управление данными контрагентов";
+    var js = new System.Web.Script.Serialization.JavaScriptSerializer();
+}
+
+<div class='contrCont'>
+</div>
+
+@section js{
+    <script type="text/javascript">
+        var asdemo = {
+            init: function () {
+                asdemo.initMainTable();
+            },
+
+            basePathController: '/Motskin/Contractor/',
+
+            initMainTable: function () {
+                as.crud.init({
+                    cont: $('.contrCont'),
+                    title: 'Редактирование и добавление новых контрагентов',
+                    toolbarAdditional: '',
+                    groupOperationsToolbar: '',
+                    ajaxURLFormat: asdemo.basePathController + 'Contractors_{0}',
+                    inlineAjaxURL: '',
+                    pageSize: 15,
+                    cookiePrefix: 'as-crud-m-contr-',
+                    emptyText: 'Нет элементов',
+                    createLinkTitle: 'Создать новый',
+                    filterLinkTitle: 'Найти',
+                    filterTitle: 'Фильтрация данных',
+                    showChecksCol: false,
+                    showNumsCol: true,
+                    showToolbar: true,
+                    showColSettings: false,
+                    showReplaceTool: false,
+                    showExcelExport: false,
+                    additionalSort: false,
+                    cols: [
+                        { code: "id", title: "ID", tooltip: "Идентификатор", isVisible: false, isPK: true, datatype: "int", isRequired: false, editHide: true },
+                        { code: "name", title: "Имя", tooltip: "Имя контрагент", isVisible: true, isPK: false, datatype: "string", isRequired: true, format: "{0}", isSort: true, callback: null },
+                    ],
+                    operations: {
+                        create: true,
+                        remove: true,
+                        edit: true,
+                        other: [
+                        ]
+                    },
+                    getFilterMakeup: function (filter) {
+                        var s = "";
+                        s += ("<div class='crdFilterItem'><span class='gCap'>Имя контрагента</span><input type='text' class='contrName' value='" + (filter.name || '') + "' /></div>");
+                        return s;
+
+                    },
+                    filter: function () {
+                        var filter = {
+                            name: $('.contrName').val() || "",
+                        };
+                        return filter;
+                    }
+                });
+            }
+        }
+        $(function () {
+            asdemo.init();
+
+        });
+    </script>
+
+}

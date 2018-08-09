@@ -1,0 +1,148 @@
+﻿<error errorId="cc10bcb8-6e50-4145-95b9-c957dfede69a" host="WI-U26835" type="System.Web.HttpException" message="Обнаружено потенциально опасное значение Request.Path, полученное от клиента (&amp;)." source="System.Web" detail="System.Web.HttpException (0x80004005): Обнаружено потенциально опасное значение Request.Path, полученное от клиента (&amp;).&#xD;&#xA;   в System.Web.HttpRequest.ValidateInputIfRequiredByConfig()&#xD;&#xA;   в System.Web.HttpApplication.PipelineStepManager.ValidateHelper(HttpContext context)" time="2016-01-31T19:59:06.8727223Z" statusCode="400">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CONNECTION:close&#xD;&#xA;HTTP_ACCEPT:*/*&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:ru-RU&#xD;&#xA;HTTP_HOST:core.web-automation.ru&#xD;&#xA;HTTP_USER_AGENT:Mozilla/3.6 (compatible; MSIE 7.0; Windows NT 6.1; en-US; rv:1.9.2.16) Gecko/20110319 MRA 5.6 (build 03278) Firefox/3.6.16&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Connection: close&#xD;&#xA;Accept: */*&#xD;&#xA;Accept-Language: ru-RU&#xD;&#xA;Host: core.web-automation.ru&#xD;&#xA;User-Agent: Mozilla/3.6 (compatible; MSIE 7.0; Windows NT 6.1; en-US; rv:1.9.2.16) Gecko/20110319 MRA 5.6 (build 03278) Firefox/3.6.16&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="/LM/W3SVC/14/ROOT" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="C:\sites\core\arkAS\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="0" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="CGI/1.1" />
+    </item>
+    <item name="HTTPS">
+      <value string="off" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="14" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="/LM/W3SVC/14" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="193.124.64.149" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/account/login&amp;l10n=ru&amp;mime=html&amp;sign=a6bfdf0cbdc97277766496d077dcd5ff&amp;keyno=0" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="C:\sites\core\arkAS\account\login&amp;l10n=ru&amp;mime=html&amp;sign=a6bfdf0cbdc97277766496d077dcd5ff&amp;keyno=0" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="93.178.255.143" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="93.178.255.143" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="58588" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="GET" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/account/login&amp;l10n=ru&amp;mime=html&amp;sign=a6bfdf0cbdc97277766496d077dcd5ff&amp;keyno=0" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="core.web-automation.ru" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="80" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="Microsoft-IIS/8.5" />
+    </item>
+    <item name="URL">
+      <value string="/account/login&amp;l10n=ru&amp;mime=html&amp;sign=a6bfdf0cbdc97277766496d077dcd5ff&amp;keyno=0" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="close" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="*/*" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="ru-RU" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="core.web-automation.ru" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/3.6 (compatible; MSIE 7.0; Windows NT 6.1; en-US; rv:1.9.2.16) Gecko/20110319 MRA 5.6 (build 03278) Firefox/3.6.16" />
+    </item>
+  </serverVariables>
+</error>

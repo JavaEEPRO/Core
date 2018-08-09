@@ -1,0 +1,50 @@
+﻿@model arkAS.Areas.Rosh.Models.MailsViewModel
+
+@{
+    ViewBag.Title = "MailStatuses";
+    Layout = "~/Areas/Rosh/Views/Shared/_LayoutRefBooks.cshtml";
+}
+
+<div id="menu">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Создать", "MailStatuses_createItem", "Mails", new { area = "Rosh" })</li>
+        <li>@Html.ActionLink("Изменить", "MailStatuses_editItem", "Mails", new { area = "Rosh" })</li>
+        <li>@Html.ActionLink("Удалить", "MailStatuses_deleteItem", "Mails", new { area = "Rosh" })</li>
+    </ul>
+</div>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                <h4>id</h4>
+            </th>
+            <th>
+                <h4>Наименование</h4>
+            </th>
+            <th>
+                <h4>Код</h4>
+            </th>
+            <th>
+                <h4>Цвет</h4>
+            <th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model.mailStatuses)
+    {
+        <tr>
+            <td>
+                @item.id
+            </td>
+            <td>
+                @item.name
+            </td>
+            <td>
+                @item.code
+            </td>
+            <td>
+                @item.color
+            </td>
+        </tr>
+    }
+</table>

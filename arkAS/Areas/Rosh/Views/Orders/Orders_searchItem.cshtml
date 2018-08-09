@@ -1,0 +1,124 @@
+﻿@model arkAS.Areas.Rosh.Models.OrdersViewModel
+
+@{
+    ViewBag.Title = "Orders";
+    Layout = "~/Areas/Rosh/Views/Shared/_Layout.cshtml";
+    //Layout = arkAS.BLL.Core.CoreManager.GetCabinetLayout();
+    //var js = new System.Web.Script.Serialization.JavaScriptSerializer();
+}
+
+    @*<div class="createButton">
+        <div class="form-group">
+            <button type="button" class="btn btn-primary btn-md"
+                    onclick="location.href='@Url.Action("Orders_createItem", "Orders",
+                    new { @class = "viewDialog", data_dialog_title = "Создание модели" })'">
+                Создать
+            </button>
+        </div>
+    </div>*@
+
+<p><h3>@Html.ActionLink("Создать", "Orders_createItem", "Orders", new { }, new
+  {
+      @class = "viewDialog", @*data-dialog-title = "Создать"*@ })</h3></p>
+
+
+    @using (Html.BeginForm("Orders_searchItem", "Orders", FormMethod.Post))
+    {
+        <div class="selection">
+
+            <div class="form-group col-xs-12 col-sm-12 col-md-12">
+                <label class="control-label">Фильтрация данных</label>
+            </div>
+
+            <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                <select class="form-control" name="contragentID">
+                    <option value="0">Сортировка по контрагенту</option>
+                    @foreach (var item in Model.Contragents)
+                    {
+                        <option value='@item.id'>@item.name</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                <select class="form-control" name="orderStatusID">
+                    <option value="0">Сортировка по статусу</option>
+                    @foreach (var item in Model.OrdersStatuses)
+                    {
+                        <option value='@item.id'>@item.name</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group col-xs-6 col-sm-5 col-md-4 col-lg-offset-1 col-lg-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Поиск по номеру счета" name="orderNumber" />
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                <h4>Дата</h4>
+            </th>
+            <th>
+                <h4>Номер</h4>
+            </th>
+            <th>
+                <h4>Контрагент</h4>
+            </th>
+            <th>
+                <h4>Статус счета</h4>
+            </th>
+            <th>
+                <h4>Примечание</h4>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @Html.Partial("Orders_Partial")
+
+</table>
+
+@*//modal window using jquery UI*@
+@section scripts
+    {
+    <script type="text/javascript">
+
+        $(document).ready(function ()
+        {
+            //$("#dialog").dialog({
+            //    modal: true,
+            //    zIndex: 3999,
+            //    minWidth: 1180,
+            //    autoOpen: false
+            //});
+
+            $.ajaxSetup({ cache: false });
+
+            $(".viewDialog").on("click", function (e)
+            {
+                e.preventDefault();
+
+                $("<div></div>")
+                    .addClass("dialog")
+                    .appendTo("body")
+                    .dialog({
+                        //title: $(this).attr("data-dialog-title"),
+                        close: function () { $(this).remove() },
+                        modal: true
+                    })
+                    .load(this.href);
+            });
+        });
+    </script>
+}

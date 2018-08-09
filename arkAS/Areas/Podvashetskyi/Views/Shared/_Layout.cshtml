@@ -1,0 +1,127 @@
+﻿@using Glimpse.Mvc.Html
+@using StackExchange.Profiling
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@(ViewBag.Title ?? "Ark AS")</title>
+
+    @Styles.Render("~/bundles/css")
+    @Styles.Render("~/Areas/Glushko/Content/styles.css")
+
+    <link href="~/content/Cabinet.css" rel="stylesheet">
+
+    @Styles.Render("~/bundles/sb-admin-css")
+
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    @Html.Raw(arkAS.BLL.Core.CoreManager.StyleForDev())
+    @RenderSection("css", false)
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#responsive-menu">
+                            <span class="sr-only">Главное меню</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">My Company</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="responsive-menu">
+                        <ul class="nav navbar-nav">
+                            
+                            <li>@Html.ActionLink("Документы", "Documents", "Documents")</li>
+                            <li>@Html.ActionLink("Счета", "Index", "Invoices")</li>
+                            <li>@Html.ActionLink("Почта", "Index", "Mail")</li>
+                            <li>@Html.ActionLink("Контрагенты", "Index", "Contractors")</li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Дополнительно<b class="caret"> </b></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Типы Документов", "DocTypes", "Documents")</li>
+                                    <li>@Html.ActionLink("Статусы Документов", "DocStatuses", "Documents")</li>
+                                    <li>@Html.ActionLink("Службы доставки", "DeliveryServices", "Mails")</li>
+                                    <li>@Html.ActionLink("Статусы доставки", "DeliveryMailStatuses", "Mails")</li>
+                                </ul>
+                            </li>
+                        </ul>
+                       @Html.Partial("_LoginPartial")
+                    </div>
+                </div>
+            </div>
+            <!-- /.navbar-header -->
+        </nav>
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="content">
+                            @RenderBody()
+                        </div>
+
+                        <footer>
+                            <p>&copy; @DateTime.Now.Year - Система разработки CRM </p>
+                        </footer>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+
+    <div class="modal fade" id="asModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    <button type="button" class="btn btn-primary">ОК</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <script src="~/js/AS/as.resources.js" charset="windows-1251"></script>
+    @Scripts.RenderFormat("<script type=\"text/javascript\" src=\"{0}\" charset=\"windows-1251\"></script>", "~/bundles/libs")
+    @Scripts.RenderFormat("<script type=\"text/javascript\" src=\"{0}\" charset=\"windows-1251\"></script>", "~/bundles/as")
+    <script src="~/js/AS/controls/as.createMistake.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js?modules=core,widget,mouse,sortable"></script>
+    <script src="~/js/as/controls/as.selectImage.js" charset="windows-1251"></script>
+    <script type="text/javascript" src="/js/uploadify/jquery.uploadify-3.1.min.js"></script>
+
+    <script src="~/js/jquery.signalR-2.1.2.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/js/AS/controls/as.opinion.js"></script>
+    @Scripts.RenderFormat("<script type=\"text/javascript\" src=\"{0}\" charset=\"windows-1251\"></script>", "~/bundles/sb-admin-js")
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function () { try { w.yaCounter32000186 = new Ya.Metrika({ id: 32000186, clickmap: true, trackLinks: true, accurateTrackBounce: true, webvisor: true }); } catch (e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="https://mc.yandex.ru/watch/32000186" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
+    @StackExchange.Profiling.MiniProfiler.RenderIncludes()
+    @Html.GlimpseClient()
+    @MiniProfiler.RenderIncludes()
+    @RenderSection("js", false)
+</body>
+</html>

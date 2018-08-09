@@ -1,0 +1,45 @@
+﻿@model arkAS.Areas.Rosh.Models.OrdersViewModel
+
+@*@{
+    ViewBag.Title = "Orders";
+    Layout = "~/Areas/Rosh/Views/Shared/_Layout.cshtml";
+    //Layout = arkAS.BLL.Core.CoreManager.GetCabinetLayout();
+    //var js = new System.Web.Script.Serialization.JavaScriptSerializer();
+}*@
+
+<h3>Вы уверены, что хотите удалить эту запись?</h3>
+
+@using (Html.BeginForm("Orders_deleteItem", "Orders",
+        FormMethod.Post, new { enctype = "multipart/form-data" })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+<fieldset>
+    <div class="display-label">
+        <label for="orderDate" class="control-label">Дата:</label>
+        @Html.DisplayFor(model => model.orderDate)
+    </div>
+    <div class="display-label">
+        <label for="orderNumber" class="control-label">Номер счета:</label>
+        @Html.DisplayFor(model => model.orderNumber)
+    </div>
+    <div class="display-field">
+        <label for="contragentName" class="control-label">Контрагент:</label>
+        @Html.DisplayFor(model => model.contragentName)
+    </div>
+    <div class="display-label">
+        <label for="orderStatusName" class="control-label">Статус счета:</label>
+        @Html.DisplayFor(model => model.orderStatusName)
+    </div>
+    <div class="display-field">
+        <label for="description" class="control-label">Примечание:</label>
+        @Html.DisplayFor(model => model.description)
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Удалить" class="btn btn-default" />
+    </div>
+</fieldset>
+        }
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

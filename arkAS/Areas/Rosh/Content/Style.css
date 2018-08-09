@@ -1,0 +1,9 @@
+﻿body {
+}
+
+.selection {
+    overflow: hidden; /*for fluid heihgt of "div class="selection"*/
+    /*background-color: #007897;*/
+    border: 1px #CCCCCC solid;
+    border-radius: 1%;
+}
