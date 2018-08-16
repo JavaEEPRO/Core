@@ -2,56 +2,63 @@
 
 CREATE DATABASE [shtoda];
 
-CREATE TABLE [shtoda_acts]
+CREATE TABLE [Shtoda_acts]
 (
 [id] [int] IDENTITY(1,1) NOT NULL,
-[created] [datetime] NOT NULL,
+[date] [datetime] NOT NULL,
 [number] [int] NOT NULL,
 [contragent] [NVARCHAR] (150) NOT NULL,
 [total] [int],
-[remark] [NVARCHAR] (240) NOT NULL,
+[description] [NVARCHAR] (240) NOT NULL,
 [status] [NVARCHAR] (70) NOT NULL,
-[parent] [NVARCHAR] (240) NOT NULL
+[parent] [NVARCHAR] (240),
+[typeID] [int] (10),
+[isDeleted] [BOOLEAN]
 ); 
 
-CREATE TABLE [shtoda_contracts]
+CREATE TABLE [Shtoda_contracts]
 (
 [id] [int] IDENTITY(1,1) NOT NULL,
-[created] [datetime] NOT NULL,
+[date] [datetime] NOT NULL,
 [number] [int] NOT NULL,
 [contragent] [NVARCHAR] (150) NOT NULL,
 [total] [int],
-[remark] [NVARCHAR] (240) NOT NULL,
+[description] [NVARCHAR] (240) NOT NULL,
 [status] [NVARCHAR] (70) NOT NULL,
-[parent] [NVARCHAR] (240) NOT NULL
+[parent] [NVARCHAR] (240),
+[typeID] [int] (10),
+[isDeleted] [BOOLEAN]
 ); 
 
-CREATE TABLE [shtoda_addons]
+CREATE TABLE [Shtoda_addons]
 (
 [id] [int] IDENTITY(1,1) NOT NULL,
-[created] [datetime] NOT NULL,
+[date] [datetime] NOT NULL,
 [number] [int] NOT NULL,
 [contragent] [NVARCHAR] (150) NOT NULL,
 [total] [int],
-[remark] [NVARCHAR] (240) NOT NULL,
+[description] [NVARCHAR] (240) NOT NULL,
 [status] [NVARCHAR] (70) NOT NULL,
-[parent] [NVARCHAR] (240) NOT NULL
+[parent] [NVARCHAR] (240),
+[typeID] [int] (10),
+[isDeleted] [BOOLEAN]
 ); 
 
-CREATE TABLE [shtoda_invoices]
+CREATE TABLE [Shtoda_invoices]
 (
 [id] [int] IDENTITY(1,1) NOT NULL,
-[created] [datetime] NOT NULL,
+[date] [datetime] NOT NULL,
 [number] [int] NOT NULL,
 [contragent] [NVARCHAR] (150) NOT NULL,
-[remark] [NVARCHAR] (240) NOT NULL,
-[status] [NVARCHAR] (70) NOT NULL
+[description] [NVARCHAR] (240) NOT NULL,
+[status] [NVARCHAR] (70) NOT NULL,
+[isDeleted] [BOOLEAN]
 );
 
-CREATE TABLE [shtoda_mails]
+CREATE TABLE [Shtoda_mails]
 (
 [id] [int] IDENTITY(1,1) NOT NULL,
-[created] [datetime] NOT NULL,
+[date] [datetime] NOT NULL,
 [sender] [NVARCHAR] (240) NOT NULL,
 [address] [NVARCHAR] (240) NOT NULL,
 [description] [NVARCHAR] (240),
@@ -60,20 +67,67 @@ CREATE TABLE [shtoda_mails]
 [status] [NVARCHAR] (70) NOT NULL,
 [returnTrackNumber] [int],
 [returnDeliveryExpected] [datetime],
+[isDeleted] [BOOLEAN]
 );
 
-INSERT INTO [shtoda_acts] ([created], [number], [contragent], [total], [remark], [status])
-VALUES ('12/08/2018','1', 'Test Partner', '0', 'new act: population test','created ok');			    //shtoda_acts population test
+CREATE TABLE [Shtoda_contragents]
+(
+[id] [int] IDENTITY(1,1) NOT NULL,
+[name] [NVARCHAR] (240) NOT NULL
+);
 
-INSERT INTO [shtoda_contracts] ([created], [number], [contragent], [total], [remark], [status])
-VALUES ('13/08/2018','1', 'Test Partner', '0', 'new agreement: population test','created ok');			//shtoda_contracts population test
+CREATE TABLE [Shtoda_docTypes]
+(
+[id] [int] IDENTITY(1,1) NOT NULL,
+[name] [NVARCHAR] (240) NOT NULL,
+[code] [NVARCHAR] (240) NOT NULL
+);
 
-INSERT INTO [shtoda_addons] ([created], [number], [contragent], [total], [remark], [status])
-VALUES ('14/08/2018','1', 'Test Partner', '0', 'new addon: population test','created ok');			  //shtoda_addons population test
+CREATE TABLE [Shtoda_docTypeTemplates]
+(
+[id] [int] IDENTITY(1,1) NOT NULL,
+[typeID] [int] (10),
+[parent] [NVARCHAR] (240),
+[name] [NVARCHAR] (240) NOT NULL,
+[ord] [int]
+);
 
-INSERT INTO [shtoda_invoices] ([created], [number], [contragent], [remark], [status])
-VALUES ('15/08/2018','1', 'Test Partner', '0', 'new bill: population test','created ok');		    	//shtoda_invoices population test
+CREATE TABLE [Shtoda_statuses_contracts]
+(
+[id] [int] IDENTITY(1,1) NOT NULL,
+[name] [NVARCHAR] (240) NOT NULL,
+[code] [NVARCHAR] (240) NOT NULL,
+[color] [NVARCHAR] (50)
+);
 
-INSERT INTO [shtoda_mails] ([created], [sender], [address], [description], [sendSystem], [trackNumber], [status], [returnTrackNumber], [returnDeliveryExpected] )
+CREATE TABLE [Shtoda_statuses_invoices]
+(
+[id] [int] IDENTITY(1,1) NOT NULL,
+[name] [NVARCHAR] (240) NOT NULL,
+[code] [NVARCHAR] (240) NOT NULL,
+[color] [NVARCHAR] (50)
+);
+
+CREATE TABLE [Shtoda_statuses_mails]
+(
+[id] [int] IDENTITY(1,1) NOT NULL,
+[name] [NVARCHAR] (240) NOT NULL,
+[code] [NVARCHAR] (240) NOT NULL,
+[color] [NVARCHAR] (50)
+);
+
+INSERT INTO [Shtoda_acts] ([date], [number], [contragent], [total], [description], [status])
+VALUES ('12/08/2018','1', 'Test Partner', '0', 'new act: population test','created ok');			    //Shtoda_acts population test
+
+INSERT INTO [Shtoda_contracts] ([date], [number], [contragent], [total], [description], [status])
+VALUES ('13/08/2018','1', 'Test Partner', '0', 'new agreement: population test','created ok');			//Shtoda_contracts population test
+
+INSERT INTO [Shtoda_addons] ([date], [number], [contragent], [total], [description], [status])
+VALUES ('14/08/2018','1', 'Test Partner', '0', 'new addon: population test','created ok');			  //Shtoda_addons population test
+
+INSERT INTO [Shtoda_invoices] ([date], [number], [contragent], [description], [status])
+VALUES ('15/08/2018','1', 'Test Partner', '0', 'new bill: population test','created ok');		    	//Shtoda_invoices population test
+
+INSERT INTO [Shtoda_mails] ([date], [sender], [address], [description], [sendSystem], [trackNumber], [status], [returnTrackNumber], [returnDeliveryExpected] )
 VALUES ('16/08/2018', 'Test Sender', 'test address', 'new mail: population test', 'smtp', '0', 'created ok', '0', '17/08/2018');
 																																														    	//shtoda_mails population test
