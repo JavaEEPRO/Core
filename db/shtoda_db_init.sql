@@ -26,7 +26,7 @@ CREATE TABLE [shtoda_contracts]
 [parent] [NVARCHAR] (240) NOT NULL
 ); 
 
-CREATE TABLE [shtoda_statuses_contracts]
+CREATE TABLE [shtoda_addons]
 (
 [id] [int] IDENTITY(1,1) NOT NULL,
 [created] [datetime] NOT NULL,
@@ -68,8 +68,8 @@ VALUES ('12/08/2018','1', 'Test Partner', '0', 'new act: population test','creat
 INSERT INTO [shtoda_contracts] ([created], [number], [contragent], [total], [remark], [status])
 VALUES ('13/08/2018','1', 'Test Partner', '0', 'new agreement: population test','created ok');			//shtoda_contracts population test
 
-INSERT INTO [shtoda_statuses_contracts] ([created], [number], [contragent], [total], [remark], [status])
-VALUES ('14/08/2018','1', 'Test Partner', '0', 'new addon: population test','created ok');			  //shtoda_statuses_contracts population test
+INSERT INTO [shtoda_addons] ([created], [number], [contragent], [total], [remark], [status])
+VALUES ('14/08/2018','1', 'Test Partner', '0', 'new addon: population test','created ok');			  //shtoda_addons population test
 
 INSERT INTO [shtoda_invoices] ([created], [number], [contragent], [remark], [status])
 VALUES ('15/08/2018','1', 'Test Partner', '0', 'new bill: population test','created ok');		    	//shtoda_invoices population test
